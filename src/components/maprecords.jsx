@@ -21,22 +21,25 @@ class MapRecords extends React.Component {
   };
 
   render() {
-    console.log(data);
     return (
       <Pane>
-        {data.features.map((feature, fi) => {
-          return (
-            <CircleMarker
-              key={fi}
-              radius={0.2}
-              color="black"
-              center={[
-                feature.geometry.coordinates[1],
-                feature.geometry.coordinates[0]
-              ]}
-            />
-          );
-        })}
+        {data.features
+          .filter(f => {
+            return f.properties.date < store.date;
+          })
+          .map((feature, fi) => {
+            return (
+              <CircleMarker
+                key={fi}
+                radius={0.5}
+                color="black"
+                center={[
+                  feature.geometry.coordinates[1],
+                  feature.geometry.coordinates[0]
+                ]}
+              />
+            );
+          })}
       </Pane>
     );
   }
