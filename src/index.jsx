@@ -2,14 +2,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import DevTools from 'mobx-react-devtools';
 import App from './components/app';
+import Base from './base';
 import './main.scss';
 
 import Store from './store';
 
 window.store = new Store();
-store.addTodo('make coffee');
-store.addTodo('get a cookie');
-store.addTodo('drink coffee');
+window.Base = Base;
+
+Base.getData('data/baptisteries.geojson', res => {
+  console.log('data', res);
+});
 
 render(
   <div className="section">
