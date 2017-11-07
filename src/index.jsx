@@ -12,13 +12,12 @@ window.store = new Store();
 window.Base = Base;
 
 Base.getData('data/baptisteries.geojson', res => {
-  console.log('data', res);
+  window.data = res;
+  render(
+    <div className="section">
+      <DevTools />
+      <App />
+    </div>,
+    document.body.appendChild(document.createElement('div'))
+  );
 });
-
-render(
-  <div className="section">
-    <DevTools />
-    <App />
-  </div>,
-  document.body.appendChild(document.createElement('div'))
-);

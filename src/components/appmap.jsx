@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
+import { divIcon } from 'leaflet';
+import MapRecords from './maprecords';
 import {
   Map,
   TileLayer,
@@ -15,8 +17,6 @@ import {
   GeoJSON,
   Pane
 } from 'react-leaflet';
-
-import { divIcon } from 'leaflet';
 
 @observer
 class AppMap extends React.Component {
@@ -90,6 +90,7 @@ class AppMap extends React.Component {
               />
             </LayersControl.BaseLayer>
           </LayersControl>
+          <MapRecords />
         </Map>
       </div>
     );
