@@ -1,8 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-import Base from './../base';
-import TodoList from './todolist';
+import AppMap from './appmap';
 
 @observer
 export default class App extends React.Component {
@@ -13,8 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="container is-fluid">
-        {Base.label()}
-        <TodoList />
+        <AppMap />
       </div>
     );
   }
