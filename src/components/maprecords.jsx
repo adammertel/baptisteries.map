@@ -34,7 +34,8 @@ class MapRecords extends React.Component {
           .map((feature, fi) => {
             const icon = ReactDOMServer.renderToStaticMarkup(
               Shapes.do(feature.properties.shape, size, {
-                stroke: 'white',
+                stroke: 'black',
+                fill: 'white',
                 strokeWidth: 2
               })
             );

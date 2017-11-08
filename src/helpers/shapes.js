@@ -12,7 +12,7 @@ var Shapes = {
       : Shapes.shapeMargins['default'];
   },
   shapesDictionary: {
-    default: 'hexagon',
+    default: 'trapezoid',
     rectangle: 'rectangle',
     square: 'square',
     round: 'circle',
@@ -28,7 +28,8 @@ var Shapes = {
     octogon: 'octogon'
   },
   shapeMargins: {
-    default: 2
+    default: 2,
+    rectangle: 1
   },
   parsePoints: points => {
     return points
@@ -67,7 +68,19 @@ var Shapes = {
     );
   },
   octogon: (d, s, style) => {
-    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+    const v = (s - d * 2) / 3.414;
+    const a = 1.414 * v;
+
+    const points = [
+      [d + v, d],
+      [d + v + a, d],
+      [s - d, d + v],
+      [s - d, d + v + a],
+      [d + v + a, s - d],
+      [d + v, s - d],
+      [d, d + v + a],
+      [d, d + v]
+    ];
 
     return (
       <polygon
@@ -78,7 +91,10 @@ var Shapes = {
     );
   },
   trapezoid: (d, s, style) => {
-    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+    const s1 = s;
+    const s2 = s - 4;
+    const a = s / 5;
+    const points = [[d + a, d], [s1 - d - a, d], [s1 - d, s2 - d], [d, s2 - d]];
 
     return (
       <polygon
@@ -166,8 +182,8 @@ var Shapes = {
     );
   },
   rectangle: (d, s, style) => {
-    const s1 = s + 2;
-    const s2 = s - 2;
+    const s1 = s;
+    const s2 = s - 4;
     const points = [[d, d], [s1 - d, d], [s1 - d, s2 - d], [d, s2 - d]];
 
     return (
