@@ -1,10 +1,40 @@
 import React from 'react';
 
 var Shapes = {
-  create: (shape, d, s, style) => {
+  parseShape: shape => {
+    return Shapes.shapesDictionary[shape]
+      ? Shapes.shapesDictionary[shape]
+      : Shapes.shapesDictionary['default'];
+  },
+  parseShapeMargin: shape => {
+    return Shapes.shapeMargins[shape]
+      ? Shapes.shapeMargins[shape]
+      : Shapes.shapeMargins['default'];
+  },
+  shapesDictionary: {
+    default: 'circle',
+    rectangle: 'rectangle',
+    square: 'square',
+    square: 'square',
+    round: 'circle'
+  },
+  shapeMargins: {
+    default: 2
+  },
+  parsePoints: points => {
+    return points
+      .map(point => {
+        return point[0] + ',' + point[1];
+      })
+      .join(' ');
+  },
+  do: (shape, s, style) => {
+    const parsedShape = Shapes.parseShape(shape);
+    const parsedMargin = Shapes.parseShapeMargin(shape);
+
     return (
       <svg width={s} height={s}>
-        {Shapes[shape](d, s, style)}
+        {Shapes[parsedShape](parsedMargin, s, style)}
       </svg>
     );
   },
@@ -20,36 +50,44 @@ var Shapes = {
     );
   },
   triangle: (d, s, style) => {
-    const p1 = [s / 2, d];
-    const p2 = [s - d, s - d];
-    const p3 = [d, s - d];
+    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
 
-    let points = [p1, p2, p3]
-      .map(point => {
-        return point[0] + ',' + point[1];
-      })
-      .join(' ');
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
+  },
+  rectangle: (d, s, style) => {
+    const s1 = s + 2;
+    const s2 = s - 2;
+    const points = [[d, d], [s1 - d, d], [s1 - d, s2 - d], [d, s2 - d]];
 
-    return <polygon {...Object.assign({}, style, { points: points })} />;
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
   },
   square: (d, s, style) => {
-    const p1 = [d, d];
-    const p2 = [s - d, d];
-    const p3 = [s - d, s - d];
-    const p4 = [d, s - d];
+    const points = [[d, d], [s - d, d], [s - d, s - d], [d, s - d]];
 
-    let points = [p1, p2, p3, p4]
-      .map(point => {
-        return point[0] + ',' + point[1];
-      })
-      .join(' ');
-
-    return <polygon {...Object.assign({}, style, { points: points })} />;
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
   },
   star: (d, s, style) => {
     const s1 = (s - 2 * d) / 8;
 
-    const pointCoordinates = [
+    const points = [
       [s / 2, d],
       [d + 5 * s1, d + 3 * s1],
       [s - d, d + 3 * s1],
@@ -62,12 +100,13 @@ var Shapes = {
       [d + 3 * s1, d + 3 * s1]
     ];
 
-    let points = pointCoordinates
-      .map(point => {
-        return point[0] + ',' + point[1];
-      })
-      .join(' ');
-    return <polygon {...Object.assign({}, style, { points: points })} />;
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
   }
 };
 

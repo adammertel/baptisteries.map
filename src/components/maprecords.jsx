@@ -23,7 +23,7 @@ class MapRecords extends React.Component {
   };
 
   render() {
-    const size = 20;
+    const size = 15;
 
     return (
       <Pane>
@@ -33,7 +33,10 @@ class MapRecords extends React.Component {
           })
           .map((feature, fi) => {
             const icon = ReactDOMServer.renderToStaticMarkup(
-              Shapes.create('star', 2, size, {})
+              Shapes.do(feature.properties.shape, size, {
+                stroke: 'white',
+                strokeWidth: 2
+              })
             );
             return (
               <Marker
