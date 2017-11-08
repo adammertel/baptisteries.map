@@ -12,11 +12,20 @@ var Shapes = {
       : Shapes.shapeMargins['default'];
   },
   shapesDictionary: {
-    default: 'circle',
+    default: 'hexagon',
     rectangle: 'rectangle',
     square: 'square',
-    square: 'square',
-    round: 'circle'
+    round: 'circle',
+    semicircle: 'circle',
+    'inside the church': 'inside',
+    'central building': 'inside',
+    polygon: 'polygon',
+    cross: 'cross',
+    trefoil: 'trefoil',
+    quatrefoil: 'quatrefoil',
+    trapezoid: 'trapezoid',
+    hexagon: 'hexagon',
+    octogon: 'octogon'
   },
   shapeMargins: {
     default: 2
@@ -36,6 +45,102 @@ var Shapes = {
       <svg width={s} height={s}>
         {Shapes[parsedShape](parsedMargin, s, style)}
       </svg>
+    );
+  },
+  hexagon: (d, s, style) => {
+    const a = s - d * 2;
+    const points = [
+      [s - d, d + a / 2],
+      [d + a * 0.75, d + a],
+      [d + a * 0.25, d + a],
+      [d, d + a / 2],
+      [d + a * 0.25, d],
+      [d + a * 0.75, d]
+    ];
+
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
+  },
+  octogon: (d, s, style) => {
+    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
+  },
+  trapezoid: (d, s, style) => {
+    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
+  },
+  trefoil: (d, s, style) => {
+    return (
+      <circle
+        {...Object.assign({}, style, {
+          cx: s / 2,
+          cy: s / 2,
+          r: s / 2 - d
+        })}
+      />
+    );
+  },
+  quatrefoil: (d, s, style) => {
+    return (
+      <circle
+        {...Object.assign({}, style, {
+          cx: s / 2,
+          cy: s / 2,
+          r: s / 2 - d
+        })}
+      />
+    );
+  },
+  cross: (d, s, style) => {
+    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
+    );
+  },
+  inside: (d, s, style) => {
+    return (
+      <circle
+        {...Object.assign({}, style, {
+          cx: s / 2,
+          cy: s / 2,
+          r: s / 2 - d
+        })}
+      />
+    );
+  },
+  polygon: (d, s, style) => {
+    const points = [[s / 2, d], [s - d, s - d], [d, s - d]];
+
+    return (
+      <polygon
+        {...Object.assign({}, style, {
+          points: Shapes.parsePoints(points)
+        })}
+      />
     );
   },
   circle: (d, s, style) => {

@@ -23,7 +23,7 @@ class MapRecords extends React.Component {
   };
 
   render() {
-    const size = 15;
+    const size = 20;
 
     return (
       <Pane>
