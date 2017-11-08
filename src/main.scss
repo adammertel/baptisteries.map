@@ -14,5 +14,10 @@ $secondary: $color2;
 $primary-invert: white;
 $family-primary: $family-serif;
 
+.leaflet-marker-icon:not(.marker-cluster) {
+  background: none !important;
+  border: none !important;
+}
+
 @import '../node_modules/bulma/bulma';
 @import './styles/slider';

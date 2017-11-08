@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
-import { CircleMarker, Tooltip, Pane } from 'react-leaflet';
+import { CircleMarker, Marker, Tooltip, Pane } from 'react-leaflet';
+import Shapes from '../helpers/shapes';
 
 @observer
 class MapRecords extends React.Component {
@@ -21,6 +23,8 @@ class MapRecords extends React.Component {
   };
 
   render() {
+    const size = 20;
+
     return (
       <Pane>
         {data.features
@@ -28,12 +32,20 @@ class MapRecords extends React.Component {
             return f.properties.date < store.date;
           })
           .map((feature, fi) => {
+            const icon = ReactDOMServer.renderToStaticMarkup(
+              Shapes.create('star', 2, size, {})
+            );
             return (
-              <CircleMarker
+              <Marker
+                icon={divIcon({
+                  html: icon,
+                  iconAnchor: [size / 2, size / 2],
+                  iconSize: [size, size]
+                })}
                 key={fi}
                 radius={0.5}
                 color="black"
-                center={[
+                position={[
                   feature.geometry.coordinates[1],
                   feature.geometry.coordinates[0]
                 ]}
