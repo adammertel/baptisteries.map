@@ -19,5 +19,33 @@ $family-primary: $family-serif;
   border: none !important;
 }
 
+.awesome-marker i {
+  font-size: 18px;
+  margin-top: 5px;
+  font-style: normal;
+}
+
 @import '../node_modules/bulma/bulma';
 @import './styles/slider';
+
+.shape-rectangle:before {
+  content: '\2B22';
+}
+.shape-square:before {
+  content: '\25A0';
+}
+.shape-circle:before {
+  content: '\25AE';
+}
+.shape-inside:before {
+  content: '\25C9';
+}
+.shape-trapezoid:before {
+  content: '\25B0';
+}
+.shape-cross:before {
+  content: '\1F7A4';
+}
+.shape-foil:before {
+  content: '\2663';
+}

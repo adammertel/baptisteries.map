@@ -5,6 +5,8 @@ import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
 import { CircleMarker, Marker, Tooltip, Pane } from 'react-leaflet';
 import Shapes from '../helpers/shapes';
+require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
+require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
 
 @observer
 class MapRecords extends React.Component {
@@ -22,33 +24,49 @@ class MapRecords extends React.Component {
     e.preventDefault();
   };
 
+  parseShape = shape => {
+    const shapeDictionary = {
+      default: 'foil',
+      rectangle: 'rectangle',
+      square: 'square',
+      round: 'circle',
+      semicircle: 'circle',
+      'inside the church': 'inside',
+      'central building': 'inside',
+      polygon: 'trapezoid',
+      cross: 'cross',
+      trefoil: 'foil',
+      quatrefoil: 'foil',
+      octofoil: 'foil',
+      trapezoid: 'trapezoid',
+      hexagon: 'hexagon',
+      octogon: 'trapezoid'
+    };
+    return shapeDictionary[shape]
+      ? shapeDictionary[shape]
+      : shapeDictionary['default'];
+  };
+
   render() {
     const size = 20;
-
+    console.log('renders');
+    L.AwesomeMarkers.Icon.prototype.options.prefix = 'shape';
     return (
       <Pane>
         {data.features
-          .filter(f => {
-            return f.properties.date < store.date;
+          .filter((f, fi) => {
+            return f.properties.date < store.date && fi < 100;
           })
           .map((feature, fi) => {
-            const icon = ReactDOMServer.renderToStaticMarkup(
-              Shapes.do(feature.properties.shape, size, {
-                stroke: 'black',
-                fill: 'white',
-                strokeWidth: 2
-              })
-            );
+            const icon = L.AwesomeMarkers.icon({
+              icon: this.parseShape(feature.properties.shape),
+              markerColor: 'cadetblue',
+              shadowSize: [0, 0]
+            });
             return (
               <Marker
-                icon={divIcon({
-                  html: icon,
-                  iconAnchor: [size / 2, size / 2],
-                  iconSize: [size, size]
-                })}
+                icon={icon}
                 key={fi}
-                radius={0.5}
-                color="black"
                 position={[
                   feature.geometry.coordinates[1],
                   feature.geometry.coordinates[0]
