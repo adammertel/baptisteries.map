@@ -12,7 +12,7 @@ var Shapes = {
       : Shapes.shapeMargins['default'];
   },
   shapesDictionary: {
-    default: 'trapezoid',
+    default: 'inside',
     rectangle: 'rectangle',
     square: 'square',
     round: 'circle',
@@ -139,13 +139,26 @@ var Shapes = {
   },
   inside: (d, s, style) => {
     return (
-      <circle
-        {...Object.assign({}, style, {
-          cx: s / 2,
-          cy: s / 2,
-          r: s / 2 - d
-        })}
-      />
+      <g>
+        <circle
+          {...Object.assign({}, style, {
+            cx: s / 2,
+            cy: s / 2,
+            r: s / 2 - d
+          })}
+        />
+        <circle
+          {...Object.assign(
+            {},
+            { fill: 'black' },
+            {
+              cx: s / 2,
+              cy: s / 2,
+              r: s / 8
+            }
+          )}
+        />
+      </g>
     );
   },
   polygon: (d, s, style) => {
