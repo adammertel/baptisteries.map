@@ -67,7 +67,7 @@ class AppMap extends React.Component {
           ref="map"
           style={this.mapStyle()}
           attributionControl={false}
-          maxZoom={12}
+          maxZoom={10}
           minZoom={3}
         >
           <ScaleControl position="topleft" imperial={false} />
