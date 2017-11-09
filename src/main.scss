@@ -53,18 +53,22 @@ $family-primary: $family-serif;
 @import '~react-leaflet-markercluster/dist/styles.min.css';
 @import '../node_modules/bulma/bulma';
 @import './styles/slider';
+@import './styles/checkradio';
 
 .shape-rectangle:before {
-  content: '\2B22';
+  content: '\25AE';
 }
 .shape-square:before {
   content: '\25A0';
 }
 .shape-circle:before {
-  content: '\25AE';
+  content: '\2B24';
 }
 .shape-inside:before {
   content: '\25C9';
+}
+.shape-hexagon:before {
+  content: '\2B22';
 }
 .shape-trapezoid:before {
   content: '\25B0';
@@ -74,4 +78,22 @@ $family-primary: $family-serif;
 }
 .shape-foil:before {
   content: '\2663';
+}
+
+.panel-wrapper {
+  .shape-filter {
+    .checkbox {
+      display: inline-block;
+      label {
+        padding-left: 15px;
+        i.shape {
+          font-style: normal;
+          font-size: 15px;
+          padding-left: 10px;
+          padding-right: 5px;
+          vertical-align: top;
+        }
+      }
+    }
+  }
 }

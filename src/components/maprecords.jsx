@@ -28,12 +28,6 @@ class MapRecords extends React.Component {
     e.preventDefault();
   };
 
-  parseShape = shape => {
-    return Shapes.shapeDictionary[shape]
-      ? Shapes.shapeDictionary[shape]
-      : Shapes.shapeDictionary['default'];
-  };
-
   componentDidMount() {
     console.log(map.getPane('records'));
   }
@@ -43,11 +37,14 @@ class MapRecords extends React.Component {
 
     const records = data.features
       .filter((f, fi) => {
-        return f.properties.date < store.date;
+        return (
+          f.properties.date < store.date &&
+          store.shapeFilter[f.properties.shape]
+        );
       })
       .map((feature, fi) => {
         const icon = L.AwesomeMarkers.icon({
-          icon: this.parseShape(feature.properties.shape),
+          icon: Shapes.parseShape(feature.properties.shape),
           markerColor: 'cadetblue',
           shadowSize: [0, 0]
         });

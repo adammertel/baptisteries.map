@@ -18,7 +18,7 @@ class Panel extends React.Component {
 
   render() {
     return (
-      <div className="panel-wrapped" style={this.style()}>
+      <div className="panel-wrapper" style={this.style()}>
         <section className="hero is-primary" style={{ height: 300 }}>
           <div className="hero-head" style={{ paddingTop: 10 }}>
             <div className="container">

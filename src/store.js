@@ -1,10 +1,17 @@
 import { observable, action, computed } from 'mobx';
-import Base from './base.js';
+import Base from './base';
+import Shapes from './helpers/shapes';
 
 export default class AppStore {
   @observable date = 1000;
+  @observable shapeFilter = {};
 
-  constructor() {}
+  constructor() {
+    this.shapeFilter = Object.assign({}, Shapes.shapesDictionary);
+    Object.keys(this.shapeFilter).map(shapeKey => {
+      this.shapeFilter[shapeKey] = true;
+    });
+  }
 
   @computed
   get todosArray() {
@@ -12,4 +19,8 @@ export default class AppStore {
   }
 
   @action changeDate = newDate => (this.date = newDate);
+  @action
+  toggleShapeFilter(shapeKey) {
+    this.shapeFilter[shapeKey] = !this.shapeFilter[shapeKey];
+  }
 }

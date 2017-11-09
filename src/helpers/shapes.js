@@ -2,7 +2,7 @@ import React from 'react';
 
 var Shapes = {
   shapesDictionary: {
-    default: 'foil',
+    default: 'circle',
     rectangle: 'rectangle',
     square: 'square',
     round: 'circle',
@@ -17,6 +17,11 @@ var Shapes = {
     trapezoid: 'trapezoid',
     hexagon: 'hexagon',
     octogon: 'trapezoid'
+  },
+  parseShape: shape => {
+    return Shapes.shapesDictionary[shape]
+      ? Shapes.shapesDictionary[shape]
+      : Shapes.shapesDictionary['default'];
   }
 };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
+import Shapes from './../helpers/shapes';
 
 @observer
 class ShapeFilter extends React.Component {
@@ -8,18 +9,32 @@ class ShapeFilter extends React.Component {
     return {};
   }
 
+  handleChangeFilter(shapeKey) {
+    store.toggleShapeFilter(shapeKey);
+  }
+
   render() {
     return (
-      <div className="time-slider" style={this.style()}>
-        <input
-          className="slider is-fullwidth"
-          step="1"
-          onChange={this.handleDrag}
-          min={500}
-          max={1300}
-          value={this.value}
-          type="range"
-        />
+      <div className="shape-filter" style={this.style()}>
+        {Object.keys(Shapes.shapesDictionary).map(shapeKey => {
+          const parsedShape = Shapes.parseShape(shapeKey);
+          return (
+            <div className="field checkbox" key={shapeKey}>
+              <input
+                className="is-checkradio is-white is-small"
+                id={shapeKey}
+                type="checkbox"
+                name={shapeKey}
+                onChange={this.handleChangeFilter.bind(this, shapeKey)}
+                checked={store.shapeFilter[shapeKey]}
+              />
+              <label htmlFor={shapeKey}>
+                <i className={'shape shape-' + parsedShape} />
+                {shapeKey}
+              </label>
+            </div>
+          );
+        })}
       </div>
     );
   }
