@@ -6,13 +6,9 @@ $color3: #ae956d;
 $color4: #4bb8e8;
 $color5: #255b73;
 
-$pink-invert: #fff;
-$family-serif: 'Merriweather', 'Georgia', serif;
-
 $primary: $color5;
 $secondary: $color2;
 $primary-invert: white;
-$family-primary: $family-serif;
 
 .leaflet-marker-icon:not(.marker-cluster) {
   background: none !important;
@@ -81,6 +77,23 @@ $family-primary: $family-serif;
 }
 
 .panel-wrapper {
+  height: 300;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  .hero {
+    height: 300;
+    .hero-body {
+      padding: 20px;
+      .title {
+        padding-bottom: 10px;
+      }
+      .panel-control {
+        padding-left: 30px;
+      }
+    }
+  }
   .shape-filter {
     .checkbox {
       display: inline-block;
