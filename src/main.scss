@@ -25,6 +25,31 @@ $family-primary: $family-serif;
   font-style: normal;
 }
 
+.marker-cluster.marker-cluster-small,
+.marker-cluster.marker-cluster-medium,
+.marker-cluster.marker-cluster-large {
+  background: rgba(255, 255, 255, 0.5);
+  margin-left: -30px !important;
+  margin-top: -30px !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 30px !important;
+  div {
+    background-color: $color5;
+    color: $color2;
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    margin-top: 7px;
+    margin-left: 7px;
+    span {
+      line-height: 45px;
+      font-size: 15px;
+      font-weight: bolder;
+    }
+  }
+}
+
 @import '~react-leaflet-markercluster/dist/styles.min.css';
 @import '../node_modules/bulma/bulma';
 @import './styles/slider';
