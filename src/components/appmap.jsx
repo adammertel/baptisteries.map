@@ -52,7 +52,7 @@ class AppMap extends React.Component {
       position: 'absolute',
       width: '100%',
       top: 0,
-      bottom: 200
+      bottom: 300
     };
   }
 

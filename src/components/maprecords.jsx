@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
 import { CircleMarker, Marker, Tooltip, Pane } from 'react-leaflet';
 
+import Shapes from './../helpers/shapes';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 require('leaflet.markercluster.placementstrategies');
@@ -28,26 +29,9 @@ class MapRecords extends React.Component {
   };
 
   parseShape = shape => {
-    const shapeDictionary = {
-      default: 'foil',
-      rectangle: 'rectangle',
-      square: 'square',
-      round: 'circle',
-      semicircle: 'circle',
-      'inside the church': 'inside',
-      'central building': 'inside',
-      polygon: 'trapezoid',
-      cross: 'cross',
-      trefoil: 'foil',
-      quatrefoil: 'foil',
-      octofoil: 'foil',
-      trapezoid: 'trapezoid',
-      hexagon: 'hexagon',
-      octogon: 'trapezoid'
-    };
-    return shapeDictionary[shape]
-      ? shapeDictionary[shape]
-      : shapeDictionary['default'];
+    return Shapes.shapeDictionary[shape]
+      ? Shapes.shapeDictionary[shape]
+      : Shapes.shapeDictionary['default'];
   };
 
   componentDidMount() {
