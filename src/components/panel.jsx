@@ -13,7 +13,10 @@ class Panel extends React.Component {
           <div className="hero-body">
             <div className="container">
               <h1 className="title">BAPTISTERIA Interactive Map</h1>
-              <h3 className="subtitle">Show only buildings built before:</h3>
+              <h3 className="subtitle">
+                Show only buildings built before year{' '}
+                <strong>{store.date}</strong>:
+              </h3>
               <div className="panel-control">
                 <TimeSlider />
               </div>

@@ -91,6 +91,7 @@ $primary-invert: white;
       }
       .panel-control {
         padding-left: 30px;
+        padding-bottom: 15px;
       }
     }
   }
@@ -107,6 +108,23 @@ $primary-invert: white;
           vertical-align: top;
         }
       }
+    }
+  }
+  .time-slider {
+    .slider-wrapper {
+      input {
+        margin-top: 7px;
+      }
+    }
+    .label {
+      color: white;
+      display: inline;
+    }
+  }
+  .column-label {
+    vertical-align: center;
+    &.column-label-left {
+      text-align: right;
     }
   }
 }
