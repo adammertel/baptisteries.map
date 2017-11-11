@@ -128,3 +128,24 @@ $primary-invert: white;
     }
   }
 }
+
+.marker-tooltip {
+  .title {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+  .line {
+    margin: 5px 0;
+    .definition {
+      font-weight: bolder;
+    }
+    .value {
+      padding-left: 5px;
+    }
+  }
+}
+
+.leaflet-tooltip-pane,
+.leaflet-popup-pane {
+  z-index: 1000;
+}

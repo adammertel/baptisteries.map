@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
-import { CircleMarker, Marker, Tooltip, Pane } from 'react-leaflet';
+import { CircleMarker, Marker, Popup, Pane } from 'react-leaflet';
 
 import Shapes from './../helpers/shapes';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
@@ -43,8 +43,9 @@ class MapRecords extends React.Component {
         );
       })
       .map((feature, fi) => {
+        const props = feature.properties;
         const icon = L.AwesomeMarkers.icon({
-          icon: Shapes.parseShape(feature.properties.shape),
+          icon: Shapes.parseShape(props.shape),
           markerColor: 'cadetblue',
           shadowSize: [0, 0]
         });
@@ -56,7 +57,29 @@ class MapRecords extends React.Component {
               feature.geometry.coordinates[1],
               feature.geometry.coordinates[0]
             ]}
-          />
+          >
+            {
+              <Popup>
+                <div className="marker-tooltip">
+                  <h6 className="title is-6">
+                    <strong>{feature.properties.name}</strong>
+                  </h6>
+                  <p className="line">
+                    <span className="definition">date:</span>
+                    <span className="value">{props.date}</span>
+                  </p>
+                  <p className="line">
+                    <span className="definition">building shape:</span>
+                    <span className="value">{props.shape}</span>
+                  </p>
+                  <p className="line">
+                    <span className="definition">specification:</span>
+                    <span className="value">{props.specification}</span>
+                  </p>
+                </div>
+              </Popup>
+            }
+          </Marker>
         );
       });
 
