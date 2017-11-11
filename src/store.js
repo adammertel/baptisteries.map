@@ -4,6 +4,7 @@ import Shapes from './helpers/shapes';
 
 export default class AppStore {
   @observable date = 1300;
+  @observable gridThreshold = 7;
   @observable shapeFilter = {};
   @observable basemap = 'AWMC';
 

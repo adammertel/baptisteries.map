@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
@@ -14,20 +13,6 @@ require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-marke
 
 @observer
 class MapRecords extends React.Component {
-  @observable newTodoTitle = '';
-
-  @action
-  handleInputChange = e => {
-    this.newTodoTitle = e.target.value;
-  };
-
-  @action
-  handleAddTodo = e => {
-    store.addTodo(this.newTodoTitle);
-    this.newTodoTitle = '';
-    e.preventDefault();
-  };
-
   componentDidMount() {
     console.log(map.getPane('records'));
   }

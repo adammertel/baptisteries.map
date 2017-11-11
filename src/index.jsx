@@ -9,6 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import Store from './store';
 
 window.store = new Store();
+window.map = false;
 window.Base = Base;
 
 window.basemaps = Base.requestConfigFile('./helpers/basemaps.json', true);
