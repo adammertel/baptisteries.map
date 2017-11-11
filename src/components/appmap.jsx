@@ -3,6 +3,12 @@ import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { divIcon } from 'leaflet';
 import MapRecords from './maprecords';
+import L from 'leaflet';
+import Shapes from './../helpers/shapes';
+
+require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
+require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+
 import {
   Map,
   TileLayer,
@@ -17,6 +23,7 @@ import {
   GeoJSON,
   Pane
 } from 'react-leaflet';
+import 'leaflet-regular-grid-cluster';
 
 @observer
 class AppMap extends React.Component {
@@ -43,10 +50,6 @@ class AppMap extends React.Component {
     };
   }
 
-  componentDidMount() {
-    window['map'] = this.refs.map.leafletElement;
-  }
-
   mapStyle() {
     return {
       position: 'absolute',
@@ -54,6 +57,78 @@ class AppMap extends React.Component {
       top: 0,
       bottom: 300
     };
+  }
+
+  componentDidMount() {
+    window['map'] = this.refs.map.leafletElement;
+    L.Util.setOptions(map, { maxBoundsViscosity: 1 });
+    this.afterRender();
+  }
+
+  componentDidUpdate() {
+    this.afterRender();
+  }
+
+  afterRender() {
+    const rules = {
+      cells: {
+        fillColor: {
+          method: 'count',
+          attribute: '',
+          scale: 'continuous',
+          range: ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641']
+        },
+        color: 'black',
+        fillOpacity: 0.2,
+        weight: 0
+      },
+      markers: {
+        color: 'white',
+        weight: 2,
+        fillOpacity: 0.9,
+        fillColor: '#ffffb2',
+        radius: {
+          method: 'count',
+          attribute: '',
+          scale: 'continuous',
+          range: [7, 17]
+        }
+      },
+      texts: {}
+    };
+
+    const grid = L.regularGridCluster({
+      rules: rules,
+      gridMode: 'hexagon',
+      showCells: true,
+      showMarkers: true,
+      showTexts: false
+    });
+
+    const records = data.features
+      .filter((f, fi) => {
+        return (
+          f.properties.date < store.date &&
+          store.shapeFilter[f.properties.shape]
+        );
+      })
+      .map((feature, fi) => {
+        const props = feature.properties;
+        const icon = L.AwesomeMarkers.icon({
+          icon: Shapes.parseShape(props.shape),
+          markerColor: 'cadetblue',
+          shadowSize: [0, 0]
+        });
+        return {
+          marker: L.marker([
+            feature.geometry.coordinates[1],
+            feature.geometry.coordinates[0]
+          ]),
+          properties: feature.properties
+        };
+      });
+    grid.addLayers(records);
+    grid.addTo(map);
   }
 
   renderBaseLayers() {

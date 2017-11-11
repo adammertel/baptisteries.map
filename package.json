@@ -37,6 +37,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "^3.0.1",
     "leaflet": "^1.2.0",
+    "leaflet-regular-grid-cluster": "^0.1.9",
     "leaflet.awesome-markers": "^2.0.4",
     "leaflet.markercluster": "^1.1.0",
     "leaflet.markercluster.placementstrategies": "^0.1.4",
