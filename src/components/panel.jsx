@@ -12,7 +12,7 @@ class Panel extends React.Component {
         <section className="hero is-primary">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title">BAPTISTERIA Interactive Map</h1>
+              <h1 className="title">Christian Baptisteries</h1>
               <h3 className="subtitle">
                 Show only buildings built before year{' '}
                 <strong>{store.date}</strong>:

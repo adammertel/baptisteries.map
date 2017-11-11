@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 
 @observer
 class TimeSlider extends React.Component {
-  @observable value = 1000;
-  @observable min = 500;
+  @observable value = 1300;
+  @observable min = 300;
   @observable max = 1300;
   @observable changing = false;
 

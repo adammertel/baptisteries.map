@@ -2,7 +2,7 @@ import React from 'react';
 
 var Shapes = {
   shapesDictionary: {
-    default: 'circle',
+    other: 'circle',
     rectangle: 'rectangle',
     square: 'square',
     round: 'circle',
@@ -21,7 +21,7 @@ var Shapes = {
   parseShape: shape => {
     return Shapes.shapesDictionary[shape]
       ? Shapes.shapesDictionary[shape]
-      : Shapes.shapesDictionary['default'];
+      : Shapes.shapesDictionary['others'];
   }
 };
 

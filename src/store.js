@@ -3,7 +3,7 @@ import Base from './base';
 import Shapes from './helpers/shapes';
 
 export default class AppStore {
-  @observable date = 1000;
+  @observable date = 1300;
   @observable shapeFilter = {};
 
   constructor() {
