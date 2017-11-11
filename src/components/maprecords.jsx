@@ -91,9 +91,17 @@ class MapRecords extends React.Component {
             zoomToBoundsOnClick: true,
             removeOutsideVisibleBounds: true,
             elementsPlacementStrategy: 'clock-concentric',
+            firstCircleElements: 6,
+            spiderfyDistanceSurplus: 45,
             animate: false,
             spiderLegPolylineOptions: { weight: 0 },
-            clockHelpingCircleOptions: { weight: 0 }
+            clockHelpingCircleOptions: {
+              color: 'black',
+              dashArray: 5,
+              fillOpacity: 0,
+              opacity: 0.7,
+              weight: 3
+            }
           }}
         >
           {records}
