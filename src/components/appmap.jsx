@@ -56,6 +56,18 @@ class AppMap extends React.Component {
     };
   }
 
+  renderBaseLayers() {
+    return <LayerGroup>{this.renderBaseLayer()}</LayerGroup>;
+  }
+
+  renderBaseLayer(basemap) {
+    if (basemap.type === 'tile') {
+      return <TileLayer {...basemap} />;
+    } else if (basemap.type === 'wms') {
+      return <WMSTileLayer {...basemap} />;
+    }
+  }
+
   render() {
     return (
       <div className="map-wrapped" style={this.style()}>
@@ -74,21 +86,18 @@ class AppMap extends React.Component {
           <AttributionControl position="bottomleft" />
 
           <LayersControl position="topright">
-            <LayersControl.BaseLayer
-              checked={true}
-              name="OpenStreetMap.BlackAndWhite"
-            >
-              <TileLayer
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-              />
-            </LayersControl.BaseLayer>
-            <LayersControl.BaseLayer name="OpenStreetMap.Mapnik">
-              <TileLayer
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-            </LayersControl.BaseLayer>
+            {Object.keys(basemaps).map(basemapId => {
+              const basemap = basemaps[basemapId];
+              return (
+                <LayersControl.BaseLayer
+                  checked={store.basemap === basemapId}
+                  name={basemapId}
+                  key={basemapId}
+                >
+                  {this.renderBaseLayer(basemap)}
+                </LayersControl.BaseLayer>
+              );
+            })}
           </LayersControl>
           <MapRecords />
         </Map>

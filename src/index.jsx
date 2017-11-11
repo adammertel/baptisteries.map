@@ -11,6 +11,8 @@ import Store from './store';
 window.store = new Store();
 window.Base = Base;
 
+window.basemaps = Base.requestConfigFile('./helpers/basemaps.json', true);
+
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(

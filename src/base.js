@@ -1,14 +1,52 @@
 var Base = {
-  sortAlphabetical(array, by) {
-    const sortedArray = array.slice();
-    sortedArray.sort((a, b) => {
-      return a[by].toUpperCase() > b[by].toUpperCase() ? 1 : -1;
-    });
-    return sortedArray;
+  doRequestSync(url) {
+    let xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+    xhr.open('GET', url, false);
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.send();
+
+    if (xhr.status === 200) {
+      return xhr.responseText;
+    } else {
+      return {};
+    }
   },
 
-  label() {
-    return 'todo example';
+  doRequestAsync(url) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    //xhr.withCredentials = true;
+    xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://adam:8080');
+
+    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
+    xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    xhr.onload = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          return xhr.responseText;
+        } else {
+          //console.log(xhr.statusText);
+          return {};
+        }
+      } else {
+        return {};
+      }
+    };
+
+    xhr.send();
+  },
+
+  validGeo(feat) {
+    return !!(
+      feat &&
+      (feat.x || feat[0]) &&
+      (feat.y || feat[1]) &&
+      (isFinite(feat.x) || isFinite(feat[0])) &&
+      (isFinite(feat.y) || isFinite(feat[1]))
+    );
   },
 
   getData(path, next) {
@@ -30,6 +68,17 @@ var Base = {
         return req.status === 200 ? success(req) : error(req.status);
       }
     };
+  },
+
+  requestConfigFile(configName, sync, next = false) {
+    const configPath = './' + configName;
+    if (sync) {
+      return JSON.parse(this.doRequestSync(configPath));
+    } else {
+      this.doRequest(configPath, response => {
+        next(JSON.parse(response));
+      });
+    }
   }
 };
 

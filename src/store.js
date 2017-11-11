@@ -5,6 +5,7 @@ import Shapes from './helpers/shapes';
 export default class AppStore {
   @observable date = 1300;
   @observable shapeFilter = {};
+  @observable basemap = 'AWMC';
 
   constructor() {
     this.shapeFilter = Object.assign({}, Shapes.shapesDictionary);

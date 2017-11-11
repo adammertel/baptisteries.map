@@ -8,7 +8,7 @@ var Shapes = {
     round: 'circle',
     semicircle: 'circle',
     'inside the church': 'inside',
-    'central building': 'inside',
+    'central building': 'circle',
     polygon: 'trapezoid',
     cross: 'cross',
     trefoil: 'foil',
