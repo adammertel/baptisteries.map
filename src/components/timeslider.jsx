@@ -28,27 +28,21 @@ class TimeSlider extends React.Component {
   render() {
     return (
       <div className="time-slider" style={this.style()}>
-        <div className="columns">
-          <div className="column is-1 column-label column-label-left">
-            <div className="label">{this.min}</div>
-          </div>
-          <div className="column is-10">
-            <div className="slider-wrapper">
-              <input
-                className="slider is-fullwidth"
-                step="1"
-                onChange={this.handleDrag}
-                min={this.min}
-                max={this.max}
-                value={this.value}
-                type="range"
-              />
-            </div>
-          </div>
-          <div className="column is-1 column-label column-label-right">
-            <div className="label">{this.max}</div>
-          </div>
-        </div>
+        <p className="time-slider-row">
+          <span className="label">{this.min}</span>
+          <span className="slider-wrapper">
+            <input
+              className="slider is-medium"
+              step="1"
+              onChange={this.handleDrag}
+              min={this.min}
+              max={this.max}
+              value={this.value}
+              type="range"
+            />
+          </span>
+          <span className="label">{this.max}</span>
+        </p>
       </div>
     );
   }
