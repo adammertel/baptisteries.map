@@ -80,8 +80,8 @@ $panel-w: 400;
 .map-wrapper {
   top: 0;
   bottom: 0;
-  left: 0;
-  right: $panel-w;
+  right: 0;
+  left: $panel-w;
   position: fixed;
   .leaflet-container {
     height: 100%;
@@ -94,7 +94,7 @@ $panel-w: 400;
   overflow-y: auto;
   overflow-x: none;
   bottom: 0;
-  right: 0;
+  left: 0;
   width: $panel-w;
   position: fixed;
   color: $color2;

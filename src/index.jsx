@@ -12,7 +12,7 @@ window.store = new Store();
 window.map = false;
 window.Base = Base;
 
-window.basemaps = Base.requestConfigFile('./helpers/basemaps.json', true);
+window.basemaps = Base.requestConfigFile('./basemaps.json', true);
 
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;

@@ -4,7 +4,7 @@ import Shapes from './helpers/shapes';
 
 export default class AppStore {
   @observable date = 1300;
-  @observable gridThreshold = 7;
+  @observable gridThreshold = 6;
   @observable shapeFilter = {};
   @observable basemap = 'CartoDB_Positron';
 

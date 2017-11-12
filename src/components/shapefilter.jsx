@@ -29,7 +29,7 @@ class ShapeFilter extends React.Component {
             onChange={this.handleAllCheckboxClick.bind(this)}
             checked={store.shapesAllChecked}
           />
-          <label htmlFor="all">check all</label>
+          <label htmlFor="all">(un)check all</label>
         </div>
         <br />
         {Object.keys(Shapes.shapesDictionary).map(shapeKey => {

@@ -76,6 +76,7 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: './src/index.html', to: 'index.html' },
       { from: './src/config.json', to: 'config.json' },
+      { from: './src/basemaps.json', to: 'basemaps.json' },
       { from: './src/ext', to: 'ext' },
       {
         from: './src/data/baptisteries.geojson',

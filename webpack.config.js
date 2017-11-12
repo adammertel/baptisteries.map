@@ -12,9 +12,12 @@ module.exports = {
     contentBase: './src',
     port: 8080
   },
-  entry: './src/index',
+  entry: {
+    main: './src/index',
+    static_shape: './src/static_shape/index'
+  },
   output: {
-    path: '[name].bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
