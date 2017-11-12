@@ -72,18 +72,19 @@ class MapGrid extends React.Component {
           attribute: 'date',
           scale: 'size',
           range: [
-            '#ffffb2',
-            '#fed976',
-            '#feb24c',
-            '#fd8d3c',
-            '#f03b20',
-            '#bd0026'
+            '#ffffcc',
+            '#c7e9b4',
+            '#7fcdbb',
+            '#41b6c4',
+            '#1d91c0',
+            '#225ea8',
+            '#0c2c84'
           ],
           domain: [200, 1301]
         },
         color: 'white',
         fillOpacity: 0.7,
-        opacity: 1,
+        opacity: 0,
         weight: 2
       },
       markers: {

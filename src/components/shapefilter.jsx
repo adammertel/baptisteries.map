@@ -13,15 +13,31 @@ class ShapeFilter extends React.Component {
     store.toggleShapeFilter(shapeKey);
   }
 
+  handleAllCheckboxClick() {
+    store.toggleAllShapeFilters();
+  }
+
   render() {
     return (
       <div className="shape-filter" style={this.style()}>
+        <div className="field checkbox only-label" key="all">
+          <input
+            className="is-checkradio is-white"
+            id="all"
+            type="checkbox"
+            name="all"
+            onChange={this.handleAllCheckboxClick.bind(this)}
+            checked={store.shapesAllChecked}
+          />
+          <label htmlFor="all">check all</label>
+        </div>
+        <br />
         {Object.keys(Shapes.shapesDictionary).map(shapeKey => {
           const parsedShape = Shapes.parseShape(shapeKey);
           return (
             <div className="field checkbox" key={shapeKey}>
               <input
-                className="is-checkradio is-white is-small"
+                className="is-checkradio is-white"
                 id={shapeKey}
                 type="checkbox"
                 name={shapeKey}

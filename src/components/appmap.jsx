@@ -67,7 +67,7 @@ class AppMap extends React.Component {
           ref="map"
           attributionControl={false}
           maxZoom={10}
-          minZoom={3}
+          minZoom={4}
         >
           <ScaleControl position="topleft" imperial={false} />
           <AttributionControl position="bottomleft" />
@@ -78,7 +78,7 @@ class AppMap extends React.Component {
               return (
                 <LayersControl.BaseLayer
                   checked={store.basemap === basemapId}
-                  name={basemapId}
+                  name={basemap.name}
                   key={basemapId}
                 >
                   {this.renderBaseLayer(basemap)}

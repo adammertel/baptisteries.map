@@ -9,22 +9,17 @@ class Panel extends React.Component {
   render() {
     return (
       <div className="panel-wrapper">
-        <section className="panel">
-          <div className="container">
-            <h1 className="title">Christian Baptisteries</h1>
-            <h3 className="subtitle">
-              Show only buildings built before year{' '}
-              <strong>{store.date}</strong>:
-            </h3>
-            <div className="panel-control">
-              <TimeSlider />
-            </div>
-            <h3 className="subtitle">Filter buildings based on the shape:</h3>
-            <div className="panel-control">
-              <ShapeFilter />
-            </div>
-          </div>
-        </section>
+        <h1 className="title">Christian Baptisteries</h1>
+        <h3 className="subtitle section-label">
+          Built before <strong>{store.date}</strong>:
+        </h3>
+        <div className="panel-control">
+          <TimeSlider />
+        </div>
+        <h3 className="subtitle section-label">The shape of the buildings:</h3>
+        <div className="panel-control">
+          <ShapeFilter />
+        </div>
       </div>
     );
   }
