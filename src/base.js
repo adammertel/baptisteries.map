@@ -49,6 +49,16 @@ var Base = {
     );
   },
 
+  compareShapes(sh1, sh2) {
+    let same = true;
+    Object.keys(sh1).map(sk1 => {
+      if (sh2[sk1] !== sh1[sk1]) {
+        same = false;
+      }
+    });
+    return same;
+  },
+
   getData(path, next) {
     const req = new XMLHttpRequest();
     req.open('GET', path, true);

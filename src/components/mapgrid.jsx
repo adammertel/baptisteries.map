@@ -12,6 +12,8 @@ require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-marke
 @observer
 class MapGrid extends React.Component {
   @observable rendered = false;
+  @observable date = 0;
+  @observable shapes = {};
   grid = false;
 
   @action
@@ -32,8 +34,16 @@ class MapGrid extends React.Component {
     this.clearGrid();
   }
 
+  shouldComponentUpdate() {
+    return true;
+  }
+
   afterRender() {
-    if (!this.rendered) {
+    if (
+      !this.rendered ||
+      this.props.date !== this.date ||
+      !Base.compareShapes(store.shapeFilter, this.shapes)
+    ) {
       this.renderGrid();
     }
   }
@@ -60,7 +70,7 @@ class MapGrid extends React.Component {
         fillColor: {
           method: 'mean',
           attribute: 'date',
-          scale: 'continuous',
+          scale: 'size',
           range: [
             '#ffffb2',
             '#fed976',
@@ -68,22 +78,25 @@ class MapGrid extends React.Component {
             '#fd8d3c',
             '#f03b20',
             '#bd0026'
-          ]
+          ],
+          domain: [200, 1301]
         },
-        color: 'black',
-        fillOpacity: 0.5,
-        weight: 0
+        color: 'white',
+        fillOpacity: 0.7,
+        opacity: 1,
+        weight: 2
       },
       markers: {
         color: '#222222',
         weight: 2,
-        fillOpacity: 0.9,
+        fillOpacity: 0.8,
         fillColor: '#255b73',
         radius: {
           method: 'count',
           attribute: '',
           scale: 'continuous',
-          range: [7, 17]
+          range: [2, 15],
+          domain: [0, 30]
         }
       },
       texts: {}
@@ -91,6 +104,7 @@ class MapGrid extends React.Component {
 
     this.grid = L.regularGridCluster({
       rules: rules,
+      gridOrigin: { lat: 0, lng: -10 },
       gridMode: 'hexagon',
       showCells: true,
       showMarkers: true,
@@ -123,6 +137,8 @@ class MapGrid extends React.Component {
     this.grid.addTo(map);
 
     this.rendered = true;
+    this.date = this.props.date;
+    this.shapes = Object.assign({}, store.shapeFilter);
   }
 
   render() {

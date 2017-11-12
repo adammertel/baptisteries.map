@@ -109,7 +109,11 @@ class AppMap extends React.Component {
           {this.zoom > store.gridThreshold ? (
             <MapRecords />
           ) : (
-            <MapGrid map={map} />
+            <MapGrid
+              map={map}
+              date={store.date}
+              shapes={Object.values(store.shapeFilter)}
+            />
           )}
         </Map>
       </div>
