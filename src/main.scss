@@ -9,6 +9,7 @@ $color5: #255b73;
 $primary: $color5;
 $secondary: $color2;
 $primary-invert: white;
+$panel-w: 300;
 
 .leaflet-marker-icon:not(.marker-cluster) {
   background: none !important;
@@ -76,25 +77,38 @@ $primary-invert: white;
   content: '\2663';
 }
 
-.panel-wrapper {
-  height: 300;
+.map-wrapper {
+  top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: $panel-w;
   position: fixed;
-  .hero {
-    height: 300;
-    .hero-body {
-      padding: 20px;
-      .title {
-        padding-bottom: 10px;
-      }
-      .panel-control {
-        padding-left: 30px;
-        padding-bottom: 15px;
-      }
-    }
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
   }
+}
+
+.panel-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  bottom: 0;
+  right: 0;
+  width: $panel-w;
+  position: fixed;
+  color: $color2;
+  background-color: $color5;
+  padding: 20px;
+  .title,
+  .subtitle {
+    padding-bottom: 10px;
+    color: $color2;
+  }
+  .panel-control {
+    padding-left: 30px;
+    padding-bottom: 15px;
+  }
+
   .shape-filter {
     .checkbox {
       display: inline-block;

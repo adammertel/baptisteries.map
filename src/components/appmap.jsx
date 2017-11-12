@@ -39,25 +39,6 @@ class AppMap extends React.Component {
     return [this.center[0], this.center[1]];
   }
 
-  style() {
-    return {
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      position: 'fixed'
-    };
-  }
-
-  mapStyle() {
-    return {
-      position: 'absolute',
-      width: '100%',
-      top: 0,
-      bottom: 300
-    };
-  }
-
   componentDidMount() {
     window['map'] = this.refs.map.leafletElement;
     L.Util.setOptions(map, { maxBoundsViscosity: 1 });
@@ -77,14 +58,13 @@ class AppMap extends React.Component {
 
   render() {
     return (
-      <div className="map-wrapped" style={this.style()}>
+      <div className="map-wrapper">
         <Map
           center={this.mapPosition}
           zoom={this.zoom}
           onViewportChanged={this.handleViewportChanged}
           useFlyTo={true}
           ref="map"
-          style={this.mapStyle()}
           attributionControl={false}
           maxZoom={10}
           minZoom={3}

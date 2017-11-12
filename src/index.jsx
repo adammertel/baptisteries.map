@@ -17,7 +17,7 @@ window.basemaps = Base.requestConfigFile('./helpers/basemaps.json', true);
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(
-    <div className="section">
+    <div>
       <DevTools />
       <App />
     </div>,
