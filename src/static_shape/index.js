@@ -185,7 +185,7 @@ const init = () => {
     const binPie = pie(shapeDict);
     const pieG = binG.append('g');
 
-    const radius = Math.sqrt(bin.length) * 2 + 5;
+    const radius = Math.sqrt(bin.length) * 3;
     binPie.map(binP => {
       const arc = d3
         .arc()
@@ -207,15 +207,17 @@ const init = () => {
       .attr('fill', 'none');
   });
 
-  allShapes.map(shape => {
-    //console.log(shape.label, pieColors(shape.label));
-  });
-
   // legend
   const legendW = 300;
-  const legendH = 400;
+  const legendItemH = 20;
+  const legendItemW = 30;
+  const headingH = 40;
   const legendPadding = 10;
   const legendMargin = 25;
+
+  const legendH = allShapes.length * legendItemH + legendPadding * 2 + headingH;
+
+  const alignX = legendMargin + legendPadding;
 
   createLayer('legend');
   const legendG = layers.legend.append('g');
@@ -226,5 +228,36 @@ const init = () => {
     .attr('y', svgH - legendH - legendMargin)
     .attr('width', legendW)
     .attr('height', legendH)
-    .attr('fill', 'white');
+    .attr('fill', 'white')
+    .attr('opacity', 0.9);
+
+  text(
+    legendG,
+    'Christian Baptisteries - shape of Building',
+    alignX,
+    svgH - legendH - legendMargin + legendPadding
+  );
+
+  allShapes.map((shape, si) => {
+    const y = svgH - legendH - legendMargin + si * legendItemH + headingH;
+    legendG
+      .append('rect')
+      .attr('y', y)
+      .attr('x', alignX)
+      .attr('height', legendItemH - 5)
+      .attr('width', legendItemW)
+      .attr('fill', pieColors(shape.label))
+      .attr('stroke', 'black');
+
+    text(legendG, shape.label, alignX + legendItemW + 8, y);
+  });
+};
+
+const text = (el, text, x, y, style) => {
+  el
+    .append('text')
+    .text(text)
+    .attr('x', x)
+    .attr('y', y + 12)
+    .attr('color', 'black');
 };
