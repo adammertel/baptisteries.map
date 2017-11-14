@@ -20,7 +20,7 @@ const layers = {};
 const projection = projections
   .geoNaturalEarth2()
   .scale(1000)
-  .center([20, 30])
+  .center([20, 32])
   .translate([svgW / 2, svgH / 2]);
 
 const path = d3
@@ -91,10 +91,10 @@ const init = () => {
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
-    .scaleSequential(scales.interpolateReds)
-    .domain([800, 400]);
+    .scaleSequential(scales.interpolateOranges)
+    .domain([700, 400]);
 
-  const pieColors = d3.scaleOrdinal().range(scales.schemeDark2);
+  const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
 
   createLayer('countries');
   createLayer('bins');
@@ -189,14 +189,15 @@ const init = () => {
   });
 
   // legend
-  const legendW = 400;
+  const legendW = 500;
   const legendItemH = 20;
   const legendItemW = 30;
   const headingH = 40;
   const legendPadding = 10;
   const legendMargin = 25;
 
-  const legendH = allShapes.length * legendItemH + legendPadding * 2 + headingH;
+  const legendH =
+    allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH;
 
   const alignX = legendMargin + legendPadding;
 
@@ -221,19 +222,26 @@ const init = () => {
   );
 
   allShapes.sort((a, b) => (a.count < b.count ? 1 : -1)).map((shape, si) => {
-    const y = svgH - legendH - legendMargin + si * legendItemH + headingH;
+    const y =
+      svgH -
+      legendH -
+      legendMargin +
+      Math.floor(si / 2) * legendItemH +
+      headingH;
+    const x = si % 2 ? alignX + 150 : alignX;
     legendG
       .append('rect')
       .attr('y', y)
-      .attr('x', alignX)
+      .attr('x', x)
       .attr('height', legendItemH - 5)
       .attr('width', legendItemW)
       .attr('fill', pieColors(shape.label))
       .attr('stroke', 'black');
 
-    text(legendG, shape.label, alignX + legendItemW + 8, y);
+    text(legendG, shape.label, x + legendItemW + 8, y);
   });
 
+  // big pie
   const allShapesPie = pie(allShapes);
   const arc = d3
     .arc()
@@ -245,7 +253,7 @@ const init = () => {
       .append('path')
       .attr(
         'transform',
-        'translate(' + (alignX + 250) + ',' + (svgH - legendMargin - 200) + ')'
+        'translate(' + (alignX + 380) + ',' + (svgH - legendMargin - 100) + ')'
       )
       .attr('d', arc(shapeP))
       .attr('fill', pieColors(shapeP.data.label));
@@ -262,7 +270,7 @@ const text = (el, text, x, y, usedStyle = {}) => {
     .append('text')
     .text(text)
     .attr('x', x)
-    .attr('font-family', 'Verdana')
+    .attr('font-family', 'Ubuntu')
     .attr('font-weight', style.fontWeight)
     .attr('font-size', style.fontSize)
     .attr('y', y + style.fontSize + 2)
