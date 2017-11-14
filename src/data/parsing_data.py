@@ -11,7 +11,9 @@ for ri, row in enumerate(baptisterias):
                 "name": row['Localisation'],
                 "date": int(row['Date_average'], 10),
                 "shape": row['Building_shape_1'].strip(),
-                "specification": row['Place_specification']
+                "specification": row['Place_specification'],
+                "piscina_shape": row['Piscina_shape_1'],
+                "piscina_depth": row['Piscina_depth_cm']
             }
             #print(float(row['X_coordinates']))
             point = Point([float(row['X_coordinates']), float(row['Y_coordinates'])])

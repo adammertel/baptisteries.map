@@ -61,6 +61,14 @@ class MapRecords extends React.Component {
                     <span className="definition">specification:</span>
                     <span className="value">{props.specification}</span>
                   </p>
+                  <p className="line">
+                    <span className="definition">piscina shape:</span>
+                    <span className="value">{props.piscina_shape}</span>
+                  </p>
+                  <p className="line">
+                    <span className="definition">piscina depth:</span>
+                    <span className="value">{props.piscina_depth}</span>
+                  </p>
                 </div>
               </Popup>
             }
