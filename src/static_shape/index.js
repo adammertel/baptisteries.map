@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 require('d3-geo');
 
 var scales = require('d3-scale-chromatic');
+var projections = require('d3-geo-projection');
 var d3Hexbin = require('d3-hexbin');
 
 const svgW = 1000;
@@ -16,9 +17,9 @@ const data = [
 
 const layers = {};
 
-const projection = d3
-  .geoNaturalEarth1()
-  .scale(1100)
+const projection = projections
+  .geoNaturalEarth2()
+  .scale(1000)
   .center([20, 30])
   .translate([svgW / 2, svgH / 2]);
 
@@ -91,24 +92,9 @@ const init = () => {
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
     .scaleSequential(scales.interpolateReds)
-    .domain([500, 1000]);
+    .domain([800, 400]);
 
-  const pieColors = d3
-    .scaleOrdinal()
-    .range([
-      '#a6cee3',
-      '#1f78b4',
-      '#b2df8a',
-      '#33a02c',
-      '#fb9a99',
-      '#e31a1c',
-      '#fdbf6f',
-      '#ff7f00',
-      '#cab2d6',
-      '#6a3d9a',
-      '#ffff99',
-      '#b15928'
-    ]);
+  const pieColors = d3.scaleOrdinal().range(scales.schemeDark2);
 
   createLayer('countries');
   createLayer('bins');
@@ -246,6 +232,23 @@ const init = () => {
       .attr('stroke', 'black');
 
     text(legendG, shape.label, alignX + legendItemW + 8, y);
+  });
+
+  const allShapesPie = pie(allShapes);
+  const arc = d3
+    .arc()
+    .innerRadius(0)
+    .outerRadius(Math.sqrt(allShapes.reduce((sum, s) => sum + s.count, 0)) * 3);
+
+  allShapesPie.map(shapeP => {
+    legendG
+      .append('path')
+      .attr(
+        'transform',
+        'translate(' + (alignX + 250) + ',' + (svgH - legendMargin - 200) + ')'
+      )
+      .attr('d', arc(shapeP))
+      .attr('fill', pieColors(shapeP.data.label));
   });
 };
 
