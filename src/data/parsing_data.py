@@ -10,7 +10,7 @@ for ri, row in enumerate(baptisterias):
             props = {
                 "name": row['Localisation'],
                 "date": int(row['Date_average'], 10),
-                "shape": row['Building_shape_1'],
+                "shape": row['Building_shape_1'].strip(),
                 "specification": row['Place_specification']
             }
             #print(float(row['X_coordinates']))

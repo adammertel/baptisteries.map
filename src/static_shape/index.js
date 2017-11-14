@@ -1,6 +1,8 @@
 import Base from './../base';
 import * as d3 from 'd3';
 require('d3-geo');
+
+var scales = require('d3-scale-chromatic');
 var d3Hexbin = require('d3-hexbin');
 
 const svgW = 1000;
@@ -17,7 +19,7 @@ const layers = {};
 const projection = d3
   .geoNaturalEarth1()
   .scale(1100)
-  .center([20, 34])
+  .center([20, 30])
   .translate([svgW / 2, svgH / 2]);
 
 const path = d3
@@ -87,12 +89,10 @@ const init = () => {
 
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
-  const color = d3.scaleSequential(d3.interpolate('red', 'white')).domain([
-    d3.max(bins, function(d) {
-      return d.length;
-    }),
-    0
-  ]);
+  const binColors = d3
+    .scaleSequential(scales.interpolateReds)
+    .domain([500, 1000]);
+
   const pieColors = d3
     .scaleOrdinal()
     .range([
@@ -147,17 +147,12 @@ const init = () => {
     });
   });
 
-  /*
-  bins.map(bin => {
-    if (bin.length !== bin.inside.length) {
-      console.log('not the same length', bin);
-    }
-  });
-  */
-
   bins.map(bin => {
     const binG = layers.bins.append('g');
     //console.log(bin);
+
+    const dates = bin.inside.map(b => b.properties.date).filter(d => d);
+    const avgDate = dates.reduce((p, c) => p + c, 0) / dates.length;
 
     const shapes = bin.inside.map(b => b.properties.shape);
 
@@ -175,7 +170,7 @@ const init = () => {
     binG
       .append('path')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
-      .attr('fill', color(bin.inside.length))
+      .attr('fill', binColors(avgDate))
       .attr('fill-opacity', 0.5)
       .attr('stroke', 'black')
       .attr('stroke-weight', 3)
@@ -208,7 +203,7 @@ const init = () => {
   });
 
   // legend
-  const legendW = 300;
+  const legendW = 400;
   const legendItemH = 20;
   const legendItemW = 30;
   const headingH = 40;
@@ -233,12 +228,13 @@ const init = () => {
 
   text(
     legendG,
-    'Christian Baptisteries - shape of Building',
+    'CHRISTIAN BAPTISTERIES - SHAPE OF BUILDING',
     alignX,
-    svgH - legendH - legendMargin + legendPadding
+    svgH - legendH - legendMargin + legendPadding,
+    { fontSize: 13, fontWeight: 'bold' }
   );
 
-  allShapes.map((shape, si) => {
+  allShapes.sort((a, b) => (a.count < b.count ? 1 : -1)).map((shape, si) => {
     const y = svgH - legendH - legendMargin + si * legendItemH + headingH;
     legendG
       .append('rect')
@@ -253,11 +249,19 @@ const init = () => {
   });
 };
 
-const text = (el, text, x, y, style) => {
+const text = (el, text, x, y, usedStyle = {}) => {
+  const defaultStyle = {
+    fontWeight: 'normal',
+    fontSize: 10
+  };
+  const style = Object.assign({}, defaultStyle, usedStyle);
   el
     .append('text')
     .text(text)
     .attr('x', x)
-    .attr('y', y + 12)
+    .attr('font-family', 'Verdana')
+    .attr('font-weight', style.fontWeight)
+    .attr('font-size', style.fontSize)
+    .attr('y', y + style.fontSize + 2)
     .attr('color', 'black');
 };
