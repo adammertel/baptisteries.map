@@ -1,5 +1,7 @@
-node_modules
+node_modules/
 npm-debug.log
 .DS_Store
-./.idea
-./src/data/**.csv
+.idea/
+.vscode/
+build/
+src/data/**.csv
