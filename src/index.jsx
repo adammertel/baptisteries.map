@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import DevTools from 'mobx-react-devtools';
 import App from './components/app';
 import Base from './base';
+import Shapes from './helpers/shapes';
 import './main.scss';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,12 +15,20 @@ window.Base = Base;
 
 window.basemaps = Base.requestConfigFile('./basemaps.json', true);
 
+Shapes.shapesDictionary.map(shape => {
+  //console.log('.shape-' + shape.label + ':before', 'content:' + shape.icon);
+  Base.createCSSSelector(
+    '.shape-' + shape.label + ':before',
+    'content:' + shape.icon
+  );
+});
+
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(
     <div>
       <DevTools />
-      <App />
+      <App store={store} />
     </div>,
     document.body.appendChild(document.createElement('div'))
   );

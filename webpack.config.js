@@ -57,8 +57,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({ url: 'http://localhost:8080' })
-  ]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };

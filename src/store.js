@@ -5,14 +5,14 @@ import Shapes from './helpers/shapes';
 export default class AppStore {
   @observable date = 1200;
   @observable gridThreshold = 6;
-  @observable shapeFilter = {};
+  @observable shapes = {};
   @observable basemap = 'CartoDB_Positron';
 
   constructor() {
-    this.shapeFilter = Object.assign({}, Shapes.shapesDictionary);
-    Object.keys(this.shapeFilter).map(shapeKey => {
-      this.shapeFilter[shapeKey] = true;
-    });
+    const initShapes = {};
+    Shapes.shapesDictionary.map(s => s.label).map(l => (initShapes[l] = true));
+
+    this.shapes = Object.assign({}, initShapes);
   }
 
   @computed
@@ -24,8 +24,8 @@ export default class AppStore {
   get shapesAllChecked() {
     let allChecked = true;
 
-    Object.keys(this.shapeFilter).map(key => {
-      if (!this.shapeFilter[key]) {
+    Object.keys(this.shapes).map(key => {
+      if (!this.shapes[key]) {
         allChecked = false;
       }
     });
@@ -35,14 +35,14 @@ export default class AppStore {
   @action changeDate = newDate => (this.date = newDate);
   @action
   toggleShapeFilter(shapeKey) {
-    this.shapeFilter[shapeKey] = !this.shapeFilter[shapeKey];
+    this.shapes[shapeKey] = !this.shapes[shapeKey];
   }
 
   @action
   toggleAllShapeFilters() {
     const checked = this.shapesAllChecked;
-    Object.keys(this.shapeFilter).map(key => {
-      this.shapeFilter[key] = !checked;
+    Object.keys(this.shapes).map(key => {
+      this.shapes[key] = !checked;
     });
   }
 }

@@ -17,6 +17,10 @@ class ShapeFilter extends React.Component {
     store.toggleAllShapeFilters();
   }
 
+  shouldComponentUpdate(nextProps) {
+    return true;
+  }
+
   render() {
     return (
       <div className="shape-filter" style={this.style()}>
@@ -27,26 +31,30 @@ class ShapeFilter extends React.Component {
             type="checkbox"
             name="all"
             onChange={this.handleAllCheckboxClick.bind(this)}
-            checked={store.shapesAllChecked}
+            checked={this.props.store.shapesAllChecked}
           />
           <label htmlFor="all">(un)check all</label>
         </div>
         <br />
-        {Object.keys(Shapes.shapesDictionary).map(shapeKey => {
-          const parsedShape = Shapes.parseShape(shapeKey);
+        {Shapes.shapesDictionary.map(shape => {
           return (
-            <div className="field checkbox" key={shapeKey}>
+            <div className="field checkbox" key={shape.label}>
               <input
                 className="is-checkradio is-white"
-                id={shapeKey}
+                id={shape.label}
                 type="checkbox"
-                name={shapeKey}
-                onChange={this.handleChangeFilter.bind(this, shapeKey)}
-                checked={store.shapeFilter[shapeKey]}
+                name={shape.label}
+                onChange={this.handleChangeFilter.bind(this, shape.label)}
+                checked={this.props.store.shapes[shape.label]}
               />
-              <label htmlFor={shapeKey}>
-                <i className={'shape shape-' + parsedShape} />
-                {shapeKey}
+              <label htmlFor={shape.label}>
+                <i
+                  className={'shape shape-' + shape.label}
+                  dangerouslySetInnerHTML={{
+                    __html: shape.icon
+                  }}
+                />
+                {shape.label}
               </label>
             </div>
           );

@@ -13,27 +13,34 @@ require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-marke
 
 @observer
 class MapRecords extends React.Component {
-  componentDidMount() {
-    console.log(map.getPane('records'));
+  icon(shape) {
+    return divIcon({
+      html:
+        '<span style="vertical-align: bottom" class="marker-icon awesome-marker-icon-cadetblue awesome-marker"><i class="icon-text">' +
+        Shapes.getIcon(shape) +
+        '</i></span>',
+      className: '',
+      iconAnchor: [18, 50],
+      iconSize: [36, 50]
+    });
   }
-
   render() {
     L.AwesomeMarkers.Icon.prototype.options.prefix = 'shape';
 
     const records = data.features
       .filter((f, fi) => {
         return (
-          f.properties.date < store.date &&
-          store.shapeFilter[f.properties.shape]
+          f.properties.date < store.date && store.shapes[f.properties.shape]
         );
       })
       .map((feature, fi) => {
         const props = feature.properties;
-        const icon = L.AwesomeMarkers.icon({
-          icon: Shapes.parseShape(props.shape),
-          markerColor: 'cadetblue',
-          shadowSize: [0, 0]
-        });
+        // const icon = L.AwesomeMarkers.icon({
+        //   markerColor: 'cadetblue',
+        //   shadowSize: [0, 0]
+        // });
+        const icon = this.icon(props.shape);
+
         return (
           <Marker
             icon={icon}
@@ -43,6 +50,7 @@ class MapRecords extends React.Component {
               feature.geometry.coordinates[0]
             ]}
           >
+            <i>ahoj</i>
             {
               <Popup>
                 <div className="marker-tooltip">
@@ -66,7 +74,7 @@ class MapRecords extends React.Component {
                     <span className="value">{props.piscina_shape}</span>
                   </p>
                   <p className="line">
-                    <span className="definition">piscina depth:</span>
+                    <span className="definition">piscina depth[cm]:</span>
                     <span className="value">{props.piscina_depth}</span>
                   </p>
                 </div>

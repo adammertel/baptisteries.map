@@ -42,7 +42,7 @@ class MapGrid extends React.Component {
     if (
       !this.rendered ||
       this.props.date !== this.date ||
-      !Base.compareShapes(store.shapeFilter, this.shapes)
+      !Base.compareShapes(store.shapes, this.shapes)
     ) {
       this.renderGrid();
     }
@@ -98,8 +98,8 @@ class MapGrid extends React.Component {
           method: 'count',
           attribute: '',
           scale: 'continuous',
-          range: [2, 15],
-          domain: [0, 30]
+          range: [2, 20],
+          domain: [0, 50]
         }
       },
       texts: {}
@@ -117,14 +117,13 @@ class MapGrid extends React.Component {
     const records = data.features
       .filter((f, fi) => {
         return (
-          f.properties.date < store.date &&
-          store.shapeFilter[f.properties.shape]
+          f.properties.date < store.date && store.shapes[f.properties.shape]
         );
       })
       .map((feature, fi) => {
         const props = feature.properties;
         const icon = L.AwesomeMarkers.icon({
-          icon: Shapes.parseShape(props.shape),
+          icon: Shapes.getIcon(props.shape),
           markerColor: 'cadetblue',
           shadowSize: [0, 0]
         });

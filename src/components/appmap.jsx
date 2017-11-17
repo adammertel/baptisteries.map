@@ -26,7 +26,7 @@ import 'leaflet-regular-grid-cluster';
 @observer
 class AppMap extends React.Component {
   @observable center = [40, 20];
-  @observable zoom = 5;
+  @observable zoom = 9;
 
   @action
   handleViewportChanged = e => {
@@ -42,6 +42,9 @@ class AppMap extends React.Component {
   componentDidMount() {
     window['map'] = this.refs.map.leafletElement;
     L.Util.setOptions(map, { maxBoundsViscosity: 1 });
+  }
+  shouldComponentUpdate(nextProps) {
+    return true;
   }
 
   renderBaseLayers() {
@@ -89,11 +92,7 @@ class AppMap extends React.Component {
           {this.zoom > store.gridThreshold ? (
             <MapRecords />
           ) : (
-            <MapGrid
-              map={map}
-              date={store.date}
-              shapes={Object.values(store.shapeFilter)}
-            />
+            <MapGrid map={map} date={store.date} />
           )}
         </Map>
       </div>

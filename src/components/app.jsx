@@ -10,11 +10,15 @@ export default class App extends React.Component {
     super(props);
   }
 
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps);
+  }
+
   render() {
     return (
       <div className="container is-fluid">
-        <AppMap />
-        <Panel />
+        <AppMap store={store} />
+        <Panel store={store} />
       </div>
     );
   }

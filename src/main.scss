@@ -22,6 +22,10 @@ $panel-w: 400;
   font-style: normal;
 }
 
+.marker-icon .icon-text {
+  color: white;
+}
+
 .marker-cluster.marker-cluster-small,
 .marker-cluster.marker-cluster-medium,
 .marker-cluster.marker-cluster-large {
@@ -51,31 +55,6 @@ $panel-w: 400;
 @import '../node_modules/bulma/bulma';
 @import './styles/slider';
 @import './styles/checkradio';
-
-.shape-rectangle:before {
-  content: '\25AE';
-}
-.shape-square:before {
-  content: '\25A0';
-}
-.shape-circle:before {
-  content: '\2B24';
-}
-.shape-inside:before {
-  content: '\25C9';
-}
-.shape-hexagon:before {
-  content: '\2B22';
-}
-.shape-trapezoid:before {
-  content: '\25B0';
-}
-.shape-cross:before {
-  content: '\1F7A4';
-}
-.shape-foil:before {
-  content: '\2663';
-}
 
 .map-wrapper {
   top: 0;
