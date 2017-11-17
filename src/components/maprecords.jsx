@@ -5,6 +5,8 @@ import { divIcon } from 'leaflet';
 import { CircleMarker, Marker, Popup, Pane } from 'react-leaflet';
 
 import Shapes from './../helpers/shapes';
+import Certainties from './../helpers/certainties';
+import TooltipLine from './tooltipline';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 require('leaflet.markercluster.placementstrategies');
@@ -53,26 +55,35 @@ class MapRecords extends React.Component {
                   <h6 className="title is-6">
                     <strong>{feature.properties.name}</strong>
                   </h6>
-                  <p className="line">
-                    <span className="definition">date:</span>
-                    <span className="value">{props.date}</span>
-                  </p>
-                  <p className="line">
-                    <span className="definition">building shape:</span>
-                    <span className="value">{props.shape}</span>
-                  </p>
-                  <p className="line">
-                    <span className="definition">specification:</span>
-                    <span className="value">{props.specification}</span>
-                  </p>
-                  <p className="line">
-                    <span className="definition">piscina shape:</span>
-                    <span className="value">{props.piscina_shape}</span>
-                  </p>
-                  <p className="line">
-                    <span className="definition">piscina depth[cm]:</span>
-                    <span className="value">{props.piscina_depth}</span>
-                  </p>
+                  <TooltipLine
+                    definition="Building shape"
+                    value={props.shape}
+                  />
+                  <TooltipLine definition="Date" value={props.date} />
+                  <TooltipLine
+                    definition="Built after or in"
+                    value={props.date_after}
+                  />
+                  <TooltipLine
+                    definition="Built before or in"
+                    value={props.date_before}
+                  />
+                  <TooltipLine
+                    definition="Piscina shape"
+                    value={props.piscina_shape}
+                  />
+                  <TooltipLine
+                    definition="Piscina depth"
+                    value={
+                      props.piscina_depth
+                        ? props.piscina_depth + ' cm'
+                        : 'unknown'
+                    }
+                  />
+                  <TooltipLine
+                    definition="Localisation certainty"
+                    value={Certainties[props.localisation_certainty]}
+                  />
                 </div>
               </Popup>
             }
