@@ -25,8 +25,7 @@ class MapRecords extends React.Component {
     });
   }
   render() {
-    L.AwesomeMarkers.Icon.prototype.options.prefix = 'shape';
-
+    console.log(store.shapes);
     const records = data.features
       .filter((f, fi) => {
         return (
@@ -35,10 +34,6 @@ class MapRecords extends React.Component {
       })
       .map((feature, fi) => {
         const props = feature.properties;
-        // const icon = L.AwesomeMarkers.icon({
-        //   markerColor: 'cadetblue',
-        //   shadowSize: [0, 0]
-        // });
         const icon = this.icon(props.shape);
 
         return (
