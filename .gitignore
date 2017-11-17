@@ -5,3 +5,5 @@ npm-debug.log
 .vscode/
 build/
 src/data/**.csv
+*.lock
+package-lock.json
