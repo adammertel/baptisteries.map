@@ -10,37 +10,37 @@ var Shapes = {
     {
       label: 'square',
       values: ['square'],
-      icon: '\\25A0'
+      icon: '&#9632;'
     },
     {
       label: 'circle',
       values: ['round', 'circle', 'central building', 'semicircle'],
-      icon: '\\25AE'
+      icon: '&#9679;'
     },
     {
       label: 'inside the church',
       values: ['inside the church'],
-      icon: '\\25C9'
+      icon: '&#10752;'
     },
     {
       label: 'cross',
       values: ['cross'],
-      icon: '\\1F7A4'
+      icon: '&#128932;'
     },
     {
       label: 'foil',
       values: ['trefoil', 'quatrefoil', 'octofoil'],
-      icon: '\\2663'
+      icon: '&#9827;'
     },
     {
-      label: 'unknown',
+      label: 'unknown;',
       values: [''],
-      icon: '\\2663'
+      icon: '&#10067;'
     },
     {
       label: 'hexagon',
       values: ['hexagon', 'octogon'],
-      icon: '\\2B22'
+      icon: '&#11042;'
     },
     {
       label: 'other',
@@ -52,7 +52,7 @@ var Shapes = {
         'dodekagon',
         'octofoil'
       ],
-      icon: '\\25AE'
+      icon: '&#9676;'
     }
   ],
   getIcon: shape => {

@@ -15,14 +15,6 @@ window.Base = Base;
 
 window.basemaps = Base.requestConfigFile('./basemaps.json', true);
 
-Shapes.shapesDictionary.map(shape => {
-  //console.log('.shape-' + shape.label + ':before', 'content:' + shape.icon);
-  Base.createCSSSelector(
-    '.shape-' + shape.label + ':before',
-    'content:' + shape.icon
-  );
-});
-
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(
