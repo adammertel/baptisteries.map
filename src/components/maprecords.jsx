@@ -48,7 +48,7 @@ class MapRecords extends React.Component {
           >
             <i>ahoj</i>
             {
-              <Popup>
+              <Popup className="popup">
                 <div className="marker-tooltip">
                   <h6 className="title is-6">
                     <strong>{feature.properties.name}</strong>
