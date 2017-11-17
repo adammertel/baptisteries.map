@@ -34,7 +34,8 @@ class MapGrid extends React.Component {
     this.clearGrid();
   }
 
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps) {
+    console.log('grid', nextProps);
     return true;
   }
 
@@ -42,7 +43,7 @@ class MapGrid extends React.Component {
     if (
       !this.rendered ||
       this.props.date !== this.date ||
-      !Base.compareShapes(store.shapes, this.shapes)
+      !Base.compareShapes(this.props.shapes, this.shapes)
     ) {
       this.renderGrid();
     }
@@ -141,11 +142,18 @@ class MapGrid extends React.Component {
 
     this.rendered = true;
     this.date = this.props.date;
-    this.shapes = Object.assign({}, store.shapeFilter);
+    this.shapes = Object.assign({}, store.shapes);
   }
 
   render() {
-    return <Pane style={{ zIndex: 999 }} />;
+    return (
+      <Pane
+        style={{ zIndex: 999 }}
+        activeShapes={
+          Object.keys(store.shapes).filter(s => store.shapes[s]).length
+        }
+      />
+    );
   }
 }
 

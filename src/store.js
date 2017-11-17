@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed, extendObservable } from 'mobx';
 import Base from './base';
 import Shapes from './helpers/shapes';
 
@@ -9,10 +9,12 @@ export default class AppStore {
   @observable basemap = 'CartoDB_Positron';
 
   constructor() {
-    const initShapes = {};
-    Shapes.shapesDictionary.map(s => s.label).map(l => (initShapes[l] = true));
-
-    this.shapes = Object.assign({}, initShapes);
+    Shapes.shapesDictionary.map(s => s.label).map(label => {
+      const newRule = {};
+      newRule[label] = true;
+      extendObservable(this.shapes, newRule);
+    });
+    console.log(this.shapes);
   }
 
   @computed
