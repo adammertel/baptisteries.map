@@ -50,11 +50,15 @@ var Shapes = {
         'polygon',
         'dekagon',
         'dodekagon',
-        'octofoil'
+        'octofoil',
+        'other'
       ],
       icon: '&#9676;'
     }
   ],
+  defaultShape: () => {
+    return Shapes.getShape('other');
+  },
   getIcon: shape => {
     return Shapes.getShape(shape) ? Shapes.getShape(shape).icon : false;
   },
@@ -62,7 +66,7 @@ var Shapes = {
     const shape = Shapes.shapesDictionary.find(s => {
       return s.values.includes(shapeValue);
     });
-    return shape ? shape : false;
+    return shape ? shape : Shapes.defaultShape();
   },
   getLabel: shapeValue => {
     const shape = Shapes.getShape(shapeValue);
