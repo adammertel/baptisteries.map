@@ -117,7 +117,8 @@ class MapGrid extends React.Component {
     const records = data.features
       .filter((f, fi) => {
         return (
-          f.properties.date < store.date && store.shapes[f.properties.shape]
+          f.properties.date < store.date &&
+          store.shapes[Shapes.getLabel(f.properties.shape)]
         );
       })
       .map((feature, fi) => {

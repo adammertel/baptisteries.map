@@ -63,6 +63,10 @@ var Shapes = {
       return s.values.includes(shapeValue);
     });
     return shape ? shape : false;
+  },
+  getLabel: shapeValue => {
+    const shape = Shapes.getShape(shapeValue);
+    return shape ? shape.label : false;
   }
 };
 
