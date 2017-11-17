@@ -4,8 +4,11 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
-    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js",
-    "deploy-windows": "SET NODE_ENV=production & webpack --config webpack.production.config.js",
+    "gitignore": "git rm -r --cached . && git add . && git commit",
+    "deploy":
+      "NODE_ENV=production webpack --config webpack.production.config.js",
+    "deploy-windows":
+      "SET NODE_ENV=production & webpack --config webpack.production.config.js",
     "lint": "eslint src"
   },
   "repository": {
@@ -13,7 +16,8 @@
     "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
   },
   "keywords": [],
-  "author": "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
+  "author":
+    "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mobxjs/mobx/issues"
