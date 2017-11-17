@@ -14,8 +14,13 @@ var Shapes = {
     },
     {
       label: 'circle',
-      values: ['round', 'circle', 'central building', 'semicircle'],
+      values: ['round', 'circle', 'semicircle'],
       icon: '&#9679;'
+    },
+    {
+      label: 'central building',
+      values: ['central building'],
+      icon: '&#9711;'
     },
     {
       label: 'inside the church',

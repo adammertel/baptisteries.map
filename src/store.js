@@ -6,6 +6,7 @@ export default class AppStore {
   @observable date = 1200;
   @observable gridThreshold = 6;
   @observable shapes = {};
+  @observable infoOpen = true;
   @observable basemap = 'CartoDB_Positron';
 
   constructor() {
@@ -33,6 +34,9 @@ export default class AppStore {
     });
     return allChecked;
   }
+
+  @action closeInfo = () => (this.infoOpen = false);
+  @action openInfo = () => (this.infoOpen = false);
 
   @action changeDate = newDate => (this.date = newDate);
   @action

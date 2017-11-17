@@ -172,6 +172,12 @@ $panel-w: 400;
   }
 }
 
+.modal {
+  p {
+    padding-bottom: 5px;
+  }
+}
+
 .leaflet-pane.leaflet-tooltip-pane,
 .leaflet-pane.leaflet-popup-pane {
   z-index: 1000;

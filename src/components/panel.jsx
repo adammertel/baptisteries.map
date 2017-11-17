@@ -15,7 +15,7 @@ class Panel extends React.Component {
       <div className="panel-wrapper">
         <h1 className="title">Christian Baptisteries</h1>
         <h3 className="subtitle section-label">
-          Built before <strong>{store.date}</strong>:
+          Temporal filter: <strong>{store.date}</strong>
         </h3>
         <div className="panel-control">
           <TimeSlider />
