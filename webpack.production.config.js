@@ -10,11 +10,14 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
   devtool: 'cheap-source-map',
-  entry: './src/index.jsx',
+  entry: {
+    main: './src/index',
+    static_shape: './src/static_shape/index'
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: './bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [

@@ -38,14 +38,14 @@ var Shapes = {
       icon: '&#9827;'
     },
     {
-      label: 'unknown;',
-      values: [''],
-      icon: '&#10067;'
-    },
-    {
       label: 'hexagon',
       values: ['hexagon', 'octogon'],
       icon: '&#11042;'
+    },
+    {
+      label: 'unknown;',
+      values: [''],
+      icon: '&#10067;'
     },
     {
       label: 'other',

@@ -14,16 +14,20 @@ class Panel extends React.Component {
     return (
       <div className="panel-wrapper">
         <h1 className="title">Christian Baptisteries</h1>
+        <p />
         <h3 className="subtitle section-label">
           Temporal filter: <strong>{store.date}</strong>
         </h3>
         <div className="panel-control">
           <TimeSlider />
         </div>
+        <hr />
         <h3 className="subtitle section-label">The shape of the buildings:</h3>
         <div className="panel-control">
           <ShapeFilter store={store} />
         </div>
+        <hr />
+        <a className="button is-white">open info</a>
       </div>
     );
   }
