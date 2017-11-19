@@ -8,8 +8,8 @@ var scales = require('d3-scale-chromatic');
 var projections = require('d3-geo-projection');
 var d3Hexbin = require('d3-hexbin');
 
-const svgW = 1200;
-const svgH = 900;
+const svgW = 1100;
+const svgH = 1050;
 
 const data = [
   { name: 'baptisteries', path: './../data/baptisteries.geojson' },
@@ -20,8 +20,8 @@ const layers = {};
 
 const projection = projections
   .geoNaturalEarth2()
-  .scale(1000)
-  .center([20, 32])
+  .scale(1300)
+  .center([18, 32])
   .translate([svgW / 2, svgH / 2]);
 
 const path = d3
@@ -32,7 +32,7 @@ const path = d3
 const hexbin = d3Hexbin
   .hexbin()
   .size([svgW, svgH])
-  .radius(35);
+  .radius(45);
 
 const pie = d3
   .pie()
@@ -104,7 +104,7 @@ const init = () => {
     .append('path')
     .attr('d', path)
     .style('fill', 'grey')
-    .style('opacity', '0.4')
+    .style('opacity', '0.3')
     .style('stroke', 'white');
 
   // get inside points
@@ -131,9 +131,8 @@ const init = () => {
     });
   });
 
-  bins.map(bin => {
+  bins.filter(bin => bin.inside.length).map(bin => {
     const binG = layers.bins.append('g');
-    //console.log(bin);
 
     const dates = bin.inside.map(b => b.properties.date).filter(d => d);
     const avgDate = dates.reduce((p, c) => p + c, 0) / dates.length;
@@ -151,11 +150,12 @@ const init = () => {
     });
 
     // hexes
+
     binG
       .append('path')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
       .attr('fill', binColors(avgDate))
-      .attr('fill-opacity', 0.5)
+      .attr('fill-opacity', 0.4)
       .attr('stroke', 'black')
       .attr('stroke-weight', 3)
       .attr('d', hexbin.hexagon());
@@ -187,15 +187,15 @@ const init = () => {
   });
 
   // legend
-  const legendW = 500;
-  const legendItemH = 20;
-  const legendItemW = 30;
+  const legendW = 600;
+  const legendItemH = 25;
+  const legendItemW = 35;
   const headingH = 40;
   const legendPadding = 10;
   const legendMargin = 25;
 
   const legendH =
-    allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH;
+    allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH + 200;
 
   const alignX = legendMargin + legendPadding;
 
@@ -219,7 +219,7 @@ const init = () => {
     { fontSize: 13, fontWeight: 'bold' }
   );
 
-  allShapes.sort((a, b) => (a.count < b.count ? 1 : -1)).map((shape, si) => {
+  allShapes.map((shape, si) => {
     const y =
       svgH -
       legendH -
@@ -251,7 +251,7 @@ const init = () => {
       .append('path')
       .attr(
         'transform',
-        'translate(' + (alignX + 380) + ',' + (svgH - legendMargin - 100) + ')'
+        'translate(' + (alignX + 480) + ',' + (svgH - legendMargin - 270) + ')'
       )
       .attr('d', arc(shapeP))
       .attr('fill', Shapes.getColor(shapeP.data.label, true));
