@@ -89,7 +89,7 @@ const init = () => {
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
-    .scaleSequential(scales.interpolateOranges)
+    .scaleSequential(scales.interpolateGreens)
     .domain([700, 400]);
 
   const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
@@ -156,7 +156,7 @@ const init = () => {
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
       .attr('fill', binColors(avgDate))
       .attr('fill-opacity', 0.4)
-      .attr('stroke', 'black')
+      .attr('stroke', 'white')
       .attr('stroke-weight', 3)
       .attr('d', hexbin.hexagon());
 
@@ -182,7 +182,7 @@ const init = () => {
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
       .attr('r', radius + 0.5)
       .attr('stroke', 'black')
-      .attr('stroke-width', 1)
+      .attr('stroke-width', 2)
       .attr('fill', 'none');
   });
 
@@ -234,17 +234,20 @@ const init = () => {
       .attr('height', legendItemH - 5)
       .attr('width', legendItemW)
       .attr('fill', Shapes.getColor(shape.label, true))
-      .attr('stroke', 'black');
+      .attr('stroke', 'black')
+      .attr('stroke-width', '2');
 
     text(legendG, shape.label, x + legendItemW + 8, y);
   });
 
   // big pie
   const allShapesPie = pie(allShapes);
+  const bigPieRadius =
+    Math.sqrt(allShapes.reduce((sum, s) => sum + s.count, 0)) * 3;
   const arc = d3
     .arc()
     .innerRadius(0)
-    .outerRadius(Math.sqrt(allShapes.reduce((sum, s) => sum + s.count, 0)) * 3);
+    .outerRadius(bigPieRadius);
 
   allShapesPie.map(shapeP => {
     legendG
@@ -256,6 +259,16 @@ const init = () => {
       .attr('d', arc(shapeP))
       .attr('fill', Shapes.getColor(shapeP.data.label, true));
   });
+  legendG
+    .append('circle')
+    .attr(
+      'transform',
+      'translate(' + (alignX + 480) + ',' + (svgH - legendMargin - 270) + ')'
+    )
+    .attr('r', bigPieRadius + 0.5)
+    .attr('stroke', 'black')
+    .attr('stroke-width', 2)
+    .attr('fill', 'none');
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
