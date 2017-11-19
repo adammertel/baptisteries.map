@@ -2,13 +2,14 @@ import Base from './../base';
 import * as d3 from 'd3';
 require('d3-geo');
 
+import Shapes from './../helpers/shapes';
+
 var scales = require('d3-scale-chromatic');
 var projections = require('d3-geo-projection');
 var d3Hexbin = require('d3-hexbin');
 
-const svgW = 1000;
+const svgW = 1200;
 const svgH = 900;
-const margin = { top: 40, right: 20, bottom: 20, left: 40 };
 
 const data = [
   { name: 'baptisteries', path: './../data/baptisteries.geojson' },
@@ -69,16 +70,13 @@ const createLayer = layerName => {
 // create visualisation
 const init = () => {
   // getting all shapes
-  const allShapes = [];
+  const allShapes = Shapes.shapesDictionary;
+  allShapes.map(s => (s.count = 0));
   baptisteries.features.map(b => {
     const bShape = b.properties.shape;
 
-    const allShapeFound = allShapes.find(s => s.label === bShape);
-    if (!allShapeFound) {
-      allShapes.push({ label: bShape, count: 1 });
-    } else {
-      allShapeFound.count++;
-    }
+    const shape = Shapes.getShape(bShape);
+    shape.count++;
   });
 
   // projecting baptisteries
@@ -177,7 +175,7 @@ const init = () => {
         .append('path')
         .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
         .attr('d', arc(binP))
-        .attr('fill', pieColors(binP.data.label));
+        .attr('fill', Shapes.getColor(binP.data.label));
     });
     pieG
       .append('circle')
@@ -235,7 +233,7 @@ const init = () => {
       .attr('x', x)
       .attr('height', legendItemH - 5)
       .attr('width', legendItemW)
-      .attr('fill', pieColors(shape.label))
+      .attr('fill', Shapes.getColor(shape.label, true))
       .attr('stroke', 'black');
 
     text(legendG, shape.label, x + legendItemW + 8, y);
@@ -256,7 +254,7 @@ const init = () => {
         'translate(' + (alignX + 380) + ',' + (svgH - legendMargin - 100) + ')'
       )
       .attr('d', arc(shapeP))
-      .attr('fill', pieColors(shapeP.data.label));
+      .attr('fill', Shapes.getColor(shapeP.data.label, true));
   });
 };
 
