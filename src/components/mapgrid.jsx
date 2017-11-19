@@ -117,7 +117,8 @@ class MapGrid extends React.Component {
       gridMode: 'hexagon',
       showCells: true,
       showMarkers: true,
-      showTexts: false
+      showTexts: false,
+      zoneSize: 7000
     });
 
     const records = data.features

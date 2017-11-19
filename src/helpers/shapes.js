@@ -38,27 +38,19 @@ var Shapes = {
       icon: '&#9827;'
     },
     {
-      label: 'hexagon',
-      values: ['hexagon', 'octogon'],
+      label: 'other regular polygons (octogons...)',
+      values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon'],
       icon: '&#11042;'
     },
     {
-      label: 'unknown;',
-      values: [''],
-      icon: '&#10067;'
+      label: 'other',
+      values: ['trapezoid', 'irregular', 'other', 'polygon'],
+      icon: '&#9676;'
     },
     {
-      label: 'other',
-      values: [
-        'trapezoid',
-        'irregular',
-        'polygon',
-        'dekagon',
-        'dodekagon',
-        'octofoil',
-        'other'
-      ],
-      icon: '&#9676;'
+      label: 'unknown',
+      values: [''],
+      icon: '&#10067;'
     }
   ],
   defaultShape: () => {
