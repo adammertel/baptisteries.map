@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 
+import GridLegend from './gridlegend';
 @observer
 class Panel extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -14,7 +15,7 @@ class Panel extends React.Component {
 
   render() {
     return (
-      <div className="modal is-active">
+      <div className="modal is-active info">
         <div className="modal-background" />
         <div className="modal-card">
           <section className="modal-card-body">
@@ -31,11 +32,8 @@ class Panel extends React.Component {
               User has two possibilities to filter displayed baptisteries - ...
             </p>
             <p />
-            <svg height="300" width="600">
-              <text x="30" y="150" fontFamily="Verdana" fontSize="35">
-                Legend will be here...
-              </text>
-            </svg>
+            <GridLegend />
+
             <p className="has-text-centered">
               <a
                 onClick={this.handleCloseModal}

@@ -37,9 +37,9 @@ export default class AppStore {
 
   displayMapGrid() {
     if (map.getZoom) {
-      return map.getZoom() > store.gridThreshold;
+      return map.getZoom() <= store.gridThreshold;
     } else {
-      return false;
+      return true;
     }
   }
 

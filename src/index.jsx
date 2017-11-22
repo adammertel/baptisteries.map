@@ -15,6 +15,23 @@ window.Base = Base;
 
 window.basemaps = Base.requestConfigFile('./basemaps.json', true);
 
+// grid global settings
+window.gridCellColors = [
+  '#ffffe5',
+  '#ffffe5',
+  '#fff7bc',
+  '#fee391',
+  '#fec44f',
+  '#fe9929',
+  '#ec7014',
+  '#cc4c02',
+  '#993404',
+  '#662506',
+  '#662506'
+];
+gridCellColors.reverse();
+window.gridCellDomain = [230, 1300];
+
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(

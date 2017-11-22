@@ -91,13 +91,13 @@ class AppMap extends React.Component {
             })}
           </LayersControl>
           {store.displayMapGrid() ? (
-            <MapRecords />
-          ) : (
             <MapGrid
               map={map}
               date={this.props.store.date}
               shapes={this.props.store.shapes}
             />
+          ) : (
+            <MapRecords />
           )}
         </Map>
       </div>

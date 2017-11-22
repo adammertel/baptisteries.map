@@ -23,7 +23,7 @@ $panel-w: 400;
 }
 
 .marker-icon .icon-text {
-  color: white;
+  color: $color2;
 }
 
 .marker-cluster.marker-cluster-small,
@@ -68,6 +68,12 @@ $panel-w: 400;
   }
 }
 
+.info {
+  .time-legend-wrapper {
+    margin-top: 10px;
+  }
+}
+
 .panel-wrapper {
   height: 100%;
   overflow-y: auto;
@@ -94,6 +100,9 @@ $panel-w: 400;
   .panel-control {
     padding-left: 10px;
     padding-bottom: 15px;
+    strong {
+      color: $color2;
+    }
   }
 
   .shape-filter {
@@ -132,6 +141,7 @@ $panel-w: 400;
       max-width: 40px;
     }
   }
+
   .column-label {
     vertical-align: center;
     &.column-label-left {

@@ -19,14 +19,13 @@ class Panel extends React.Component {
       <div className="panel-wrapper">
         <h1 className="title">Christian Baptisteries</h1>
         <p />
-        <h3 className="subtitle section-label">
-          Temporal filter: <strong>{store.date}</strong>
-        </h3>
+        <h3 className="subtitle section-label">Temporal filter</h3>
         <div className="panel-control">
+          Selected date: <strong>{store.date}</strong>
           <TimeSlider />
         </div>
         <hr />
-        <h3 className="subtitle section-label">The shape of the buildings:</h3>
+        <h3 className="subtitle section-label">The shape of building</h3>
         <div className="panel-control">
           <ShapeFilter store={store} />
         </div>

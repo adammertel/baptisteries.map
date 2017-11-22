@@ -66,29 +66,15 @@ class MapGrid extends React.Component {
 
   renderGrid() {
     this.clearGrid();
-    const cellColors = [
-      '#ffffe5',
-      '#ffffe5',
-      '#fff7bc',
-      '#fee391',
-      '#fec44f',
-      '#fe9929',
-      '#ec7014',
-      '#cc4c02',
-      '#993404',
-      '#662506',
-      '#662506'
-    ];
-    cellColors.reverse();
 
     const rules = {
       cells: {
         fillColor: {
-          method: 'mean',
+          method: 'median',
           attribute: 'date',
           scale: 'size',
-          range: cellColors,
-          domain: [230, 1301]
+          range: window.gridCellColors,
+          domain: window.gridCellDomain
         },
         color: '#222222',
         fillOpacity: 0.6,
