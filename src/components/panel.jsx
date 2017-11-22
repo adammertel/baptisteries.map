@@ -10,6 +10,10 @@ class Panel extends React.Component {
     return true;
   }
 
+  handleInfoOpen() {
+    store.openInfo();
+  }
+
   render() {
     return (
       <div className="panel-wrapper">
@@ -27,7 +31,9 @@ class Panel extends React.Component {
           <ShapeFilter store={store} />
         </div>
         <hr />
-        <a className="button is-white">open info</a>
+        <a className="button is-white" onClick={this.handleInfoOpen.bind(this)}>
+          open info
+        </a>
       </div>
     );
   }

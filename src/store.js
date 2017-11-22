@@ -36,7 +36,7 @@ export default class AppStore {
   }
 
   @action closeInfo = () => (this.infoOpen = false);
-  @action openInfo = () => (this.infoOpen = false);
+  @action openInfo = () => (this.infoOpen = true);
 
   @action changeDate = newDate => (this.date = newDate);
   @action
