@@ -22,8 +22,8 @@ class MapRecords extends React.Component {
         Shapes.getIcon(shape) +
         '</i></span>',
       className: '',
-      iconAnchor: [18, 50],
-      iconSize: [36, 50]
+      iconAnchor: [18, 45],
+      iconSize: [36, 45]
     });
   }
   render() {
@@ -107,7 +107,7 @@ class MapRecords extends React.Component {
               color: 'black',
               dashArray: 5,
               fillOpacity: 0,
-              opacity: 0.7,
+              opacity: 0,
               weight: 3
             }
           }}

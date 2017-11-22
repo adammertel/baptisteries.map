@@ -35,6 +35,14 @@ export default class AppStore {
     return allChecked;
   }
 
+  displayMapGrid() {
+    if (map.getZoom) {
+      return map.getZoom() > store.gridThreshold;
+    } else {
+      return false;
+    }
+  }
+
   @action closeInfo = () => (this.infoOpen = false);
   @action openInfo = () => (this.infoOpen = true);
 

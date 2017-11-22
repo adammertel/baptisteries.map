@@ -44,7 +44,6 @@ class AppMap extends React.Component {
     L.Util.setOptions(map, { maxBoundsViscosity: 1 });
   }
   shouldComponentUpdate(nextProps) {
-    console.log('map', nextProps);
     return true;
   }
 
@@ -70,6 +69,7 @@ class AppMap extends React.Component {
           useFlyTo={true}
           ref="map"
           attributionControl={false}
+          attributionControl={false}
           maxZoom={10}
           minZoom={4}
         >
@@ -90,7 +90,7 @@ class AppMap extends React.Component {
               );
             })}
           </LayersControl>
-          {this.zoom > store.gridThreshold ? (
+          {store.displayMapGrid() ? (
             <MapRecords />
           ) : (
             <MapGrid
