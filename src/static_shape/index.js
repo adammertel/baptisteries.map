@@ -190,7 +190,7 @@ const init = () => {
   });
 
   // legend
-  const legendW = 600;
+  const legendW = 700;
   const legendItemH = 25;
   const legendItemW = 35;
   const headingH = 40;
@@ -212,32 +212,47 @@ const init = () => {
     .attr('width', legendW)
     .attr('height', legendH)
     .attr('fill', 'white')
-    .attr('opacity', 0.9);
+    .attr('opacity', 0.85);
 
   text(
     legendG,
     'CHRISTIAN BAPTISTERIES 240CE - 1200CE',
     alignX,
-    svgH - legendH - legendMargin + legendPadding,
+    svgH - legendH - legendMargin + legendPadding - 10,
     { fontSize: 25, fontWeight: 'bold' }
   );
+
   text(
     legendG,
     'Shape of Building',
     alignX,
-    svgH - legendH - legendMargin + legendPadding + headingH + 5,
+    svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'normal' }
   );
 
-  allShapes.map((shape, si) => {
+  text(
+    legendG,
+    'All shapes',
+    alignX + 460,
+    svgH - legendH - legendMargin + legendPadding + headingH - 5,
+    { fontSize: 15, fontWeight: 'normal' }
+  );
+
+  const longLabelCondition = a => a.label.length > 25;
+  const thatLegendWithLongLabel = allShapes.find(a => longLabelCondition(a));
+  const allShapesLegend = allShapes.filter(a => !longLabelCondition(a));
+  allShapesLegend.push(thatLegendWithLongLabel);
+
+  allShapesLegend.map((shape, si) => {
     const y =
       svgH -
       legendH -
       legendMargin +
       legendPadding +
-      Math.floor(si / 2) * legendItemH +
-      headingH * 2;
-    const x = si % 2 ? alignX + 150 : alignX;
+      Math.floor(si / 3) * legendItemH +
+      60;
+    const x =
+      si % 3 === 0 ? alignX : si % 3 === 1 ? alignX + 150 : alignX + 300;
 
     legendG
       .append('rect')
@@ -254,14 +269,14 @@ const init = () => {
 
   // big pie
   const allShapesPie = pie(allShapes);
-  const bigPieRadius = 60;
+  const bigPieRadius = 50;
   const arc = d3
     .arc()
     .innerRadius(0)
     .outerRadius(bigPieRadius);
 
-  const bigPieX = alignX + 480;
-  const bigPieY = svgH - legendMargin - 270;
+  const bigPieX = alignX + 500;
+  const bigPieY = svgH - legendMargin - 280;
 
   allShapesPie.map(shapeP => {
     legendG
@@ -284,9 +299,9 @@ const init = () => {
     .fill()
     .map((_, i) => hexDates[0] + i * (hexDates[1] - hexDates[0]) / 5);
 
-  const hexLegendLabelY = svgH - legendMargin - 180;
-  const hexLegendTextY = svgH - legendMargin - 50;
-  const hexLegendPathY = svgH - legendMargin - 100;
+  const hexLegendLabelY = svgH - legendMargin - 230;
+  const hexLegendTextY = svgH - legendMargin - 200;
+  const hexLegendPathY = svgH - legendMargin - 160;
 
   text(
     legendG,
@@ -297,7 +312,7 @@ const init = () => {
   );
 
   hexLegendDates.map((hexDate, hi) => {
-    const x = (hi + 1) * ((legendW - 2 * (legendPadding + 20)) / 5) + 20;
+    const x = (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
     legendG
       .append('path')
       .attr('d', d => {
@@ -309,6 +324,11 @@ const init = () => {
 
     text(legendG, hexDate, x - 10, hexLegendTextY);
   });
+
+  // size legend
+  const sizeLegendLabelY = svgH - legendMargin - 120;
+  const sizeLegendTextY = svgH - legendMargin - 80;
+  const sizeLegendPathY = svgH - legendMargin - 60;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
