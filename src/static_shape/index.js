@@ -167,7 +167,7 @@ const init = () => {
     const binPie = pie(shapeDict);
     const pieG = binG.append('g');
 
-    const radius = Math.sqrt(bin.length) * 4;
+    const radius = sizeRadius(bin.length);
     binPie.map(binP => {
       const arc = d3
         .arc()
@@ -227,7 +227,7 @@ const init = () => {
     'Shape of Building',
     alignX,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
-    { fontSize: 15, fontWeight: 'normal' }
+    { fontSize: 15, fontWeight: 'bold' }
   );
 
   text(
@@ -235,7 +235,7 @@ const init = () => {
     'All shapes',
     alignX + 460,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
-    { fontSize: 15, fontWeight: 'normal' }
+    { fontSize: 15, fontWeight: 'bold' }
   );
 
   const longLabelCondition = a => a.label.length > 25;
@@ -308,7 +308,7 @@ const init = () => {
     'Median year of aggregated buildings',
     alignX,
     hexLegendLabelY,
-    { fontSize: 15, fontWeight: 'normal' }
+    { fontSize: 15, fontWeight: 'bold' }
   );
 
   hexLegendDates.map((hexDate, hi) => {
@@ -326,9 +326,38 @@ const init = () => {
   });
 
   // size legend
-  const sizeLegendLabelY = svgH - legendMargin - 120;
-  const sizeLegendTextY = svgH - legendMargin - 80;
-  const sizeLegendPathY = svgH - legendMargin - 60;
+  const sizeLegendLabelY = svgH - legendMargin - 110;
+  const sizeLegendTextY = svgH - legendMargin - 40;
+  const sizeLegendPathY = svgH - legendMargin - 50;
+
+  const legendSizes = Array(8)
+    .fill()
+    .map((_, i) => i * 5);
+
+  text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
+    fontSize: 15,
+    fontWeight: 'bold'
+  });
+
+  legendSizes.map((legendSize, li) => {
+    const x = 20 + legendSize * 10;
+    const radius = sizeRadius(legendSize);
+
+    legendG
+      .append('circle')
+      .attr('r', radius)
+      .attr('cx', x)
+      .attr('cy', sizeLegendPathY - radius)
+      .attr('fill', 'white')
+      .attr('stroke', 'black')
+      .attr('stroke-width', '1.5');
+
+    text(legendG, legendSize, x - 5, sizeLegendTextY);
+  });
+};
+
+const sizeRadius = size => {
+  return Math.sqrt(size) * 4;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
