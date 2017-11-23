@@ -11,6 +11,8 @@ var d3Hexbin = require('d3-hexbin');
 const svgW = 1100;
 const svgH = 1050;
 
+const hexDates = [400, 800];
+
 const data = [
   { name: 'baptisteries', path: './../data/baptisteries.geojson' },
   { name: 'countries', path: './../data/ne_50m_admin.geojson' }
@@ -90,7 +92,7 @@ const init = () => {
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
     .scaleSequential(scales.interpolateYlGn)
-    .domain([700, 400]);
+    .domain([hexDates[1], hexDates[0]]);
 
   const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
 
@@ -193,7 +195,7 @@ const init = () => {
   const legendItemW = 35;
   const headingH = 40;
   const legendPadding = 30;
-  const legendMargin = 50;
+  const legendMargin = 30;
 
   const legendH =
     allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH + 200;
@@ -214,10 +216,17 @@ const init = () => {
 
   text(
     legendG,
-    'CHRISTIAN BAPTISTERIES',
+    'CHRISTIAN BAPTISTERIES 240CE - 1200CE',
     alignX,
     svgH - legendH - legendMargin + legendPadding,
-    { fontSize: 15, fontWeight: 'bold' }
+    { fontSize: 25, fontWeight: 'bold' }
+  );
+  text(
+    legendG,
+    'Shape of Building',
+    alignX,
+    svgH - legendH - legendMargin + legendPadding + headingH + 5,
+    { fontSize: 15, fontWeight: 'normal' }
   );
 
   allShapes.map((shape, si) => {
@@ -251,32 +260,61 @@ const init = () => {
     .innerRadius(0)
     .outerRadius(bigPieRadius);
 
+  const bigPieX = alignX + 480;
+  const bigPieY = svgH - legendMargin - 270;
+
   allShapesPie.map(shapeP => {
     legendG
       .append('path')
-      .attr(
-        'transform',
-        'translate(' + (alignX + 480) + ',' + (svgH - legendMargin - 270) + ')'
-      )
+      .attr('transform', 'translate(' + bigPieX + ',' + bigPieY + ')')
       .attr('d', arc(shapeP))
       .attr('fill', Shapes.getColor(shapeP.data.label, true));
   });
+
   legendG
     .append('circle')
-    .attr(
-      'transform',
-      'translate(' + (alignX + 480) + ',' + (svgH - legendMargin - 270) + ')'
-    )
+    .attr('transform', 'translate(' + bigPieX + ',' + bigPieY + ')')
     .attr('r', bigPieRadius + 0.5)
     .attr('stroke', 'black')
     .attr('stroke-width', 1.5)
     .attr('fill', 'none');
+
+  // hex legend
+  const hexLegendDates = Array(5)
+    .fill()
+    .map((_, i) => hexDates[0] + i * (hexDates[1] - hexDates[0]) / 5);
+
+  const hexLegendLabelY = svgH - legendMargin - 180;
+  const hexLegendTextY = svgH - legendMargin - 50;
+  const hexLegendPathY = svgH - legendMargin - 100;
+
+  text(
+    legendG,
+    'Median year of aggregated buildings',
+    alignX,
+    hexLegendLabelY,
+    { fontSize: 15, fontWeight: 'normal' }
+  );
+
+  hexLegendDates.map((hexDate, hi) => {
+    const x = (hi + 1) * ((legendW - 2 * (legendPadding + 20)) / 5) + 20;
+    legendG
+      .append('path')
+      .attr('d', d => {
+        return 'M' + x + ',' + hexLegendPathY + hexbin.hexagon();
+      })
+      .attr('fill-opacity', 0.6)
+      .attr('fill', binColors(hexDate))
+      .attr('stroke', 'black');
+
+    text(legendG, hexDate, x - 10, hexLegendTextY);
+  });
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
   const defaultStyle = {
     fontWeight: 'normal',
-    fontSize: 10
+    fontSize: 12
   };
   const style = Object.assign({}, defaultStyle, usedStyle);
   el
