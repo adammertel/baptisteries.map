@@ -89,7 +89,7 @@ const init = () => {
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
-    .scaleSequential(scales.interpolateGreens)
+    .scaleSequential(scales.interpolateYlGn)
     .domain([700, 400]);
 
   const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
@@ -103,9 +103,10 @@ const init = () => {
     .enter()
     .append('path')
     .attr('d', path)
-    .style('fill', 'grey')
-    .style('opacity', '0.3')
-    .style('stroke', 'white');
+    .style('fill', 'lightgrey')
+    .style('fill-opacity', 0.4)
+    .style('stroke', 'grey')
+    .style('stroke-opacity', 0.7);
 
   // get inside points
   bins.map(b => (b.inside = []));
@@ -135,7 +136,7 @@ const init = () => {
     const binG = layers.bins.append('g');
 
     const dates = bin.inside.map(b => b.properties.date).filter(d => d);
-    const avgDate = dates.reduce((p, c) => p + c, 0) / dates.length;
+    const avgDate = d3.median(dates);
 
     const shapes = bin.inside.map(b => b.properties.shape);
 
@@ -155,16 +156,16 @@ const init = () => {
       .append('path')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
       .attr('fill', binColors(avgDate))
-      .attr('fill-opacity', 0.4)
-      .attr('stroke', 'white')
-      .attr('stroke-weight', 3)
+      .attr('fill-opacity', 0.5)
+      .attr('stroke', 'black')
+      .attr('stroke-weight', 1)
       .attr('d', hexbin.hexagon());
 
     // pie
     const binPie = pie(shapeDict);
     const pieG = binG.append('g');
 
-    const radius = Math.sqrt(bin.length) * 3;
+    const radius = Math.sqrt(bin.length) * 4;
     binPie.map(binP => {
       const arc = d3
         .arc()
@@ -180,9 +181,9 @@ const init = () => {
     pieG
       .append('circle')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
-      .attr('r', radius + 0.5)
+      .attr('r', radius + 0.75)
       .attr('stroke', 'black')
-      .attr('stroke-width', 2)
+      .attr('stroke-width', 1.5)
       .attr('fill', 'none');
   });
 
@@ -191,8 +192,8 @@ const init = () => {
   const legendItemH = 25;
   const legendItemW = 35;
   const headingH = 40;
-  const legendPadding = 10;
-  const legendMargin = 25;
+  const legendPadding = 30;
+  const legendMargin = 50;
 
   const legendH =
     allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH + 200;
@@ -213,10 +214,10 @@ const init = () => {
 
   text(
     legendG,
-    'CHRISTIAN BAPTISTERIES - SHAPE OF BUILDING',
+    'CHRISTIAN BAPTISTERIES',
     alignX,
     svgH - legendH - legendMargin + legendPadding,
-    { fontSize: 13, fontWeight: 'bold' }
+    { fontSize: 15, fontWeight: 'bold' }
   );
 
   allShapes.map((shape, si) => {
@@ -224,9 +225,11 @@ const init = () => {
       svgH -
       legendH -
       legendMargin +
+      legendPadding +
       Math.floor(si / 2) * legendItemH +
-      headingH;
+      headingH * 2;
     const x = si % 2 ? alignX + 150 : alignX;
+
     legendG
       .append('rect')
       .attr('y', y)
@@ -235,15 +238,14 @@ const init = () => {
       .attr('width', legendItemW)
       .attr('fill', Shapes.getColor(shape.label, true))
       .attr('stroke', 'black')
-      .attr('stroke-width', '2');
+      .attr('stroke-width', 1);
 
     text(legendG, shape.label, x + legendItemW + 8, y);
   });
 
   // big pie
   const allShapesPie = pie(allShapes);
-  const bigPieRadius =
-    Math.sqrt(allShapes.reduce((sum, s) => sum + s.count, 0)) * 3;
+  const bigPieRadius = 60;
   const arc = d3
     .arc()
     .innerRadius(0)
@@ -267,7 +269,7 @@ const init = () => {
     )
     .attr('r', bigPieRadius + 0.5)
     .attr('stroke', 'black')
-    .attr('stroke-width', 2)
+    .attr('stroke-width', 1.5)
     .attr('fill', 'none');
 };
 

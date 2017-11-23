@@ -35,7 +35,6 @@ class MapGrid extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    console.log('grid', nextProps);
     return true;
   }
 
@@ -104,7 +103,7 @@ class MapGrid extends React.Component {
       showCells: true,
       showMarkers: true,
       showTexts: false,
-      zoneSize: 7000
+      zoneSize: 5000
     });
 
     const records = data.features
