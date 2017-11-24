@@ -240,12 +240,7 @@ const init = () => {
     { fontSize: 15, fontWeight: 'bold' }
   );
 
-  const longLabelCondition = a => a.label.length > 25;
-  const thatLegendWithLongLabel = allShapes.find(a => longLabelCondition(a));
-  const allShapesLegend = allShapes.filter(a => !longLabelCondition(a));
-  allShapesLegend.push(thatLegendWithLongLabel);
-
-  allShapesLegend.map((shape, si) => {
+  allShapes.map((shape, si) => {
     const y =
       svgH -
       legendH -

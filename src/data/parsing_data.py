@@ -22,6 +22,8 @@ for ri, row in enumerate(baptisterias):
                 "shape": row['Building_shape_1'].strip(),
                 "piscina_shape": row['Piscina_shape_1'].strip(),
                 "piscina_depth": parseNumber(row['Piscina_depth_cm']),
+                "piscina_depth": parseNumber(row['Piscina_depth_cm']),
+                "ciborium": row['Piscina_depth_cm'] == 'y',
                 "localisation_certainty": row['Localisation_certainty']
             }
             #print(float(row['X_coordinates']))
