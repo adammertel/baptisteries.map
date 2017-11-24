@@ -302,7 +302,9 @@ const init = () => {
   // hex legend
   const hexLegendDates = Array(5)
     .fill()
-    .map((_, i) => hexDepths[0] + i * (hexDepths[1] - hexDepths[0]) / 5);
+    .map((_, i) => 30 + hexDepths[0] + i * (hexDepths[1] - hexDepths[0]) / 5);
+
+  hexLegendDates.push('unknown');
 
   const hexLegendLabelY = svgH - legendMargin - 230;
   const hexLegendTextY = svgH - legendMargin - 200;
@@ -324,7 +326,7 @@ const init = () => {
       .attr('fill', binColors(depth))
       .attr('stroke', 'black');
 
-    text(legendG, depth, x - 10, hexLegendTextY);
+    text(legendG, depth, x, hexLegendTextY + 10, { textAnchor: 'middle' });
   });
 
   // size legend
@@ -365,7 +367,8 @@ const sizeRadius = size => {
 const text = (el, text, x, y, usedStyle = {}) => {
   const defaultStyle = {
     fontWeight: 'normal',
-    fontSize: 12
+    fontSize: 12,
+    textAnchor: 'start'
   };
   const style = Object.assign({}, defaultStyle, usedStyle);
   el
@@ -374,6 +377,7 @@ const text = (el, text, x, y, usedStyle = {}) => {
     .attr('x', x)
     .attr('font-family', 'Ubuntu')
     .attr('font-weight', style.fontWeight)
+    .attr('text-anchor', style.textAnchor)
     .attr('font-size', style.fontSize)
     .attr('y', y + style.fontSize + 2)
     .attr('color', 'black');
