@@ -1,6 +1,13 @@
 from geojson import GeometryCollection, Point, Feature, FeatureCollection
 import csv
 import codecs
+import math
+
+def parseNumber(value):
+    try:
+        return int(value)
+    except: 
+        return False
 
 features = []
 baptisterias = csv.DictReader(codecs.open('./Christian Baptisteries, 3rd-11th c. - Baptisteries.csv', 'rU'), delimiter=',', quotechar='"')
@@ -9,12 +16,12 @@ for ri, row in enumerate(baptisterias):
         try:
             props = {
                 "name": row['Place_name_modern'],
-                "date": int(row['Date_average'], 10),
-                "date_after": int(row['Built_after_or_in'], 10),
-                "date_before": int(row['Built_before_or_in'], 10),
+                "date": parseNumber(row['Date_average']),
+                "date_after": parseNumber(row['Built_after_or_in']),
+                "date_before": parseNumber(row['Built_before_or_in']),
                 "shape": row['Building_shape_1'].strip(),
-                "piscina_shape": row['Piscina_shape_1'],
-                "piscina_depth": int(row['Piscina_depth_cm']),
+                "piscina_shape": row['Piscina_shape_1'].strip(),
+                "piscina_depth": parseNumber(row['Piscina_depth_cm']),
                 "localisation_certainty": row['Localisation_certainty']
             }
             #print(float(row['X_coordinates']))
@@ -24,5 +31,8 @@ for ri, row in enumerate(baptisterias):
         except:
             print('not possible to parse', row)
 
+
+
 f = open('baptisteries.geojson', 'w+')
 f.write(str(FeatureCollection(features)))
+print(len(features))

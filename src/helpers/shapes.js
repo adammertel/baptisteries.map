@@ -70,7 +70,7 @@ var Shapes = {
     },
     {
       label: 'unknown',
-      values: [''],
+      values: ['', 'unknown'],
       icon: '&#10067;',
       color: 9
     }

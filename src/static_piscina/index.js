@@ -71,6 +71,7 @@ const createLayer = layerName => {
 
 // create visualisation
 const init = () => {
+  console.log(baptisteries.features);
   // getting all shapes
   const allShapes = Shapes.shapesDictionary;
   allShapes.map(s => (s.count = 0));
@@ -133,7 +134,7 @@ const init = () => {
     });
   });
 
-  bins.filter(bin => bin.inside.length).map(bin => {
+  bins.map(bin => {
     const binG = layers.bins.append('g');
 
     const depths = bin.inside
