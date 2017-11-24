@@ -94,6 +94,15 @@ var Shapes = {
   getColor: (shapeValue, label = false) => {
     const shape = Shapes.getShape(shapeValue, label);
     return shape ? Shapes.colors[shape.color] : false;
+  },
+  getIndex: (shapeValue, label = false) => {
+    const shape = Shapes.getShape(shapeValue, label);
+    return Shapes.shapesDictionary.indexOf(shape);
+  },
+  sortByIndex: (a, b) => {
+    const idA = Shapes.getIndex(a.label, true);
+    const idB = Shapes.getIndex(b.label, true);
+    return idA > idB ? 1 : -1;
   }
 };
 

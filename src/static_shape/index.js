@@ -39,7 +39,7 @@ const hexbin = d3Hexbin
 const pie = d3
   .pie()
   .value(d => d.count)
-  .sort(null);
+  .sort(Shapes.sortByIndex);
 
 window.svg = d3
   .select('body')
@@ -345,8 +345,6 @@ const init = () => {
         10
       )
     );
-
-  console.log(maxInside);
 
   text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
     fontSize: 15,

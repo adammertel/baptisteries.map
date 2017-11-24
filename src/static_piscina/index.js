@@ -39,7 +39,7 @@ const hexbin = d3Hexbin
 const pie = d3
   .pie()
   .value(d => d.count)
-  .sort(null);
+  .sort(Shapes.sortByIndex);
 
 window.svg = d3
   .select('body')
@@ -349,9 +349,9 @@ const init = () => {
   });
 
   legendSizes.map((legendSize, li) => {
-    const circlesD = li * (li + 1) / 2 * 5;
-    const gapsD = li * 15;
-    const x = alignX + legendSize * 2 + gapsD + circlesD;
+    const circlesD = li * (li + 1) / 2 * 3;
+    const gapsD = li * 10;
+    const x = alignX + 10 + legendSize * 2 + gapsD + circlesD;
     const radius = sizeRadius(legendSize);
 
     legendG

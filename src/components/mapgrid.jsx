@@ -89,7 +89,7 @@ class MapGrid extends React.Component {
           method: 'count',
           attribute: '',
           scale: 'continuous',
-          range: [2, 20],
+          range: [1, 22],
           domain: [0, 50]
         }
       },
@@ -98,7 +98,7 @@ class MapGrid extends React.Component {
 
     this.grid = L.regularGridCluster({
       rules: rules,
-      gridOrigin: { lat: 0, lng: -10 },
+      gridOrigin: { lat: 0, lng: -11 },
       gridMode: 'hexagon',
       showCells: true,
       showMarkers: true,
