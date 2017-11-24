@@ -21,17 +21,17 @@ class Panel extends React.Component {
         <p />
         <h3 className="subtitle section-label">Temporal filter</h3>
         <div className="panel-control">
-          Selected date: <strong>{store.date}</strong>
+          selected: <strong>240 - {store.date}</strong>
           <TimeSlider />
         </div>
         <hr />
-        <h3 className="subtitle section-label">The shape of building</h3>
+        <h3 className="subtitle section-label">Building shape</h3>
         <div className="panel-control">
           <ShapeFilter store={store} />
         </div>
         <hr />
         <a className="button is-white" onClick={this.handleInfoOpen.bind(this)}>
-          open info
+          info
         </a>
       </div>
     );

@@ -47,7 +47,7 @@ var Shapes = {
     {
       label: 'cross',
       values: ['cross'],
-      icon: '&#128932;',
+      icon: '&#10010;',
       color: 5
     },
     {
@@ -59,7 +59,7 @@ var Shapes = {
     {
       label: 'other regular polygons (octogons...)',
       values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon'],
-      icon: '&#11042;',
+      icon: '&#11039;',
       color: 7
     },
     {

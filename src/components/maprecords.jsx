@@ -59,7 +59,6 @@ class MapRecords extends React.Component {
                     definition="Building shape"
                     value={props.shape}
                   />
-                  <TooltipLine definition="Date" value={props.date} />
                   <TooltipLine
                     definition="Built after or in"
                     value={props.date_after}
@@ -67,6 +66,10 @@ class MapRecords extends React.Component {
                   <TooltipLine
                     definition="Built before or in"
                     value={props.date_before}
+                  />
+                  <TooltipLine
+                    definition="Date (mean value)"
+                    value={props.date}
                   />
                   <TooltipLine
                     definition="Piscina shape"
