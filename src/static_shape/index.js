@@ -140,7 +140,7 @@ const init = () => {
     const dates = bin.inside.map(b => b.properties.date).filter(d => d);
     const avgDate = d3.median(dates);
 
-    const shapes = bin.inside.map(b => b.properties.shape);
+    const shapes = bin.inside.map(b => Shapes.getLabel(b.properties.shape));
 
     const shapeCounts = {};
     shapes.map(shape => {
@@ -178,7 +178,7 @@ const init = () => {
         .append('path')
         .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
         .attr('d', arc(binP))
-        .attr('fill', Shapes.getColor(binP.data.label));
+        .attr('fill', Shapes.getColor(binP.data.label, true));
     });
     pieG
       .append('circle')
