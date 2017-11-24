@@ -224,7 +224,7 @@ const init = () => {
 
   text(
     legendG,
-    'Shape of Building',
+    'Building shape',
     alignX,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'bold' }
@@ -232,7 +232,7 @@ const init = () => {
 
   text(
     legendG,
-    'All shapes',
+    'All buildings',
     alignX + 460,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'bold' }
@@ -327,10 +327,10 @@ const init = () => {
 
   // size legend
   const sizeLegendLabelY = svgH - legendMargin - 110;
-  const sizeLegendTextY = svgH - legendMargin - 40;
-  const sizeLegendPathY = svgH - legendMargin - 50;
+  const sizeLegendTextY = svgH - legendMargin - 30;
+  const sizeLegendPathY = svgH - legendMargin - 40;
 
-  const legendSizes = Array(8)
+  const legendSizes = Array(7)
     .fill()
     .map((_, i) => i * 5);
 
@@ -340,7 +340,7 @@ const init = () => {
   });
 
   legendSizes.map((legendSize, li) => {
-    const x = 20 + legendSize * 10;
+    const x = 30 + legendSize * 13;
     const radius = sizeRadius(legendSize);
 
     legendG

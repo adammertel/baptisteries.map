@@ -30,7 +30,7 @@ window.gridCellColors = [
   '#662506'
 ];
 gridCellColors.reverse();
-window.gridCellDomain = [230, 1300];
+window.gridCellDomain = [230, 1201];
 
 window.DEVELOPMENT = process.env.NODE_ENV === 'development';
 

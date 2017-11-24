@@ -5,7 +5,7 @@ import codecs
 features = []
 baptisterias = csv.DictReader(codecs.open('./Christian Baptisteries, 3rd-11th c. - Baptisteries.csv', 'rU'), delimiter=',', quotechar='"')
 for ri, row in enumerate(baptisterias):
-    if row['Certainty'] == '    ':
+    if row['Certainty'] == 'certain or very probable':
         try:
             props = {
                 "name": row['Place_name_modern'],
@@ -14,7 +14,7 @@ for ri, row in enumerate(baptisterias):
                 "date_before": int(row['Built_before_or_in'], 10),
                 "shape": row['Building_shape_1'].strip(),
                 "piscina_shape": row['Piscina_shape_1'],
-                "piscina_depth": row['Piscina_depth_cm'],
+                "piscina_depth": int(row['Piscina_depth_cm']),
                 "localisation_certainty": row['Localisation_certainty']
             }
             #print(float(row['X_coordinates']))

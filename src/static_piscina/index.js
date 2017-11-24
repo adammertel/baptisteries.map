@@ -11,7 +11,7 @@ var d3Hexbin = require('d3-hexbin');
 const svgW = 1100;
 const svgH = 1050;
 
-const hexDates = [400, 800];
+const hexDepths = [0, 150];
 
 const data = [
   { name: 'baptisteries', path: './../data/baptisteries.geojson' },
@@ -75,8 +75,7 @@ const init = () => {
   const allShapes = Shapes.shapesDictionary;
   allShapes.map(s => (s.count = 0));
   baptisteries.features.map(b => {
-    const bShape = b.properties.shape;
-
+    const bShape = b.properties.piscina_shape;
     const shape = Shapes.getShape(bShape);
     shape.count++;
   });
@@ -91,8 +90,8 @@ const init = () => {
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
   const binColors = d3
-    .scaleSequential(scales.interpolateYlGn)
-    .domain([hexDates[1], hexDates[0]]);
+    .scaleSequential(scales.interpolatePuBuGn)
+    .domain([hexDepths[0], hexDepths[1]]);
 
   const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
 
@@ -137,10 +136,12 @@ const init = () => {
   bins.filter(bin => bin.inside.length).map(bin => {
     const binG = layers.bins.append('g');
 
-    const dates = bin.inside.map(b => b.properties.date).filter(d => d);
-    const avgDate = d3.median(dates);
+    const depths = bin.inside
+      .map(b => b.properties.piscina_depth)
+      .filter(d => d);
+    const avgDepth = d3.median(depths);
 
-    const shapes = bin.inside.map(b => b.properties.shape);
+    const shapes = bin.inside.map(b => b.properties.piscina_shape);
 
     const shapeCounts = {};
     shapes.map(shape => {
@@ -157,7 +158,7 @@ const init = () => {
     binG
       .append('path')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
-      .attr('fill', binColors(avgDate))
+      .attr('fill', binColors(avgDepth))
       .attr('fill-opacity', 0.5)
       .attr('stroke', 'black')
       .attr('stroke-weight', 1)
@@ -224,7 +225,7 @@ const init = () => {
 
   text(
     legendG,
-    'Shape of Building',
+    'Piscina shape',
     alignX,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'bold' }
@@ -232,7 +233,7 @@ const init = () => {
 
   text(
     legendG,
-    'All shapes',
+    'All piscinas',
     alignX + 460,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'bold' }
@@ -297,21 +298,18 @@ const init = () => {
   // hex legend
   const hexLegendDates = Array(5)
     .fill()
-    .map((_, i) => hexDates[0] + i * (hexDates[1] - hexDates[0]) / 5);
+    .map((_, i) => hexDepths[0] + i * (hexDepths[1] - hexDepths[0]) / 5);
 
   const hexLegendLabelY = svgH - legendMargin - 230;
   const hexLegendTextY = svgH - legendMargin - 200;
   const hexLegendPathY = svgH - legendMargin - 160;
 
-  text(
-    legendG,
-    'Median year of aggregated buildings',
-    alignX,
-    hexLegendLabelY,
-    { fontSize: 15, fontWeight: 'bold' }
-  );
+  text(legendG, 'Median piscina depth', alignX, hexLegendLabelY, {
+    fontSize: 15,
+    fontWeight: 'bold'
+  });
 
-  hexLegendDates.map((hexDate, hi) => {
+  hexLegendDates.map((depth, hi) => {
     const x = (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
     legendG
       .append('path')
@@ -319,10 +317,10 @@ const init = () => {
         return 'M' + x + ',' + hexLegendPathY + hexbin.hexagon();
       })
       .attr('fill-opacity', 0.6)
-      .attr('fill', binColors(hexDate))
+      .attr('fill', binColors(depth))
       .attr('stroke', 'black');
 
-    text(legendG, hexDate, x - 10, hexLegendTextY);
+    text(legendG, depth, x - 10, hexLegendTextY);
   });
 
   // size legend
