@@ -398,6 +398,53 @@ const init = () => {
 
     text(legendG, legendSize, x, sizeLegendTextY, { textAnchor: 'middle' });
   });
+
+  // ciborium legend
+  text(
+    legendG,
+    'Proportion of buildings with ciborium',
+    alignX + 300,
+    sizeLegendLabelY,
+    {
+      fontSize: 15,
+      fontWeight: 'bold'
+    }
+  );
+
+  [0, 0.5, 1].map((c, ci) => {
+    const cx = alignX + 320 + ci * 60;
+    const cy = sizeLegendPathY - 20;
+    const dict = [
+      { label: 'true', count: c * 10 },
+      { label: 'false', count: 10 - c * 10 }
+    ];
+
+    const cPie = ciboriumPie(dict);
+    const arc = d3
+      .arc()
+      .innerRadius(0)
+      .outerRadius(25);
+
+    cPie.map(cP => {
+      legendG
+        .append('path')
+        .attr('transform', 'translate(' + cx + ',' + cy + ')')
+        .attr('d', arc(cP))
+        .attr('fill-opacity', cP.data.label === 'true' ? '1' : '0')
+        .attr('fill', cP.data.label === 'true' ? ciboriumColor : 'black');
+    });
+
+    legendG
+      .append('circle')
+      .attr('r', 20)
+      .attr('cx', cx)
+      .attr('cy', cy)
+      .attr('fill', 'white')
+      .attr('stroke', 'black')
+      .attr('stroke-width', '1.5');
+
+    text(legendG, c * 100 + '%', cx, cy + 20, { textAnchor: 'middle' });
+  });
 };
 
 const sizeRadius = size => {
