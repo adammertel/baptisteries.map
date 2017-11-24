@@ -366,7 +366,7 @@ const init = () => {
 };
 
 const sizeRadius = size => {
-  return Math.sqrt(size) * 3;
+  return Math.sqrt(size) * 3.5;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {

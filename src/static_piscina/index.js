@@ -41,6 +41,13 @@ const pie = d3
   .value(d => d.count)
   .sort(Shapes.sortByIndex);
 
+const ciboriumPie = d3
+  .pie()
+  .value(d => d.count)
+  .sort((a, b) => {
+    return a ? -1 : 1;
+  });
+
 window.svg = d3
   .select('body')
   .append('svg')
@@ -89,9 +96,13 @@ const init = () => {
 
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
+
+  const defaultBinColor = '#787878';
   const binColors = d3
     .scaleSequential(scales.interpolatePuBuGn)
     .domain([hexDepths[0], hexDepths[1]]);
+
+  const ciboriumColor = '#014636';
 
   const pieColors = d3.scaleOrdinal().range(scales.schemeSet1);
 
@@ -157,15 +168,41 @@ const init = () => {
       shapeDict.push({ label: shape, count: shapeCounts[shape] });
     });
 
+    const hexColor = avgDepth ? binColors(avgDepth) : defaultBinColor;
     // hexes
     binG
       .append('path')
       .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
-      .attr('fill', binColors(avgDepth))
+      .attr('fill', hexColor)
       .attr('fill-opacity', 0.5)
       .attr('stroke', 'black')
       .attr('stroke-weight', 1)
       .attr('d', hexbin.hexagon());
+
+    // ciborium pies
+    const cRadius = sizeRadius(bin.length) + 5;
+    const ciboriums = bin.inside.map(b => b.properties.ciborium);
+    const cDict = [
+      { label: 'true', count: ciboriums.filter(c => c).length },
+      { label: 'false', count: ciboriums.filter(c => !c).length }
+    ];
+
+    const cPie = ciboriumPie(cDict);
+    const cPieG = binG.append('g');
+
+    cPie.map(cP => {
+      const arc = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(cRadius);
+
+      cPieG
+        .append('path')
+        .attr('transform', 'translate(' + bin.x + ',' + bin.y + ')')
+        .attr('d', arc(cP))
+        .attr('fill-opacity', cP.data.label === 'true' ? '1' : '0')
+        .attr('fill', cP.data.label === 'true' ? ciboriumColor : 'black');
+    });
 
     // pies
     const binPie = pie(shapeDict);
@@ -311,13 +348,14 @@ const init = () => {
 
   hexLegendDates.map((depth, hi) => {
     const x = (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
+    const color = depth !== 'unknown' ? binColors(depth) : defaultBinColor;
     legendG
       .append('path')
       .attr('d', d => {
         return 'M' + x + ',' + hexLegendPathY + hexbin.hexagon();
       })
       .attr('fill-opacity', 0.6)
-      .attr('fill', binColors(depth))
+      .attr('fill', color)
       .attr('stroke', 'black');
 
     text(legendG, depth, x, hexLegendTextY + 10, { textAnchor: 'middle' });
@@ -363,7 +401,7 @@ const init = () => {
 };
 
 const sizeRadius = size => {
-  return Math.sqrt(size) * 3;
+  return Math.sqrt(size) * 3.5;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
