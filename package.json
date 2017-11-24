@@ -5,10 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "gitignore": "git rm -r --cached . && git add . && git commit",
-    "deploy":
-      "NODE_ENV=production webpack --config webpack.production.config.js",
-    "deploy-windows":
-      "SET NODE_ENV=production & webpack --config webpack.production.config.js",
+    "deploy": "webpack --config webpack.production.config.js",
+    "deploy-windows": "webpack --config webpack.production.config.js",
     "lint": "eslint src"
   },
   "repository": {

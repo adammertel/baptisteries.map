@@ -32,11 +32,13 @@ window.gridCellColors = [
 gridCellColors.reverse();
 window.gridCellDomain = [230, 1300];
 
+window.DEVELOPMENT = process.env.NODE_ENV === 'development';
+
 Base.getData('data/baptisteries.geojson', res => {
   window.data = res;
   render(
     <div>
-      <DevTools />
+      {DEVELOPMENT && <DevTools />}
       <App store={store} />
     </div>,
     document.body.appendChild(document.createElement('div'))
