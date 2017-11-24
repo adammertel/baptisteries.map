@@ -71,7 +71,6 @@ const createLayer = layerName => {
 
 // create visualisation
 const init = () => {
-  console.log(baptisteries.features);
   // getting all shapes
   const allShapes = Shapes.shapesDictionary;
   allShapes.map(s => (s.count = 0));
@@ -155,8 +154,6 @@ const init = () => {
     Object.keys(shapeCounts).map(shape => {
       shapeDict.push({ label: shape, count: shapeCounts[shape] });
     });
-
-    console.log(shapeDict);
 
     // hexes
     binG
@@ -331,12 +328,12 @@ const init = () => {
 
   // size legend
   const sizeLegendLabelY = svgH - legendMargin - 110;
-  const sizeLegendTextY = svgH - legendMargin - 40;
-  const sizeLegendPathY = svgH - legendMargin - 50;
+  const sizeLegendTextY = svgH - legendMargin - 35;
+  const sizeLegendPathY = svgH - legendMargin - 40;
 
-  const legendSizes = Array(8)
+  const legendSizes = Array(7)
     .fill()
-    .map((_, i) => i * 5);
+    .map((_, i) => (i + 1) * 5);
 
   text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
     fontSize: 15,
@@ -344,7 +341,9 @@ const init = () => {
   });
 
   legendSizes.map((legendSize, li) => {
-    const x = 20 + legendSize * 10;
+    const circlesD = li * (li + 1) / 2 * 5;
+    const gapsD = li * 15;
+    const x = alignX + legendSize * 2 + gapsD + circlesD;
     const radius = sizeRadius(legendSize);
 
     legendG
@@ -356,7 +355,7 @@ const init = () => {
       .attr('stroke', 'black')
       .attr('stroke-width', '1.5');
 
-    text(legendG, legendSize, x - 5, sizeLegendTextY);
+    text(legendG, legendSize, x, sizeLegendTextY, { textAnchor: 'middle' });
   });
 };
 

@@ -327,7 +327,7 @@ const init = () => {
 
   // size legend
   const sizeLegendLabelY = svgH - legendMargin - 110;
-  const sizeLegendTextY = svgH - legendMargin - 30;
+  const sizeLegendTextY = svgH - legendMargin - 35;
   const sizeLegendPathY = svgH - legendMargin - 40;
 
   const legendSizes = Array(7)
@@ -340,7 +340,9 @@ const init = () => {
   });
 
   legendSizes.map((legendSize, li) => {
-    const x = 30 + legendSize * 13;
+    const circlesD = li * (li + 1) / 2 * 5;
+    const gapsD = li * 15;
+    const x = alignX + legendSize * 2 + gapsD + circlesD;
     const radius = sizeRadius(legendSize);
 
     legendG
@@ -352,7 +354,7 @@ const init = () => {
       .attr('stroke', 'black')
       .attr('stroke-width', '1.5');
 
-    text(legendG, legendSize, x - 5, sizeLegendTextY);
+    text(legendG, legendSize, x, sizeLegendTextY, { textAnchor: 'middle' });
   });
 };
 
