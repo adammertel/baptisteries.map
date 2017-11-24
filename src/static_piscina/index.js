@@ -257,7 +257,7 @@ const init = () => {
 
   text(
     legendG,
-    'CHRISTIAN BAPTISTERIES 240CE - 1200CE',
+    'CHRISTIAN BAPTISTERIES 240–1200',
     alignX,
     svgH - legendH - legendMargin + legendPadding - 10,
     { fontSize: 25, fontWeight: 'bold' }
@@ -375,6 +375,7 @@ const init = () => {
         10
       )
     );
+  legendSizes[0] = 1;
 
   text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
     fontSize: 15,
@@ -443,7 +444,7 @@ const init = () => {
       .attr('stroke', 'black')
       .attr('stroke-width', '1.5');
 
-    text(legendG, c * 100 + '%', cx, cy + 20, { textAnchor: 'middle' });
+    text(legendG, c * 100 + '%', cx, cy + 25, { textAnchor: 'middle' });
   });
 };
 

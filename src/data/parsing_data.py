@@ -31,7 +31,8 @@ for ri, row in enumerate(baptisterias):
             feature = Feature(geometry=point, properties=props)
             features.append(feature)
         except:
-            print('not possible to parse', row)
+            print(row['ID'])
+            # print('not possible to parse', row)
 
 
 

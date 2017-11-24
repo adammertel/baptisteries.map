@@ -66,13 +66,13 @@ var Shapes = {
       label: 'other',
       values: ['trapezoid', 'irregular', 'other', 'polygon'],
       icon: '&#9676;',
-      color: 8
+      color: 9
     },
     {
       label: 'unknown',
       values: ['', 'unknown'],
       icon: '&#10067;',
-      color: 9
+      color: 8
     }
   ],
   defaultShape: () => {
