@@ -133,6 +133,8 @@ const init = () => {
     });
   });
 
+  const maxInside = d3.max(bins.map(s => s.inside.length));
+
   bins.map(bin => {
     const binG = layers.bins.append('g');
 
@@ -331,9 +333,15 @@ const init = () => {
   const sizeLegendTextY = svgH - legendMargin - 35;
   const sizeLegendPathY = svgH - legendMargin - 40;
 
-  const legendSizes = Array(7)
+  const legendSizeSteps = 5;
+  const legendSizes = Array(legendSizeSteps)
     .fill()
-    .map((_, i) => (i + 1) * 5);
+    .map((_, i) =>
+      parseInt(
+        maxInside / (legendSizeSteps * legendSizeSteps) * ((i + 1) * (i + 1)),
+        10
+      )
+    );
 
   text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
     fontSize: 15,
@@ -360,7 +368,7 @@ const init = () => {
 };
 
 const sizeRadius = size => {
-  return Math.sqrt(size) * 4;
+  return Math.sqrt(size) * 3;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {

@@ -11,7 +11,7 @@ var d3Hexbin = require('d3-hexbin');
 const svgW = 1100;
 const svgH = 1050;
 
-const hexDates = [400, 800];
+const hexDates = [400, 700];
 
 const data = [
   { name: 'baptisteries', path: './../data/baptisteries.geojson' },
@@ -133,6 +133,8 @@ const init = () => {
       }
     });
   });
+
+  const maxInside = d3.max(bins.map(s => s.inside.length));
 
   bins.filter(bin => bin.inside.length).map(bin => {
     const binG = layers.bins.append('g');
@@ -295,9 +297,9 @@ const init = () => {
     .attr('fill', 'none');
 
   // hex legend
-  const hexLegendDates = Array(5)
+  const hexLegendDates = Array(4)
     .fill()
-    .map((_, i) => hexDates[0] + i * (hexDates[1] - hexDates[0]) / 5);
+    .map((_, i) => hexDates[0] + i * (hexDates[1] - hexDates[0]) / 3);
 
   const hexLegendLabelY = svgH - legendMargin - 230;
   const hexLegendTextY = svgH - legendMargin - 200;
@@ -313,6 +315,8 @@ const init = () => {
 
   hexLegendDates.map((hexDate, hi) => {
     const x = (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
+    const hexLabel = hi !== 3 ? hexDate : hexDate + '+';
+
     legendG
       .append('path')
       .attr('d', d => {
@@ -322,17 +326,27 @@ const init = () => {
       .attr('fill', binColors(hexDate))
       .attr('stroke', 'black');
 
-    text(legendG, hexDate, x - 10, hexLegendTextY);
+    const hexDateLabel = text(legendG, hexLabel, x, hexLegendTextY + 10, {
+      textAnchor: 'middle'
+    });
   });
 
   // size legend
   const sizeLegendLabelY = svgH - legendMargin - 110;
-  const sizeLegendTextY = svgH - legendMargin - 35;
-  const sizeLegendPathY = svgH - legendMargin - 40;
+  const sizeLegendTextY = svgH - legendMargin - 30;
+  const sizeLegendPathY = svgH - legendMargin - 35;
 
-  const legendSizes = Array(7)
+  const legendSizeSteps = 5;
+  const legendSizes = Array(legendSizeSteps)
     .fill()
-    .map((_, i) => i * 5);
+    .map((_, i) =>
+      parseInt(
+        maxInside / (legendSizeSteps * legendSizeSteps) * ((i + 1) * (i + 1)),
+        10
+      )
+    );
+
+  console.log(maxInside);
 
   text(legendG, 'Number of buildings', alignX, sizeLegendLabelY, {
     fontSize: 15,
@@ -340,9 +354,9 @@ const init = () => {
   });
 
   legendSizes.map((legendSize, li) => {
-    const circlesD = li * (li + 1) / 2 * 5;
-    const gapsD = li * 15;
-    const x = alignX + legendSize * 2 + gapsD + circlesD;
+    const circlesD = li * (li + 1) / 2 * 3;
+    const gapsD = li * 10;
+    const x = alignX + 10 + legendSize * 2 + gapsD + circlesD;
     const radius = sizeRadius(legendSize);
 
     legendG
@@ -359,13 +373,14 @@ const init = () => {
 };
 
 const sizeRadius = size => {
-  return Math.sqrt(size) * 4;
+  return Math.sqrt(size) * 3;
 };
 
 const text = (el, text, x, y, usedStyle = {}) => {
   const defaultStyle = {
     fontWeight: 'normal',
-    fontSize: 12
+    fontSize: 12,
+    textAnchor: 'start'
   };
   const style = Object.assign({}, defaultStyle, usedStyle);
   el
@@ -374,6 +389,7 @@ const text = (el, text, x, y, usedStyle = {}) => {
     .attr('x', x)
     .attr('font-family', 'Ubuntu')
     .attr('font-weight', style.fontWeight)
+    .attr('text-anchor', style.textAnchor)
     .attr('font-size', style.fontSize)
     .attr('y', y + style.fontSize + 2)
     .attr('color', 'black');
