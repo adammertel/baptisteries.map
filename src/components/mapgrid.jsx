@@ -12,7 +12,8 @@ require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-marke
 @observer
 class MapGrid extends React.Component {
   @observable rendered = false;
-  @observable date = 0;
+  @observable dateFrom = 0;
+  @observable dateTo = 0;
   @observable shapes = {};
   grid = false;
 
@@ -41,7 +42,8 @@ class MapGrid extends React.Component {
   afterRender() {
     if (
       !this.rendered ||
-      this.props.date !== this.date ||
+      this.props.dateTo !== this.dateTo ||
+      this.props.dateFrom !== this.dateFrom ||
       !Base.compareShapes(this.props.shapes, this.shapes)
     ) {
       this.renderGrid();
@@ -127,7 +129,8 @@ class MapGrid extends React.Component {
     this.grid.addTo(map);
 
     this.rendered = true;
-    this.date = this.props.date;
+    this.dateFrom = this.props.dateFrom;
+    this.dateTo = this.props.dateTo;
     this.shapes = Object.assign({}, store.shapes);
   }
 

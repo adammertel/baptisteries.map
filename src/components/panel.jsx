@@ -24,7 +24,6 @@ class Panel extends React.Component {
         <p />
         <h3 className="subtitle section-label">Temporal filter</h3>
         <div className="panel-control">
-          selected: <strong>240 - {store.date}</strong>
           <TimeSlider />
         </div>
         <hr />

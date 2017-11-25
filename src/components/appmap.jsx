@@ -93,7 +93,8 @@ class AppMap extends React.Component {
           {store.displayMapGrid() ? (
             <MapGrid
               map={map}
-              date={this.props.store.date}
+              dateTo={this.props.store.dateTo}
+              dateFrom={this.props.store.dateFrom}
               shapes={this.props.store.shapes}
             />
           ) : (

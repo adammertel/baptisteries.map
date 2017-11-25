@@ -3,7 +3,8 @@ import Base from './base';
 import Shapes from './helpers/shapes';
 
 export default class AppStore {
-  @observable date = 1200;
+  @observable dateFrom = 240;
+  @observable dateTo = 1200;
   @observable gridThreshold = 6;
   @observable shapes = {};
   @observable infoOpen = true;
@@ -20,7 +21,8 @@ export default class AppStore {
 
   isActiveRecord(f) {
     return (
-      f.properties.date <= store.date &&
+      f.properties.date <= store.dateTo &&
+      f.properties.date >= store.dateFrom &&
       store.shapes[Shapes.getLabel(f.properties.shape)]
     );
   }
@@ -61,7 +63,14 @@ export default class AppStore {
   @action closeInfo = () => (this.infoOpen = false);
   @action openInfo = () => (this.infoOpen = true);
 
-  @action changeDate = newDate => (this.date = newDate);
+  @action
+  changeDate = (newDate, mode) => {
+    if (mode === 'from') {
+      this.dateFrom = newDate;
+    } else if (mode === 'to') {
+      this.dateTo = newDate;
+    }
+  };
   @action
   toggleShapeFilter(shapeKey) {
     this.shapes[shapeKey] = !this.shapes[shapeKey];
