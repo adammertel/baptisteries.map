@@ -27,7 +27,6 @@ class MapRecords extends React.Component {
     });
   }
   render() {
-    console.log(store.shapes);
     const records = data.features
       .filter(store.isActiveRecord)
       .map((feature, fi) => {

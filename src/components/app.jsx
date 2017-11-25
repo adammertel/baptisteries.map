@@ -20,7 +20,7 @@ export default class App extends React.Component {
       <div className="container is-fluid">
         {store.infoOpen && <Info store={store} />}
         <AppMap store={store} />
-        <Panel store={store} />
+        <Panel {...store} />
       </div>
     );
   }

@@ -78,6 +78,17 @@ class TimeSlider extends React.Component {
           </span>
           <span className="label max-min-label max-label">{this.max}</span>
         </p>
+        <div className="field checkbox no-date-checkbox ">
+          <input
+            className="is-checkradio is-white no-date"
+            id="no-date"
+            type="checkbox"
+            name={'no-date'}
+            onChange={store.toggleNoDate}
+            checked={store.showNoDate}
+          />
+          <label htmlFor="no-date">show records with unknown date</label>
+        </div>
       </div>
     );
   }

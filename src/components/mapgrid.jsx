@@ -14,6 +14,7 @@ class MapGrid extends React.Component {
   @observable rendered = false;
   @observable dateFrom = 0;
   @observable dateTo = 0;
+  @observable showNoDate = true;
   @observable shapes = {};
   grid = false;
 
@@ -43,6 +44,7 @@ class MapGrid extends React.Component {
     if (
       !this.rendered ||
       this.props.dateTo !== this.dateTo ||
+      this.props.showNoDate !== this.showNoDate ||
       this.props.dateFrom !== this.dateFrom ||
       !Base.compareShapes(this.props.shapes, this.shapes)
     ) {
@@ -130,6 +132,7 @@ class MapGrid extends React.Component {
 
     this.rendered = true;
     this.dateFrom = this.props.dateFrom;
+    this.showNoDate = this.props.showNoDate;
     this.dateTo = this.props.dateTo;
     this.shapes = Object.assign({}, store.shapes);
   }

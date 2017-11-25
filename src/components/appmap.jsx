@@ -96,6 +96,7 @@ class AppMap extends React.Component {
               dateTo={this.props.store.dateTo}
               dateFrom={this.props.store.dateFrom}
               shapes={this.props.store.shapes}
+              showNoDate={this.props.store.showNoDate}
             />
           ) : (
             <MapRecords />

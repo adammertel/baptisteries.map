@@ -5,6 +5,7 @@ import Shapes from './helpers/shapes';
 export default class AppStore {
   @observable dateFrom = 240;
   @observable dateTo = 1200;
+  @observable showNoDate = true;
   @observable gridThreshold = 6;
   @observable shapes = {};
   @observable infoOpen = true;
@@ -16,14 +17,23 @@ export default class AppStore {
       newRule[label] = true;
       extendObservable(this.shapes, newRule);
     });
-    console.log(this.shapes);
+  }
+
+  isDateGood(f) {
+    if (this.showNoDate && !f.properties.date) {
+      return true;
+    } else {
+      return (
+        f.properties.date &&
+        f.properties.date <= store.dateTo &&
+        f.properties.date >= store.dateFrom
+      );
+    }
   }
 
   isActiveRecord(f) {
     return (
-      f.properties.date <= store.dateTo &&
-      f.properties.date >= store.dateFrom &&
-      store.shapes[Shapes.getLabel(f.properties.shape)]
+      store.isDateGood(f) && store.shapes[Shapes.getLabel(f.properties.shape)]
     );
   }
   @computed
@@ -42,11 +52,11 @@ export default class AppStore {
     });
     return allChecked;
   }
-
   @computed
   get activeRecordsCount() {
-    return data.features.filter(f => store.isActiveRecord).length;
+    return data.features.filter(f => store.isActiveRecord(f)).length;
   }
+
   @computed
   get recordsCountAll() {
     return data.features.length;
@@ -60,6 +70,7 @@ export default class AppStore {
     }
   }
 
+  @action toggleNoDate = () => (this.showNoDate = !this.showNoDate);
   @action closeInfo = () => (this.infoOpen = false);
   @action openInfo = () => (this.infoOpen = true);
 
