@@ -273,7 +273,7 @@ const init = () => {
 
   text(
     legendG,
-    'All piscinas',
+    'All piscinae',
     alignX + 460,
     svgH - legendH - legendMargin + legendPadding + headingH - 5,
     { fontSize: 15, fontWeight: 'bold' }
@@ -341,7 +341,7 @@ const init = () => {
   const hexLegendTextY = svgH - legendMargin - 200;
   const hexLegendPathY = svgH - legendMargin - 160;
 
-  text(legendG, 'Median piscina depth', alignX, hexLegendLabelY, {
+  text(legendG, 'Median piscina depth [cm]', alignX, hexLegendLabelY, {
     fontSize: 15,
     fontWeight: 'bold'
   });
@@ -403,7 +403,7 @@ const init = () => {
   // ciborium legend
   text(
     legendG,
-    'Proportion of buildings with ciborium',
+    'Proportion of piscinae with ciborium',
     alignX + 300,
     sizeLegendLabelY,
     {
