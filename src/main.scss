@@ -72,10 +72,27 @@ $panel-w: 400;
   .modal-card {
     width: 95%;
     font-size: 80%;
+    .content {
+      a:not(.button) {
+        color: $primary;
+        font-weight: bolder;
+      }
+      .time-legend-wrapper {
+        margin-top: 0px;
+      }
+      ul {
+        margin-top: -10px;
+      }
+      p {
+        margin-bottom: 5px;
+      }
+    }
   }
-  .time-legend-wrapper {
-    margin-top: 10px;
-  }
+}
+
+.button.is-white {
+  font-weight: bold;
+  color: $color5;
 }
 
 .panel-wrapper {

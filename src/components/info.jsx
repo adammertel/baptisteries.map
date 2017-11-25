@@ -28,12 +28,14 @@ class Panel extends React.Component {
                 baptisteries built between the 3rd and the 12th century. The
                 database is a digital adaptation and formalization of the most
                 complete (as of 2017) catalogue of baptisteries by Sebastian
-                Ristow (Frühchristliche Baptisterien, Münster: Aschendorffsche
-                Verlagsbuchhandlung, 1998) and was compiled by Hana Hořínková in
-                the framework of her B.A. thesis at Masaryk University’s
-                Department for the Study of Religions (2017), supervised by
-                David Zbíral. The map was conceived and created by Adam Mertel
-                (Masaryk University, Department of Geography).
+                Ristow (<i>Frühchristliche Baptisterien</i>, Münster:
+                Aschendorffsche Verlagsbuchhandlung, 1998) and was compiled by
+                Hana Hořínková in the framework of her B.A. thesis at Masaryk
+                University’s Department for the Study of Religions (2017),
+                supervised by
+                <a href="http://www.david-zbiral.cz/"> David Zbíral</a>. The map
+                was conceived and created by Adam Mertel (Masaryk University,
+                Department of Geography).
               </p>
               <p>
                 Of all 1067 buildings in Ristow’s catalogue, this visualization
@@ -62,32 +64,40 @@ class Panel extends React.Component {
                 The degree of localisation certainty of a particular baptistery
                 can be displayed under the individual record by clicking on the
                 icon of that particular baptistery, together with some more
-                data: modern place name, building shape, terminus post quem
-                (“built after or in”), terminus ante quem (“built before or
-                in”), the mean value between the terminus post quem and ante
-                quem, piscina shape, and piscina depth.
+                data: modern place name, building shape,{' '}
+                <i>terminus post quem</i>
+                (“built after or in”), <i>terminus ante quem</i> (“built before
+                or in”), the mean value between the <i>terminus post quem</i>{' '}
+                and <i>ante quem</i>, piscina shape, and piscina depth.
               </p>
               <p>
                 When zoomed out, the map shows a hexagonal grid. The shade of an
                 individual hexagon denotes the median of the mean values between
-                the terminus post quem and ante quem of all baptisteries in that
-                hexagon; darker the shade, earlier the date. When zoomed in, the
-                map shows icons of individual baptisteries or several aggregated
-                baptisteries (in that case, their number is displayed). The
-                shape in the icon translates the shape of the building (see the
-                Legend).
+                the <i>terminus post quem</i> and <i>ante quem</i> of all
+                baptisteries in that hexagon; darker the shade, earlier the
+                date. When zoomed in, the map shows icons of individual
+                baptisteries or several aggregated baptisteries (in that case,
+                their number is displayed). The shape in the icon translates the
+                shape of the building (see the Legend).
               </p>
+              <p>The records displayed can be filtered in two ways:</p>
+              <ul>
+                <li>
+                  (un)checking individual building shapes filters the dataset by
+                  building shape
+                </li>
+                <li>
+                  the timeline can be limited in order to display only a part of
+                  the whole dataset, whose date (based on the mean value between
+                  the <i>terminus post quem</i> and <i>ante quem</i>) falls
+                  between 240 and the date selected by the user. Dragging the
+                  slider or turning the mouse wheel over it allows to move
+                  through time and see new baptisteries appear;
+                </li>
+              </ul>
               <p>
-                The records displayed can be filtered in two ways: (1)
-                (un)checking individual building shapes filters the dataset by
-                building shape, and (2) the timeline can be limited in order to
-                display only a part of the whole dataset, whose date (based on
-                the mean value between the terminus post quem and ante quem)
-                falls between 240 and the date selected by the user. Dragging
-                the slider or turning the mouse wheel over it allows to move
-                through time and see new baptisteries appear; if the map is
-                zoomed out, the shade of hexagons changes as well, showing the
-                calculated change of the median of the mean dates of
+                if the map is zoomed out, the shade of hexagons changes as well,
+                showing the calculated change of the median of the mean dates of
                 baptisteries in that hexagon.
               </p>
               <hr />
