@@ -57,7 +57,7 @@ var Shapes = {
       color: 6
     },
     {
-      label: 'polygons',
+      label: 'polygon',
       values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon'],
       icon: '&#11039;',
       color: 7

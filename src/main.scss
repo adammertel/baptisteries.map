@@ -69,6 +69,10 @@ $panel-w: 400;
 }
 
 .info {
+  .modal-card {
+    width: 95%;
+    font-size: 80%;
+  }
   .time-legend-wrapper {
     margin-top: 10px;
   }
@@ -125,7 +129,7 @@ $panel-w: 400;
       }
     }
   }
-  .time-slider {
+  .time-slider-wrapper {
     span {
       display: inline;
     }
@@ -138,6 +142,9 @@ $panel-w: 400;
         width: calc(100% - 80px);
         margin: 0px 5px;
       }
+    }
+    .time-slider {
+      margin-bottom: 15px;
     }
     .label {
       color: white;

@@ -45,39 +45,43 @@ class TimeSlider extends React.Component {
 
   render() {
     return (
-      <div className="time-slider" style={this.style()}>
-        <span className="label slider-name">from {store.dateFrom}</span>
-        <p className="time-slider-row">
-          <span className="label max-min-label min-label">{this.min}</span>
-          <span className="slider-wrapper">
-            <input
-              className="slider is-medium"
-              step="1"
-              onChange={this.handleDrag.bind(this, 'from')}
-              min={this.min}
-              max={this.max}
-              value={this.from}
-              type="range"
-            />
-          </span>
-          <span className="label max-min-label max-label">{this.max}</span>
-        </p>
-        <span className="label slider-name">to {store.dateTo}</span>
-        <p className="time-slider-row">
-          <span className="label max-min-label min-label">{this.min}</span>
-          <span className="slider-wrapper">
-            <input
-              className="slider is-medium"
-              step="1"
-              onChange={this.handleDrag.bind(this, 'to')}
-              min={this.min}
-              max={this.max}
-              value={this.to}
-              type="range"
-            />
-          </span>
-          <span className="label max-min-label max-label">{this.max}</span>
-        </p>
+      <div className="time-slider-wrapper" style={this.style()}>
+        <div className="time-slider">
+          <span className="label slider-name">from {store.dateFrom}</span>
+          <p className="time-slider-row">
+            <span className="label max-min-label min-label">{this.min}</span>
+            <span className="slider-wrapper">
+              <input
+                className="slider is-medium"
+                step="1"
+                onChange={this.handleDrag.bind(this, 'from')}
+                min={this.min}
+                max={this.max}
+                value={this.from}
+                type="range"
+              />
+            </span>
+            <span className="label max-min-label max-label">{this.max}</span>
+          </p>
+        </div>
+        <div className="time-slider">
+          <span className="label slider-name">to {store.dateTo}</span>
+          <p className="time-slider-row">
+            <span className="label max-min-label min-label">{this.min}</span>
+            <span className="slider-wrapper">
+              <input
+                className="slider is-medium"
+                step="1"
+                onChange={this.handleDrag.bind(this, 'to')}
+                min={this.min}
+                max={this.max}
+                value={this.to}
+                type="range"
+              />
+            </span>
+            <span className="label max-min-label max-label">{this.max}</span>
+          </p>
+        </div>
         <div className="field checkbox no-date-checkbox ">
           <input
             className="is-checkradio is-white no-date"
