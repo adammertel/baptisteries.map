@@ -9,6 +9,11 @@ import 'leaflet/dist/leaflet.css';
 
 import Store from './store';
 
+window.defaultDates = {
+  min: 230,
+  max: 1200
+};
+
 window.store = new Store();
 window.map = false;
 window.Base = Base;
@@ -29,6 +34,7 @@ window.gridCellColors = [
   '#662506',
   '#662506'
 ];
+
 gridCellColors.reverse();
 window.gridCellDomain = [230, 1201];
 

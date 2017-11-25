@@ -3,8 +3,8 @@ import Base from './base';
 import Shapes from './helpers/shapes';
 
 export default class AppStore {
-  @observable dateFrom = 240;
-  @observable dateTo = 1200;
+  @observable dateFrom = defaultDates.min;
+  @observable dateTo = defaultDates.max;
   @observable showNoDate = true;
   @observable gridThreshold = 6;
   @observable shapes = {};

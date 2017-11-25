@@ -4,10 +4,10 @@ import { observer } from 'mobx-react';
 
 @observer
 class TimeSlider extends React.Component {
-  @observable min = 240;
-  @observable max = 1200;
-  @observable from = 240;
-  @observable to = 1200;
+  @observable min = defaultDates.min;
+  @observable max = defaultDates.max;
+  @observable from = defaultDates.min;
+  @observable to = defaultDates.max;
   @observable changing = false;
 
   getDateValue = mode => {
