@@ -18,6 +18,9 @@ class Panel extends React.Component {
     return (
       <div className="panel-wrapper">
         <h1 className="title">Christian Baptisteries</h1>
+        <h2 className="subtitle">
+          Showing {store.activeRecordsCount} / {store.recordsCountAll} records
+        </h2>
         <p />
         <h3 className="subtitle section-label">Temporal filter</h3>
         <div className="panel-control">

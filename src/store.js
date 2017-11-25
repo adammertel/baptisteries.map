@@ -18,6 +18,12 @@ export default class AppStore {
     console.log(this.shapes);
   }
 
+  isActiveRecord(f) {
+    return (
+      f.properties.date <= store.date &&
+      store.shapes[Shapes.getLabel(f.properties.shape)]
+    );
+  }
   @computed
   get todosArray() {
     return Base.sortAlphabetical(this.todos, 'label');
@@ -33,6 +39,15 @@ export default class AppStore {
       }
     });
     return allChecked;
+  }
+
+  @computed
+  get activeRecordsCount() {
+    return data.features.filter(f => store.isActiveRecord).length;
+  }
+  @computed
+  get recordsCountAll() {
+    return data.features.length;
   }
 
   displayMapGrid() {

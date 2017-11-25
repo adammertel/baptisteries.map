@@ -29,12 +29,7 @@ class MapRecords extends React.Component {
   render() {
     console.log(store.shapes);
     const records = data.features
-      .filter((f, fi) => {
-        return (
-          f.properties.date < store.date &&
-          store.shapes[Shapes.getLabel(f.properties.shape)]
-        );
-      })
+      .filter(store.isActiveRecord)
       .map((feature, fi) => {
         const props = feature.properties;
         const icon = this.icon(props.shape);
