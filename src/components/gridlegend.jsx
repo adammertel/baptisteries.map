@@ -4,12 +4,14 @@ import { observer } from 'mobx-react';
 
 class GridLegend extends React.Component {
   render() {
+    const legendColors = window.gridCellColors.slice();
+    legendColors.push(['black']);
     const w = 600;
     const h = 200;
     const rh = 20;
     const rd = 5;
     const d = 20;
-    const rw = (w - 2 * d) / window.gridCellColors.length - rd;
+    const rw = (w - 2 * d - 200) / legendColors.length - rd;
 
     const ageLabelY = 20;
     const cellY = 40;
@@ -36,11 +38,12 @@ class GridLegend extends React.Component {
         <svg width={w} height={h} style={{ fill: 'white' }}>
           <rect x="0" y="0" width={w} height={h} style={{ fill: 'white' }} />
           <text x="10" y={ageLabelY} style={textStyle}>
-            Median "middle year" of the aggregated buildings
+            Median year of the aggregated buildings
           </text>
           <g>
-            {window.gridCellColors.map((col, ci) => {
-              const x = d + ci * (rw + rd);
+            {legendColors.map((col, ci) => {
+              const x =
+                ci !== legendColors.length - 1 ? d + ci * (rw + rd) : 400;
               const style = {
                 fill: col,
                 stroke: 'black',
@@ -58,11 +61,14 @@ class GridLegend extends React.Component {
                 />
               );
             })}
-            <text x={10} y={ageTextY} style={textStyle}>
+            <text x={20} y={ageTextY} style={textStyle}>
               240
             </text>
-            <text x={w - 50} y={ageTextY} style={textStyle}>
+            <text x={w - 290} y={ageTextY} style={textStyle}>
               1200
+            </text>
+            <text x={w - 225} y={ageTextY} style={textStyle}>
+              unknown
             </text>
           </g>
           <g>
