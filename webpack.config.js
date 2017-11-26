@@ -15,7 +15,8 @@ module.exports = {
   entry: {
     main: './src/index',
     static_shape: './src/static_shape/index',
-    static_piscina: './src/static_piscina/index'
+    static_piscina: './src/static_piscina/index',
+    static_small: './src/static_small/index'
   },
   output: {
     filename: '[name].bundle.js'

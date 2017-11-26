@@ -12,7 +12,9 @@ module.exports = {
   devtool: 'cheap-source-map',
   entry: {
     main: './src/index',
-    static_shape: './src/static_shape/index'
+    static_shape: './src/static_shape/index',
+    static_piscina: './src/static_piscina/index',
+    static_small: './src/static_small/index'
   },
   output: {
     path: path.resolve(__dirname, 'build'),

@@ -73,7 +73,7 @@ class MapGrid extends React.Component {
     const rules = {
       cells: {
         fillColor: {
-          method: 'median',
+          method: 'mean',
           attribute: 'date',
           scale: 'size',
           range: window.gridCellColors,
@@ -102,12 +102,12 @@ class MapGrid extends React.Component {
 
     this.grid = L.regularGridCluster({
       rules: rules,
-      gridOrigin: { lat: 0, lng: -11 },
+      gridOrigin: { lat: 0, lng: -12 },
       gridMode: 'hexagon',
       showCells: true,
       showMarkers: true,
       showTexts: false,
-      zoneSize: 5000
+      zoneSize: 6000
     });
 
     const records = data.features
