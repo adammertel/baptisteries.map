@@ -1,6 +1,15 @@
 {
-  "presets": ["react", "es2015", "stage-1"],
-  "plugins": [
-    "transform-decorators-legacy" /* should always be the first plugin! */
-  ]
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 3 versions", "ie >= 9"]
+        },
+        "useBuiltIns": true
+      }
+    ],
+    "react"
+  ],
+  "plugins": ["transform-decorators-legacy", "transform-class-properties"]
 }

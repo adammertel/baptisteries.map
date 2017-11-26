@@ -68,7 +68,14 @@ $panel-w: 400;
   }
 }
 
-.info {
+.info.modal {
+  z-index: 9999;
+  .modal-card-body {
+    overflow-y: scroll;
+  }
+  p {
+    padding-bottom: 5px;
+  }
   .modal-card {
     width: 95%;
     font-size: 80%;
@@ -212,12 +219,6 @@ $panel-w: 400;
         }
       }
     }
-  }
-}
-
-.modal {
-  p {
-    padding-bottom: 5px;
   }
 }
 

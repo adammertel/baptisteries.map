@@ -79,13 +79,15 @@ const createLayer = layerName => {
 // create visualisation
 const init = () => {
   // getting all shapes
-  const allShapes = Shapes.shapesDictionary;
+  let allShapes = Shapes.shapesDictionary.slice();
   allShapes.map(s => (s.count = 0));
   baptisteries.features.map(b => {
     const bShape = b.properties.piscina_shape;
     const shape = Shapes.getShape(bShape);
     shape.count++;
   });
+  console.log(allShapes.filter(s => !s.count));
+  allShapes = allShapes.filter(s => s.count);
 
   // projecting baptisteries
   baptisteries.features.map(r => {
@@ -97,7 +99,7 @@ const init = () => {
   // creating hexbin and pie helpers
   const bins = hexbin(baptisteries.features.map(f => f.geometry.coordinates));
 
-  const defaultBinColor = '#787878';
+  const defaultBinColor = '#444';
   const binColors = d3
     .scaleSequential(scales.interpolatePuBuGn)
     .domain([hexDepths[0], hexDepths[1]]);
@@ -180,7 +182,7 @@ const init = () => {
       .attr('d', hexbin.hexagon());
 
     // ciborium pies
-    const cRadius = sizeRadius(bin.length) + 5;
+    const cRadius = sizeRadius(bin.length) + 10;
     const ciboriums = bin.inside.map(b => b.properties.ciborium);
     const cDict = [
       { label: 'true', count: ciboriums.filter(c => c).length },
@@ -257,7 +259,7 @@ const init = () => {
 
   text(
     legendG,
-    'CHRISTIAN BAPTISTERIES 240–1200',
+    'CHRISTIAN BAPTISTERIES 230–1200',
     alignX,
     svgH - legendH - legendMargin + legendPadding - 10,
     { fontSize: 25, fontWeight: 'bold' }
@@ -312,7 +314,7 @@ const init = () => {
     .outerRadius(bigPieRadius);
 
   const bigPieX = alignX + 500;
-  const bigPieY = svgH - legendMargin - 280;
+  const bigPieY = svgH - legendMargin - 260;
 
   allShapesPie.map(shapeP => {
     legendG
@@ -363,8 +365,8 @@ const init = () => {
 
   // size legend
   const sizeLegendLabelY = svgH - legendMargin - 110;
-  const sizeLegendTextY = svgH - legendMargin - 35;
-  const sizeLegendPathY = svgH - legendMargin - 40;
+  const sizeLegendTextY = svgH - legendMargin - 30;
+  const sizeLegendPathY = svgH - legendMargin - 35;
 
   const legendSizeSteps = 5;
   const legendSizes = Array(legendSizeSteps)
@@ -413,7 +415,7 @@ const init = () => {
   );
 
   [0, 0.5, 1].map((c, ci) => {
-    const cx = alignX + 320 + ci * 60;
+    const cx = alignX + 320 + ci * 70;
     const cy = sizeLegendPathY - 20;
     const dict = [
       { label: 'true', count: c * 10 },
@@ -424,7 +426,7 @@ const init = () => {
     const arc = d3
       .arc()
       .innerRadius(0)
-      .outerRadius(25);
+      .outerRadius(30);
 
     cPie.map(cP => {
       legendG
@@ -444,7 +446,7 @@ const init = () => {
       .attr('stroke', 'black')
       .attr('stroke-width', '1.5');
 
-    text(legendG, c * 100 + '%', cx, cy + 25, { textAnchor: 'middle' });
+    text(legendG, c * 100 + '%', cx, cy - 10, { textAnchor: 'middle' });
   });
 };
 

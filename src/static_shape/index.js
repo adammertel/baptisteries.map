@@ -74,6 +74,9 @@ const init = () => {
   // getting all shapes
   const allShapes = Shapes.shapesDictionary;
   allShapes.map(s => (s.count = 0));
+
+  // filtering features without date
+  //baptisteries.features = baptisteries.features.filter(f => f.properties.date);
   baptisteries.features.map(b => {
     const bShape = b.properties.shape;
 
@@ -218,7 +221,7 @@ const init = () => {
 
   text(
     legendG,
-    'CHRISTIAN BAPTISTERIES 240–1200',
+    'CHRISTIAN BAPTISTERIES 230–1200',
     alignX,
     svgH - legendH - legendMargin + legendPadding - 10,
     { fontSize: 25, fontWeight: 'bold' }
