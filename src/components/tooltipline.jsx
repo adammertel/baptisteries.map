@@ -9,7 +9,7 @@ class TooltipLine extends React.Component {
     return (
       <p className="line">
         <span className="definition">{this.props.definition}:</span>
-        <span className="value">{this.props.value}</span>
+        <span className="value">{this.props.value || 'unknown'}</span>
       </p>
     );
   }

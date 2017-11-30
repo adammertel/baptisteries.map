@@ -107,7 +107,12 @@ class MapGrid extends React.Component {
       showCells: true,
       showMarkers: true,
       showTexts: false,
-      zoneSize: 6000
+      zoneSize: 6000,
+      defaultStyle: {
+        cells: {
+          fillColor: '#383838'
+        }
+      }
     });
 
     const records = data.features

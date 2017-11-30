@@ -8,9 +8,6 @@ var scales = require('d3-scale-chromatic');
 var projections = require('d3-geo-projection');
 var d3Hexbin = require('d3-hexbin');
 
-const mapW = 800;
-const mapH = 300;
-
 const distance = (cs1, cs2) =>
   Math.sqrt(Math.pow(cs1[0] - cs2[0], 2) + Math.pow(cs1[1] - cs2[1], 2));
 
@@ -29,6 +26,9 @@ const text = (el, text, x, y, usedStyle = {}) => {
   const defaultStyle = {
     fontWeight: 'normal',
     fontSize: 12,
+    color: 'black',
+    stroke: 'none',
+    strokeWidth: 0,
     textAnchor: 'start'
   };
   const style = Object.assign({}, defaultStyle, usedStyle);
@@ -39,6 +39,9 @@ const text = (el, text, x, y, usedStyle = {}) => {
     .attr('font-family', 'Ubuntu')
     .attr('font-weight', style.fontWeight)
     .attr('text-anchor', style.textAnchor)
+    .attr('stroke', style.stroke)
+    .attr('stroke-width', style.strokeWidth)
+    .attr('fill', style.color)
     .attr('font-size', style.fontSize)
     .attr('y', y + style.fontSize + 2)
     .attr('color', 'black');
@@ -81,8 +84,8 @@ const init = () => {
 
   const projection = projections
     .geoNaturalEarth2()
-    .scale(400)
-    .center([18, 32])
+    .scale(450)
+    .center([25, 33])
     .translate([w / 2, h / 2]);
 
   const hexbin = d3Hexbin
@@ -101,8 +104,7 @@ const init = () => {
   Shapes.shapesDictionary.map((shape, si) => {
     const layers = {};
     const sLabel = shape.label;
-    const shapeRelative =
-      allShapes.find(s => s.label === sLabel).count / totalCount;
+    const shapeColor = Shapes.getColor(shape.label, true);
 
     window.svg = d3
       .select('body')
@@ -168,10 +170,13 @@ const init = () => {
       bin.relative = bin.thatShape / bin.all;
     });
 
+    const maxAbsolute = d3.max(bins.map(b => b.thatShape));
+    const maxRelative = d3.max(bins.map(b => b.relative));
+
     const binColors = d3
       .scaleLinear()
-      .domain([0, d3.max(bins.map(b => b.relative))])
-      .range(['white', Shapes.getColor(shape.label, true)]);
+      .domain([0, maxRelative])
+      .range(['white', shapeColor]);
 
     bins.filter(b => b.thatShape).map(bin => {
       const binG = svg.append('g');
@@ -200,74 +205,116 @@ const init = () => {
         .attr('r', sizeRadius(bin.thatShape))
         .attr('fill', 'black');
     });
-    /*
-      // legend
-      const legendW = 700;
-      const legendItemH = 25;
-      const legendItemW = 35;
-      const headingH = 40;
-      const legendPadding = 30;
-      const legendMargin = 30;
 
-      const legendH =
-        allShapes.length / 2 * legendItemH + legendPadding * 2 + headingH + 200;
+    // legend
+    const legendW = 265;
+    const legendH = 120;
 
-      const alignX = legendMargin + legendPadding;
+    const legendPadding = 3;
+    const legendMargin = 8;
 
-      createLayer('legend');
-      const legendG = layers[shape.label].append('g');
+    const legendItemH = 25;
+    const legendItemW = 35;
+
+    const alignX = legendMargin + legendPadding;
+    const alignY = h - legendH - legendMargin + legendPadding;
+
+    const legendG = svg.append('g').attr('class', 'legend');
+
+    legendG
+      .append('rect')
+      .attr('x', legendMargin)
+      .attr('y', h - legendH - legendMargin)
+      .attr('width', legendW)
+      .attr('height', legendH)
+      .attr('fill', 'white')
+      .attr('opacity', 0.85);
+
+    text(legendG, 'CHRISTIAN BAPTISTERIES 230–1200', alignX, alignY, {
+      fontSize: 11,
+      fontWeight: 'bold'
+    });
+    text(legendG, 'Distribution of building shape', alignX, alignY + 15, {
+      fontSize: 11
+    });
+
+    text(legendG, shape.label, alignX + 150, alignY + 14, {
+      fontSize: 12,
+      fontWeight: 'normal',
+      color: 'black',
+      stroke: shapeColor,
+      strokeWidth: 1
+    });
+    text(legendG, shape.label, alignX + 150, alignY + 14, {
+      fontSize: 12,
+      fontWeight: 'normal',
+      color: 'black'
+    });
+
+    text(legendG, 'relative distribution', alignX + 15, alignY + 30, {
+      fontSize: 11
+    });
+
+    text(legendG, 'absolute distribution', alignX + 15, alignY + 72, {
+      fontSize: 11
+    });
+
+    // arrays of domains
+    let absoluteArr = d3
+      .scaleLinear()
+      .domain([0, maxAbsolute])
+      .ticks(3);
+    absoluteArr[0] = 1;
+    absoluteArr[absoluteArr.length - 1] = maxAbsolute;
+
+    if (maxAbsolute < 5) {
+      absoluteArr = [];
+      for (let i = 1; i != maxAbsolute + 1; i++) {
+        absoluteArr[i - 1] = i;
+      }
+    }
+    console.log(absoluteArr);
+
+    const relativeArr = d3
+      .scaleLinear()
+      .domain([0, maxRelative])
+      .ticks(4);
+    relativeArr[0] = 0;
+    relativeArr[relativeArr.length - 1] = maxRelative;
+
+    relativeArr.map((r, ri) => {
+      const rColor = binColors(r);
+      const y = alignY + 60;
+      const x = alignX + 30 + 20 * ri;
 
       legendG
-        .append('rect')
-        .attr('x', legendMargin)
-        .attr('y', mapH - legendH - legendMargin)
-        .attr('width', legendW)
-        .attr('height', legendH)
-        .attr('fill', 'white')
-        .attr('opacity', 0.85);
-
-      text(
-        legendG,
-        'CHRISTIAN BAPTISTERIES 230–1200',
-        alignX,
-        svgH - legendH - legendMargin + legendPadding - 10,
-        { fontSize: 25, fontWeight: 'bold' }
-      );
-
-      // hex legend
-      const hexLegendDates = Array(5)
-        .fill()
-        .map(
-          (_, i) => 30 + hexDepths[0] + i * (hexDepths[1] - hexDepths[0]) / 5
-        );
-
-      hexLegendDates.push('unknown');
-
-      const hexLegendLabelY = svgH - legendMargin - 230;
-      const hexLegendTextY = svgH - legendMargin - 200;
-      const hexLegendPathY = svgH - legendMargin - 160;
-
-      text(legendG, 'Median piscina depth [cm]', alignX, hexLegendLabelY, {
-        fontSize: 15,
-        fontWeight: 'bold'
+        .append('path')
+        .attr('d', d => {
+          return 'M' + x + ',' + y + hexbin.hexagon();
+        })
+        .attr('fill-opacity', 0.6)
+        .attr('fill', rColor)
+        .attr('stroke', 'grey');
+      text(legendG, r.toFixed(2), x, y - 5, {
+        fontSize: 8,
+        textAnchor: 'middle'
       });
+    });
 
-      hexLegendDates.map((depth, hi) => {
-        const x =
-          (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
-        const color = depth !== 'unknown' ? binColors(depth) : defaultBinColor;
-        legendG
-          .append('path')
-          .attr('d', d => {
-            return 'M' + x + ',' + hexLegendPathY + hexbin.hexagon();
-          })
-          .attr('fill-opacity', 0.6)
-          .attr('fill', color)
-          .attr('stroke', 'black');
+    absoluteArr.map((a, ai) => {
+      const aSize = sizeRadius(a);
+      const y = alignY + 100;
+      const x = alignX + 30 + 20 * ai;
 
-        text(legendG, depth, x, hexLegendTextY + 10, { textAnchor: 'middle' });
+      legendG
+        .append('circle')
+        .attr('r', aSize)
+        .attr('transform', 'translate(' + x + ',' + (y - aSize / 2) + ')')
+        .attr('fill', 'black');
+      text(legendG, a, x, y + 3, {
+        fontSize: 8,
+        textAnchor: 'middle'
       });
-
-      */
+    });
   });
 };
