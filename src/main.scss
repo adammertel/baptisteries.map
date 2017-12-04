@@ -154,6 +154,18 @@ $panel-w: 400;
     }
   }
   .time-slider-wrapper {
+    .time-increment-button {
+      margin: 8px;
+      cursor: pointer;
+      font-size: 25px;
+      vertical-align: middle;
+      &.ion-arrow-left-b {
+        margin-right: 5px;
+      }
+      &.ion-arrow-right-b {
+        margin-left: 5px;
+      }
+    }
     span {
       display: inline;
     }

@@ -17,26 +17,38 @@ class TimeSlider extends React.Component {
   changeDateValue = (mode, newValue) => {
     if (mode === 'from') {
       if (newValue > this.to) {
-        newValue = this.to - 1;
+        newValue = this.to;
       }
     } else {
       if (newValue < this.from) {
-        newValue = this.from + 1;
+        newValue = this.from;
       }
     }
+    console.log('change', mode, newValue);
     this[mode] = newValue;
   };
 
   @action
   handleDrag = (mode, e) => {
-    this.changing = true;
     this.changeDateValue(mode, parseInt(e.target.value, 10));
+    this.postponeChange(mode);
+  };
+
+  postponeChange = (mode, time = 1000) => {
+    this.changing = true;
     setTimeout(() => {
       if (this.changing) {
         store.changeDate(this.getDateValue(mode), mode);
         this.changing = false;
       }
-    }, 1000);
+    }, time);
+  };
+
+  @action
+  handleIncrement = (mode, increment = true) => {
+    const newValue = parseInt(increment ? this[mode] + 1 : this[mode] - 1);
+    this.changeDateValue(mode, newValue);
+    this.postponeChange(mode, 100);
   };
 
   style() {
@@ -47,7 +59,22 @@ class TimeSlider extends React.Component {
     return (
       <div className="time-slider-wrapper" style={this.style()}>
         <div className="time-slider">
-          <span className="label slider-name">from {store.dateFrom}</span>
+          <span className="label slider-name">
+            from
+            <span className="icon">
+              <i
+                className="time-increment-button ion-arrow-left-b"
+                onClick={this.handleIncrement.bind(this, 'from', false)}
+              />
+            </span>
+            {store.dateFrom}
+            <span className="icon">
+              <i
+                className="time-increment-button ion-arrow-right-b"
+                onClick={this.handleIncrement.bind(this, 'from', true)}
+              />
+            </span>
+          </span>
           <p className="time-slider-row">
             <span className="label max-min-label min-label">{this.min}</span>
             <span className="slider-wrapper">
@@ -65,7 +92,22 @@ class TimeSlider extends React.Component {
           </p>
         </div>
         <div className="time-slider">
-          <span className="label slider-name">to {store.dateTo}</span>
+          <span className="label slider-name">
+            to
+            <span className="icon">
+              <i
+                className="time-increment-button ion-arrow-left-b"
+                onClick={this.handleIncrement.bind(this, 'to', false)}
+              />
+            </span>
+            {store.dateTo}
+            <span className="icon">
+              <i
+                className="time-increment-button ion-arrow-right-b"
+                onClick={this.handleIncrement.bind(this, 'to', true)}
+              />
+            </span>
+          </span>
           <p className="time-slider-row">
             <span className="label max-min-label min-label">{this.min}</span>
             <span className="slider-wrapper">

@@ -28,7 +28,7 @@ var Shapes = {
     },
     {
       label: 'circle',
-      values: ['round', 'circle', 'semicircle'],
+      values: ['round', 'circle', 'semicircle', 'three-quarter round', 'oval'],
       icon: '&#9679;',
       color: 2
     },
@@ -58,13 +58,27 @@ var Shapes = {
     },
     {
       label: 'polygon',
-      values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon'],
+      values: [
+        'triangle',
+        'hexagon',
+        'octogon',
+        'dodekagon',
+        'dekagon',
+        'heptagon'
+      ],
       icon: '&#11039;',
       color: 7
     },
     {
       label: 'other',
-      values: ['trapezoid', 'irregular', 'other', 'polygon'],
+      values: [
+        'trapezoid',
+        'irregular',
+        'other',
+        'polygon',
+        'horseshoe',
+        'rosette'
+      ],
       icon: '&#9676;',
       color: 9
     },

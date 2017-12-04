@@ -1,25 +1,23 @@
 {
-  "name": "boilerplate",
-  "version": "0.0.1",
+  "name": "baptisteries",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "gitignore": "git rm -r --cached . && git add . && git commit",
     "deploy": "webpack --config webpack.production.config.js",
+    "zip": "sudo zip -r baptisteries ./build/",
     "deploy-windows": "webpack --config webpack.production.config.js",
     "lint": "eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
+    "url": "https://github.com/adammertel/baptistery-map"
   },
-  "keywords": [],
-  "author": "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
+  "keywords": ["history", "map", "leaflet", "religion", "digital humanities"],
+  "author": "Adam Mertel",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mobxjs/mobx/issues"
-  },
-  "homepage": "http://mobxjs.github.com/mobx",
+  "homepage": "http://hde.geogr.muni.cz/baptisteries/",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

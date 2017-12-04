@@ -7,3 +7,4 @@ build/
 src/data/*.csv
 *.lock
 package-lock.json
+*.zip

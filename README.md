@@ -55,3 +55,11 @@ the hexagons also changes, showing the change in the calculated median of the
 mean dates of baptisteries in that hexagon.
 
 The base map can be selected under the icon in the upper right corner.
+
+## Static maps
+
+three static maps were produced:
+
+* [building shape - small multiples](http://hde.geogr.muni.cz/baptisteries/static_multiple.png)
+* [building shape - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_shape.png)
+* [piscina - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_piscina.png)

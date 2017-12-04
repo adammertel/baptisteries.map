@@ -21,7 +21,7 @@ class Panel extends React.Component {
           <section className="modal-card-body">
             <div className="content">
               <p className="has-text-primary title is-4">
-                Christian baptisteries: interactive map
+                Christian baptisteries: interactive map (version 1.0)
               </p>
               <p>
                 This interactive map visualizes a database of Christian
@@ -37,8 +37,9 @@ class Panel extends React.Component {
                 at Masaryk University’s Department for the Study of Religions
                 (2017), supervised by
                 <a href="http://www.david-zbiral.cz/"> David Zbíral</a>. The map
-                was conceived and created by Adam Mertel (Masaryk University,
-                Department of Geography).
+                was conceived and created by{' '}
+                <a href="https://github.com/adammertel">Adam Mertel</a> (Masaryk
+                University, Department of Geography).
               </p>
               <p>
                 Of all 1067 buildings in Ristow’s catalogue, this visualization
