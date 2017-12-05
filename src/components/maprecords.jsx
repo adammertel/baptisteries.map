@@ -47,8 +47,12 @@ class MapRecords extends React.Component {
               <Popup className="popup">
                 <div className="marker-tooltip">
                   <h6 className="title is-6">
-                    <strong>{feature.properties.name}</strong>
+                    <strong>{props.name}</strong> (ID {props.id})
                   </h6>
+                  <TooltipLine
+                    definition="ID in Ristow’s catalogue"
+                    value={props.id_r}
+                  />
                   <TooltipLine
                     definition="Building shape"
                     value={props.shape}
