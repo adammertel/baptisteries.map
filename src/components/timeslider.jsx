@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
+import IncrementIcon from './incrementicon';
 
 @observer
 class TimeSlider extends React.Component {
@@ -61,19 +62,15 @@ class TimeSlider extends React.Component {
         <div className="time-slider">
           <span className="label slider-name">
             from
-            <span className="icon">
-              <i
-                className="time-increment-button ion-arrow-left-b"
-                onClick={this.handleIncrement.bind(this, 'from', false)}
-              />
-            </span>
+            <IncrementIcon
+              icon="arrow-left-b"
+              handleClick={this.handleIncrement.bind(this, 'from', false)}
+            />
             {store.dateFrom}
-            <span className="icon">
-              <i
-                className="time-increment-button ion-arrow-right-b"
-                onClick={this.handleIncrement.bind(this, 'from', true)}
-              />
-            </span>
+            <IncrementIcon
+              icon="arrow-right-b"
+              handleClick={this.handleIncrement.bind(this, 'from', true)}
+            />
           </span>
           <p className="time-slider-row">
             <span className="label max-min-label min-label">{this.min}</span>
@@ -94,19 +91,15 @@ class TimeSlider extends React.Component {
         <div className="time-slider">
           <span className="label slider-name">
             to
-            <span className="icon">
-              <i
-                className="time-increment-button ion-arrow-left-b"
-                onClick={this.handleIncrement.bind(this, 'to', false)}
-              />
-            </span>
+            <IncrementIcon
+              icon="arrow-left-b"
+              handleClick={this.handleIncrement.bind(this, 'to', false)}
+            />
             {store.dateTo}
-            <span className="icon">
-              <i
-                className="time-increment-button ion-arrow-right-b"
-                onClick={this.handleIncrement.bind(this, 'to', true)}
-              />
-            </span>
+            <IncrementIcon
+              icon="arrow-right-b"
+              handleClick={this.handleIncrement.bind(this, 'to', true)}
+            />
           </span>
           <p className="time-slider-row">
             <span className="label max-min-label min-label">{this.min}</span>
