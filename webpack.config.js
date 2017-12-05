@@ -37,18 +37,18 @@ module.exports = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
+          { loader: 'resolve-url-loader' },
           { loader: 'sass-loader' }
         ]
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
-        test: /\.png$/,
-        loader: 'url-loader',
-        query: { mimetype: 'image/png' }
-      },
-      {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
