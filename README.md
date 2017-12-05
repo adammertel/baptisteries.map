@@ -1,17 +1,17 @@
 # Christian Baptisteries map
 
-[app](http://hde.geogr.muni.cz/baptisteries/)
+[map application](http://hde.geogr.muni.cz/baptisteries/)
 
 This interactive map visualizes a database of Christian baptisteries built
 between the 3rd and 12th centuries. The database is a digital adaptation and
 formalization of the most complete (as of 2017) catalogue of baptisteries by
 Sebastian Ristow (_Frühchristliche Baptisterien_, Münster: Aschendorffsche
 Verlagsbuchhandlung, 1998) and was compiled by Hana Hořínková in the framework
-of her{' '} [B.A. thesis](http://is.muni.cz/th/439223/ff_b/?lang=en) {' '} at
-Masaryk University’s Department for the Study of Religions (2017), supervised by
+of her [B.A. thesis](http://is.muni.cz/th/439223/ff_b/?lang=en) at Masaryk
+University’s Department for the Study of Religions (2017), supervised by
 [David Zbíral](http://www.david-zbiral.cz/). The map was conceived and created
-by{' '} [Adam Mertel](https://github.com/adammertel) (Masaryk University,
-Department of Geography).
+by [Adam Mertel](https://github.com/adammertel) (Masaryk University, Department
+of Geography).
 
 Of all 1067 buildings in Ristow’s catalogue, this visualization takes into
 account only those whose existence and function as baptisteries is considered
@@ -24,7 +24,7 @@ certainty:
 * **approximate** when the particular place settlement was not found but a
   nearby settlement was
 * **ambiguous** when there were more candidates and only one, the most probable,
-  alternative had to be chosen.{' '}
+  alternative had to be chosen.
 
 The degree of certainty of the localisation of a particular baptistery can be
 displayed under the individual record by clicking on the icon of that particular

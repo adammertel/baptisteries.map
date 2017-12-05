@@ -78,7 +78,7 @@ $panel-w: 400;
     padding-bottom: 5px;
   }
   .modal-card {
-    width: 95%;
+    width: 80%;
     font-size: 80%;
     .content {
       a:not(.button) {
@@ -180,7 +180,7 @@ $panel-w: 400;
     .slider-wrapper {
       input {
         display: inline;
-        width: calc(100% - 80px);
+        width: calc(100% - 250px);
         margin: 0px 5px;
       }
     }
