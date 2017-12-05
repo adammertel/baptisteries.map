@@ -20,12 +20,17 @@ class TimeSlider extends React.Component {
       if (newValue > this.to) {
         newValue = this.to;
       }
+      if (newValue < defaultDates.min) {
+        newValue = defaultDates.min;
+      }
     } else {
       if (newValue < this.from) {
         newValue = this.from;
       }
+      if (newValue > defaultDates.max) {
+        newValue = defaultDates.max;
+      }
     }
-    console.log('change', mode, newValue);
     this[mode] = newValue;
   };
 
@@ -46,10 +51,11 @@ class TimeSlider extends React.Component {
   };
 
   @action
-  handleIncrement = (mode, increment = true) => {
-    const newValue = parseInt(increment ? this[mode] + 1 : this[mode] - 1);
+  handleIncrement = (mode, increment = true, by = 1) => {
+    const newValue = parseInt(increment ? this[mode] + by : this[mode] - by);
     this.changeDateValue(mode, newValue);
-    this.postponeChange(mode, 100);
+    this.postponeChange(mode, 1);
+    Base.clearSelection();
   };
 
   style() {
@@ -63,13 +69,21 @@ class TimeSlider extends React.Component {
           <span className="label slider-name">
             from
             <IncrementIcon
-              icon="arrow-left-b"
-              handleClick={this.handleIncrement.bind(this, 'from', false)}
+              icon="angle-double-left"
+              handleClick={this.handleIncrement.bind(this, 'from', false, 10)}
             />
-            {store.dateFrom}
             <IncrementIcon
-              icon="arrow-right-b"
-              handleClick={this.handleIncrement.bind(this, 'from', true)}
+              icon="angle-left"
+              handleClick={this.handleIncrement.bind(this, 'from', false, 1)}
+            />
+            <span className="value-label">{store.dateFrom}</span>
+            <IncrementIcon
+              icon="angle-right"
+              handleClick={this.handleIncrement.bind(this, 'from', true, 1)}
+            />
+            <IncrementIcon
+              icon="angle-double-right"
+              handleClick={this.handleIncrement.bind(this, 'from', true, 10)}
             />
           </span>
           <p className="time-slider-row">
@@ -92,13 +106,21 @@ class TimeSlider extends React.Component {
           <span className="label slider-name">
             to
             <IncrementIcon
-              icon="arrow-left-b"
-              handleClick={this.handleIncrement.bind(this, 'to', false)}
+              icon="angle-double-left"
+              handleClick={this.handleIncrement.bind(this, 'to', false, 10)}
             />
-            {store.dateTo}
             <IncrementIcon
-              icon="arrow-right-b"
-              handleClick={this.handleIncrement.bind(this, 'to', true)}
+              icon="angle-left"
+              handleClick={this.handleIncrement.bind(this, 'to', false, 1)}
+            />
+            <span className="value-label">{store.dateTo}</span>
+            <IncrementIcon
+              icon="angle-right"
+              handleClick={this.handleIncrement.bind(this, 'to', true, 1)}
+            />
+            <IncrementIcon
+              icon="angle-double-right"
+              handleClick={this.handleIncrement.bind(this, 'to', true, 10)}
             />
           </span>
           <p className="time-slider-row">

@@ -6,8 +6,9 @@ import DevTools from 'mobx-react-devtools';
 import App from './components/app';
 import Base from './base';
 import Shapes from './helpers/shapes';
-import './main.scss';
 import 'leaflet/dist/leaflet.css';
+import './../node_modules/font-awesome/css/font-awesome.min.css';
+import './main.scss';
 
 import Store from './store';
 
