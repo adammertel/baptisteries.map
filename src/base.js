@@ -59,6 +59,14 @@ var Base = {
     return same;
   },
 
+  clearSelection() {
+    if (document.selection) {
+      document.selection.empty();
+    } else if (window.getSelection) {
+      window.getSelection().removeAllRanges();
+    }
+  },
+
   getData(path, next) {
     const req = new XMLHttpRequest();
     req.open('GET', path, true);
