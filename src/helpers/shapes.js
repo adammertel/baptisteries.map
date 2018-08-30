@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 var Shapes = {
   colors: [
@@ -58,66 +58,52 @@ var Shapes = {
     },
     {
       label: 'polygon',
-      values: [
-        'triangle',
-        'hexagon',
-        'octogon',
-        'dodekagon',
-        'dekagon',
-        'heptagon'
-      ],
+      values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon', 'heptagon'],
       icon: '&#11039;',
       color: 7
     },
     {
       label: 'other',
-      values: [
-        'trapezoid',
-        'irregular',
-        'other',
-        'polygon',
-        'horseshoe',
-        'rosette'
-      ],
+      values: ['trapezoid', 'irregular', 'other', 'polygon', 'horseshoe', 'rosette'],
       icon: '&#9676;',
       color: 9
     },
     {
       label: 'unknown',
       values: ['', 'unknown'],
-      icon: '&#10067;',
+      icon: '?',
       color: 8
     }
   ],
   defaultShape: () => {
-    return Shapes.getShape('other');
+    return Shapes.getShape('other')
   },
   getIcon: shape => {
-    return Shapes.getShape(shape) ? Shapes.getShape(shape).icon : false;
+    return Shapes.getShape(shape) ? Shapes.getShape(shape).icon : false
   },
   getShape: (shapeValue, label = false) => {
     const shape = Shapes.shapesDictionary.find(s => {
-      return label ? s.label === shapeValue : s.values.includes(shapeValue);
-    });
-    return shape ? shape : Shapes.defaultShape();
+      return label ? s.label === shapeValue : s.values.includes(shapeValue)
+    })
+    return shape || Shapes.defaultShape()
   },
   getLabel: shapeValue => {
-    const shape = Shapes.getShape(shapeValue);
-    return shape ? shape.label : false;
+    const shape = Shapes.getShape(shapeValue)
+    return shape ? shape.label : false
   },
   getColor: (shapeValue, label = false) => {
-    const shape = Shapes.getShape(shapeValue, label);
-    return shape ? Shapes.colors[shape.color] : false;
+    const shape = Shapes.getShape(shapeValue, label)
+    return shape ? Shapes.colors[shape.color] : false
   },
   getIndex: (shapeValue, label = false) => {
-    const shape = Shapes.getShape(shapeValue, label);
-    return Shapes.shapesDictionary.indexOf(shape);
+    const shape = Shapes.getShape(shapeValue, label)
+    return Shapes.shapesDictionary.indexOf(shape)
   },
   sortByIndex: (a, b) => {
-    const idA = Shapes.getIndex(a.label, true);
-    const idB = Shapes.getIndex(b.label, true);
-    return idA > idB ? 1 : -1;
+    const idA = Shapes.getIndex(a.label, true)
+    const idB = Shapes.getIndex(b.label, true)
+    return idA > idB ? 1 : -1
   }
-};
+}
 
-module.exports = Shapes;
+module.exports = Shapes
