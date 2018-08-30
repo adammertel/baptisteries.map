@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
+import React, { Component } from 'react'
+import { observable, action, computed } from 'mobx'
+import { observer } from 'mobx-react'
 
-import GridLegend from './gridlegend';
-@observer
-class Panel extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return true;
+import GridLegend from './gridlegend'
+@observer class Panel extends React.Component {
+  shouldComponentUpdate (nextProps) {
+    return true
   }
 
-  handleCloseModal() {
-    store.closeInfo();
+  handleCloseModal () {
+    store.closeInfo()
   }
 
-  render() {
+  render () {
     return (
-      <div className="modal is-active info">
-        <div className="modal-background" />
-        <div className="modal-card">
-          <section className="modal-card-body">
-            <div className="content">
-              <p className="has-text-primary title is-4">
-                Christian baptisteries: interactive map (version 1.0)
+      <div className='modal is-active info'>
+        <div className='modal-background' />
+        <div className='modal-card'>
+          <section className='modal-card-body'>
+            <div className='content'>
+              <p className='has-text-primary title is-4'>
+                Christian baptisteries: interactive map (version 1.0.1)
               </p>
               <p>
                 This interactive map visualizes a database of Christian
@@ -31,14 +30,14 @@ class Panel extends React.Component {
                 Ristow (<i>Frühchristliche Baptisterien</i>, Münster:
                 Aschendorffsche Verlagsbuchhandlung, 1998) and was compiled by
                 Hana Hořínková in the framework of her{' '}
-                <a href="http://is.muni.cz/th/439223/ff_b/?lang=en">
+                <a href='http://is.muni.cz/th/439223/ff_b/?lang=en'>
                   B.A. thesis
                 </a>{' '}
                 at Masaryk University’s Department for the Study of Religions
                 (2017), supervised by
-                <a href="http://www.david-zbiral.cz/"> David Zbíral</a>. The map
+                <a href='http://www.david-zbiral.cz/'> David Zbíral</a>. The map
                 was conceived and created by{' '}
-                <a href="https://github.com/adammertel">Adam Mertel</a> (Masaryk
+                <a href='https://github.com/adammertel'>Adam Mertel</a> (Masaryk
                 University, Department of Geography).
               </p>
               <p>
@@ -56,7 +55,7 @@ class Panel extends React.Component {
                   particular settlement
                 </li>
                 <li>
-                  <strong>approximate</strong> when the particular place
+                  <strong>approximate</strong> when the particular
                   settlement was not found but a nearby settlement was
                 </li>
                 <li>
@@ -82,8 +81,7 @@ class Panel extends React.Component {
                 the date. When zoomed in, the map shows icons of individual
                 baptisteries or several aggregated baptisteries (in the latter
                 case, their number is displayed). The shape in the icon
-                translates to the shape of the building (see the legend in the
-                left panel).
+                translates to the shape of the building (see the legend below).
               </p>
               <p>The records displayed can be filtered in two ways:</p>
               <ul>
@@ -93,7 +91,7 @@ class Panel extends React.Component {
                 </li>
                 <li>
                   the timeline can be limited in order to display only a part of
-                  the whole dataset whose dates(based on the mean values between
+                  the whole dataset whose dates (based on the mean values between
                   the <i>terminus post quem</i> and <i>ante quem</i>) fall
                   between the dates selected by the user. Dragging the slider,
                   or turning the mouse wheel over it allows the user to move
@@ -112,13 +110,13 @@ class Panel extends React.Component {
               </p>
 
               <hr />
-              <p className="has-text-primary title is-5">Map Legend</p>
+              <p className='has-text-primary title is-5'>Map Legend</p>
               <GridLegend />
 
-              <p className="has-text-centered">
+              <p className='has-text-centered'>
                 <a
                   onClick={this.handleCloseModal}
-                  className="has-text-centered button is-medium is-primary"
+                  className='has-text-centered button is-medium is-primary'
                 >
                   Continue...
                 </a>
@@ -127,8 +125,8 @@ class Panel extends React.Component {
           </section>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Panel;
+export default Panel
