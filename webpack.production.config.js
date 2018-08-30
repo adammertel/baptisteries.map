@@ -1,12 +1,12 @@
-const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const path = require('path')
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 
 const extractSass = new ExtractTextPlugin({
   filename: 'main.css'
-});
+})
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -82,11 +82,10 @@ module.exports = {
       { from: './src/index.html', to: 'index.html' },
       { from: './src/config.json', to: 'config.json' },
       { from: './src/basemaps.json', to: 'basemaps.json' },
-      { from: './src/ext', to: 'ext' },
       {
         from: './src/data/baptisteries.geojson',
         to: 'data/baptisteries.geojson'
       }
     ])
   ]
-};
+}

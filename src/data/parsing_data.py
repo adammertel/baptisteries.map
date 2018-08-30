@@ -16,6 +16,7 @@ for ri, row in enumerate(baptisterias):
         try:
             props = {
                 "id": row['ID'],
+                "id_r": row['ID_Ristow'],
                 "name": row['Place_name_modern'],
                 "date": parseNumber(row['Date_average']),
                 "date_after": parseNumber(row['Built_after_or_in']),
