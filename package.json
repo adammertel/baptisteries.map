@@ -4,11 +4,13 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
-    "gitignore": "git rm -r --cached . && git add . && git commit",
-    "deploy": "webpack --config webpack.production.config.js",
+    "clean-dist": "rm -f -r -d build",
+    "build": "npm run clean-dist && webpack --config webpack.production.config.js",
+    "deploy": "rsync -avz build/ hde@hde.geogr.muni.cz:/var/www/virthtml/hde/baptisteries",
+    "build-deploy": "npm run build && npm run deploy",
     "zip": "sudo zip -r baptisteries ./build/",
-    "deploy-windows": "webpack --config webpack.production.config.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "gitignore": "git rm -r --cached . && git add . && git commit"
   },
   "repository": {
     "type": "git",
