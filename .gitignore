@@ -4,7 +4,6 @@ npm-debug.log
 .idea/
 .vscode/
 build/
-src/data/*.csv
 *.lock
 package-lock.json
 *.zip
