@@ -20,7 +20,7 @@ import GridLegend from './gridlegend'
           <section className='modal-card-body'>
             <div className='content'>
               <p className='has-text-primary title is-4'>
-                Christian baptisteries: interactive map (version 1.0.1)
+                Christian baptisteries: interactive map (version 1.0.2)
               </p>
               <p>
                 This interactive map visualizes a database of Christian
@@ -35,9 +35,16 @@ import GridLegend from './gridlegend'
                 </a>{' '}
                 at Masaryk University’s Department for the Study of Religions
                 (2017), supervised by
-                <a href='http://www.david-zbiral.cz/'> David Zbíral</a>. The map
+                <a href='http://www.david-zbiral.cz/'>
+                  {' '}David Zbíral
+                </a>
+                . The map
                 was conceived and created by{' '}
-                <a href='https://github.com/adammertel'>Adam Mertel</a> (Masaryk
+                <a href='https://github.com/adammertel'>
+                  Adam Mertel
+                </a>
+                {' '}
+                (Masaryk
                 University, Department of Geography).
               </p>
               <p>
@@ -51,7 +58,9 @@ import GridLegend from './gridlegend'
               </p>
               <ul>
                 <li>
-                  <strong>precise</strong> when the building is localised to a
+                  <strong>precise</strong>
+                  {' '}
+                  when the building is localised to a
                   particular settlement
                 </li>
                 <li>
@@ -59,31 +68,55 @@ import GridLegend from './gridlegend'
                   settlement was not found but a nearby settlement was
                 </li>
                 <li>
-                  <strong>ambiguous</strong> when there were more candidates and
-                  only one, the most probable, alternative had to be chosen.{' '}
+                  <strong>ambiguous</strong>
+                  {' '}
+                  when there were more candidates and
+                  only one, the most probable, alternative had to be chosen.
+                  {' '}
                 </li>
               </ul>
               <p>
                 The degree of certainty of the localisation of a particular
                 baptistery can be displayed under the individual record by
                 clicking on the icon of that particular baptistery. This appears
-                with some further data: modern place name, building shape,{' '}
+                with some further data: modern place name, building shape,
+                {' '}
                 <i>terminus post quem </i>
-                (“built after or in”), <i>terminus ante quem</i> (“built before
-                or in”), the mean value between the <i>terminus post quem</i>{' '}
-                and <i>ante quem</i>, piscina shape, and piscina depth.
+                (“built after or in”),
+                {' '}
+                <i>terminus ante quem</i>
+                {' '}
+                (“built before
+                or in”), the mean value between the
+                {' '}
+                <i>terminus post quem</i>
+                {' '}
+                and
+                {' '}
+                <i>ante quem</i>
+                , piscina shape, and piscina depth.
               </p>
               <p>
                 When zoomed out, the map shows a hexagonal grid. The shade of an
                 individual hexagon denotes the median of the mean values between
-                the <i>terminus post quem</i> and <i>ante quem</i> of all
+                the
+                {' '}
+                <i>terminus post quem</i>
+                {' '}
+                and
+                {' '}
+                <i>ante quem</i>
+                {' '}
+                of all
                 baptisteries in that hexagon; the darker the shade, the earlier
                 the date. When zoomed in, the map shows icons of individual
                 baptisteries or several aggregated baptisteries (in the latter
                 case, their number is displayed). The shape in the icon
                 translates to the shape of the building (see the legend below).
               </p>
-              <p>The records displayed can be filtered in two ways:</p>
+              <p>
+                The records displayed can be filtered in two ways:
+              </p>
               <ul>
                 <li>
                   (un)checking individual building shapes filters the dataset by
@@ -92,7 +125,14 @@ import GridLegend from './gridlegend'
                 <li>
                   the timeline can be limited in order to display only a part of
                   the whole dataset whose dates (based on the mean values between
-                  the <i>terminus post quem</i> and <i>ante quem</i>) fall
+                  the
+                  {' '}
+                  <i>terminus post quem</i>
+                  {' '}
+                  and
+                  {' '}
+                  <i>ante quem</i>
+                  ) fall
                   between the dates selected by the user. Dragging the slider,
                   or turning the mouse wheel over it allows the user to move
                   through time and see new baptisteries appear.
@@ -110,7 +150,16 @@ import GridLegend from './gridlegend'
               </p>
 
               <hr />
-              <p className='has-text-primary title is-5'>Map Legend</p>
+              <p className='has-text-primary title is-5'>
+                Recommended citation
+              </p>
+              <p>
+                RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version 1.0.1). Available online at &lt;http://hde.geogr.muni.cz/baptisteries&gt;.
+              </p>
+              <hr />
+              <p className='has-text-primary title is-5'>
+                Map Legend
+              </p>
               <GridLegend />
 
               <p className='has-text-centered'>
