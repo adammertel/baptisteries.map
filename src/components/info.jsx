@@ -13,6 +13,7 @@ import GridLegend from './gridlegend'
   }
 
   render () {
+    const version = '1.0.2'
     return (
       <div className='modal is-active info'>
         <div className='modal-background' />
@@ -20,7 +21,7 @@ import GridLegend from './gridlegend'
           <section className='modal-card-body'>
             <div className='content'>
               <p className='has-text-primary title is-4'>
-                Christian baptisteries: interactive map (version 1.0.2)
+                Christian baptisteries: interactive map (version {version})
               </p>
               <p>
                 This interactive map visualizes a database of Christian
@@ -154,7 +155,7 @@ import GridLegend from './gridlegend'
                 Recommended citation
               </p>
               <p>
-                RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version 1.0.1). Available online at &lt;http://hde.geogr.muni.cz/baptisteries&gt;.
+                RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version {version}). Available online at &lt;http://hde.geogr.muni.cz/baptisteries&gt;.
               </p>
               <hr />
               <p className='has-text-primary title is-5'>
