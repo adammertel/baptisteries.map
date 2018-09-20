@@ -22,6 +22,7 @@ import GridLegend from './gridlegend'
             <div className='content'>
               <p className='has-text-primary title is-4'>
                 Christian baptisteries: interactive map (version {version})
+                <button onClick={this.handleCloseModal} className="delete is-medium is-pulled-right" aria-label="close"></button>
               </p>
               <p>
                 This interactive map visualizes a database of Christian
