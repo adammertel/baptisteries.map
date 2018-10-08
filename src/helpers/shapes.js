@@ -17,15 +17,13 @@ var Shapes = {
     {
       label: 'rectangle',
       values: ['rectangle'],
-      icon: '&#9646;',
-      charCode: '9646',
+      icon: '9646',
       color: 0
     },
     {
       label: 'square',
       values: ['square'],
-      icon: '&#9632;',
-      charCode: '9632',
+      icon: '9632',
       color: 1
     },
     {
@@ -37,36 +35,32 @@ var Shapes = {
         'three-quarter round',
         'oval'
       ],
-      icon: '&#9679;',
-      charCode: '9679',
+      icon: '9679',
       color: 2
     },
     {
       label: 'central building',
       values: ['central building'],
-      icon: '&#9711;',
+      icon: '9711;',
       charCode: '9711',
       color: 3
     },
     {
       label: 'inside the church',
       values: ['inside the church'],
-      icon: '&#10752;',
-      charCode: '10752',
+      icon: '10752',
       color: 4
     },
     {
       label: 'cross',
       values: ['cross'],
-      icon: '&#10010;',
-      charCode: 'v',
+      icon: '10010',
       color: 5
     },
     {
       label: 'foil',
       values: ['trefoil', 'quatrefoil', 'octofoil'],
-      icon: '&#9827;',
-      charCode: '9827',
+      icon: '9827',
       color: 6
     },
     {
@@ -79,8 +73,7 @@ var Shapes = {
         'dekagon',
         'heptagon'
       ],
-      icon: '&#11039;',
-      charCode: '11039',
+      icon: '11039',
       color: 7
     },
     {
@@ -93,15 +86,13 @@ var Shapes = {
         'horseshoe',
         'rosette'
       ],
-      icon: '&#9676;',
-      charCode: '9676',
+      icon: '9676',
       color: 9
     },
     {
       label: 'unknown',
       values: ['', 'unknown'],
       icon: '?',
-      charCode: '63',
       color: 8
     }
   ],
