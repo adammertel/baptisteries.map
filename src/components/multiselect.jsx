@@ -6,7 +6,8 @@ const defaultProps = {
   labelNothingSelected: 'nothing selected',
   unSelectAllOption: true,
   selectAllOption: true,
-  maxCharactersInInput: 35
+  maxCharactersInInput: 50,
+  longSelectedText: no => no + ' options selected'
 }
 
 export default class MultiSelect extends React.Component {
@@ -91,7 +92,9 @@ export default class MultiSelect extends React.Component {
   _inputValue(props) {
     const selectedOptions = props.options
       .filter(o => o.active)
-      .map(o => o.label)
+      .map(o => o.inputLabel)
+
+    console.log(selectedOptions)
     const selectedNo = selectedOptions.length
     const allOptions = props.options.length
 
@@ -102,7 +105,7 @@ export default class MultiSelect extends React.Component {
     } else {
       const joinedLabel = selectedOptions.join(', ')
       if (joinedLabel.length > props.maxCharactersInInput) {
-        return selectedNo + ' options selected'
+        return props.longSelectedText(selectedNo)
       } else {
         return joinedLabel
       }
@@ -110,11 +113,11 @@ export default class MultiSelect extends React.Component {
   }
 
   render() {
-    const props = Object.assign({}, this.props, defaultProps)
+    const props = Object.assign({}, defaultProps, this.props)
     console.log(props)
     return (
-      <div className={this._classWrapper()}>
-        <div className="dropdown-trigger">
+      <div className={this._classWrapper()} style={{ width: '100%' }}>
+        <div className="dropdown-trigger" style={{ width: '100%' }}>
           <p className="control has-icons-right">
             <input
               className="input"

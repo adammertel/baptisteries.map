@@ -41,8 +41,7 @@ var Shapes = {
     {
       label: 'central building',
       values: ['central building'],
-      icon: '9711;',
-      charCode: '9711',
+      icon: '9711',
       color: 3
     },
     {
@@ -99,10 +98,9 @@ var Shapes = {
   defaultShape: () => {
     return Shapes.getShape('other')
   },
-  getIcon: shape => {
-    return Shapes.getShape(shape)
-      ? Shapes.getShape(shape).icon
-      : false
+  getIcon: (shapeValue, label = false) => {
+    const shape = Shapes.getShape(shapeValue, label)
+    return shape ? String.fromCharCode(shape.icon) : false
   },
   getShape: (shapeValue, label = false) => {
     const shape = Shapes.shapesDictionary.find(s => {
