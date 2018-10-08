@@ -18,60 +18,90 @@ var Shapes = {
       label: 'rectangle',
       values: ['rectangle'],
       icon: '&#9646;',
+      charCode: '9646',
       color: 0
     },
     {
       label: 'square',
       values: ['square'],
       icon: '&#9632;',
+      charCode: '9632',
       color: 1
     },
     {
       label: 'circle',
-      values: ['round', 'circle', 'semicircle', 'three-quarter round', 'oval'],
+      values: [
+        'round',
+        'circle',
+        'semicircle',
+        'three-quarter round',
+        'oval'
+      ],
       icon: '&#9679;',
+      charCode: '9679',
       color: 2
     },
     {
       label: 'central building',
       values: ['central building'],
       icon: '&#9711;',
+      charCode: '9711',
       color: 3
     },
     {
       label: 'inside the church',
       values: ['inside the church'],
       icon: '&#10752;',
+      charCode: '10752',
       color: 4
     },
     {
       label: 'cross',
       values: ['cross'],
       icon: '&#10010;',
+      charCode: 'v',
       color: 5
     },
     {
       label: 'foil',
       values: ['trefoil', 'quatrefoil', 'octofoil'],
       icon: '&#9827;',
+      charCode: '9827',
       color: 6
     },
     {
       label: 'polygon',
-      values: ['triangle', 'hexagon', 'octogon', 'dodekagon', 'dekagon', 'heptagon'],
+      values: [
+        'triangle',
+        'hexagon',
+        'octogon',
+        'dodekagon',
+        'dekagon',
+        'heptagon'
+      ],
       icon: '&#11039;',
+      charCode: '11039',
       color: 7
     },
     {
       label: 'other',
-      values: ['trapezoid', 'irregular', 'other', 'polygon', 'horseshoe', 'rosette'],
+      values: [
+        'trapezoid',
+        'irregular',
+        'other',
+        'polygon',
+        'horseshoe',
+        'rosette'
+      ],
       icon: '&#9676;',
+      charCode: '9676',
       color: 9
     },
     {
       label: 'unknown',
       values: ['', 'unknown'],
       icon: '?',
+      charCode: '63',
       color: 8
     }
   ],
@@ -79,11 +109,15 @@ var Shapes = {
     return Shapes.getShape('other')
   },
   getIcon: shape => {
-    return Shapes.getShape(shape) ? Shapes.getShape(shape).icon : false
+    return Shapes.getShape(shape)
+      ? Shapes.getShape(shape).icon
+      : false
   },
   getShape: (shapeValue, label = false) => {
     const shape = Shapes.shapesDictionary.find(s => {
-      return label ? s.label === shapeValue : s.values.includes(shapeValue)
+      return label
+        ? s.label === shapeValue
+        : s.values.includes(shapeValue)
     })
     return shape || Shapes.defaultShape()
   },
