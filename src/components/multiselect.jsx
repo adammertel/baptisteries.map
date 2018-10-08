@@ -3,8 +3,10 @@ import React, { Component } from 'react'
 const defaultProps = {
   defaultOpen: false,
   labelAllSelected: 'all options selected',
+  labelNothingSelected: 'nothing selected',
   unSelectAllOption: true,
-  selectAllOption: true
+  selectAllOption: true,
+  maxCharactersInInput: 30
 }
 
 export default class MultiSelect extends React.Component {
@@ -73,18 +75,39 @@ export default class MultiSelect extends React.Component {
     )
   }
 
+  _inputValue(props) {
+    const selectedOptions = props.options
+      .filter(o => o.active)
+      .map(o => o.label)
+    const selectedNo = selectedOptions.length
+    const allOptions = props.options.length
+
+    if (selectedNo === allOptions) {
+      return props.labelAllSelected
+    } else if (selectedNo === 0) {
+      return props.labelNothingSelected
+    } else {
+      const joinedLabel = selectedOptions.join(', ')
+      if (joinedLabel.length > props.maxCharactersInInput) {
+        return selectedNo + ' options selected'
+      } else {
+        return joinedLabel
+      }
+    }
+  }
+
   render() {
     const props = Object.assign({}, this.props, defaultProps)
     console.log(props)
     return (
       <div className={this._classWrapper()}>
         <div className="dropdown-trigger">
-          <p className="control has-icons-left has-icons-right">
+          <p className="control has-icons-right">
             <input
               className="input"
               type="text"
               onClick={this._handleToggleOpen.bind(this)}
-              value={props.labelAllSelected}
+              value={this._inputValue(props)}
               readOnly={true}
               style={{ cursor: 'pointer' }}
             />
@@ -105,8 +128,10 @@ export default class MultiSelect extends React.Component {
         >
           <div className="dropdown-content">
             {props.selectAllOption && this._renderSelectAllOption()}
+
             {props.unSelectAllOption &&
               this._renderUnSelectAllOption()}
+
             {props.options.map(option => {
               return this._renderOption(
                 option.value,
