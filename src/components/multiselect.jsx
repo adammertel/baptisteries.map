@@ -6,7 +6,7 @@ const defaultProps = {
   labelNothingSelected: 'nothing selected',
   unSelectAllOption: true,
   selectAllOption: true,
-  maxCharactersInInput: 30
+  maxCharactersInInput: 35
 }
 
 export default class MultiSelect extends React.Component {
@@ -40,16 +40,29 @@ export default class MultiSelect extends React.Component {
     return classNames.join(' ')
   }
 
-  _renderOption(key, value, label, active, clickFunction) {
+  _renderOption(
+    value,
+    label,
+    active,
+    clickFunction,
+    displayIcon = true
+  ) {
     const iconCheck = active
       ? 'fa fa-check-square-o'
       : 'fa fa-square-o'
+
     return (
-      <a className="dropdown-item" key={key} onClick={clickFunction}>
+      <a
+        className="dropdown-item"
+        key={value}
+        onClick={clickFunction}
+      >
         <label className="checkbox">
-          <span className="icon is-small is-left">
-            <i className={iconCheck} />
-          </span>
+          {displayIcon && (
+            <span className="icon is-small is-left">
+              <i className={iconCheck} />
+            </span>
+          )}
           <span>{label}</span>
         </label>
       </a>
@@ -58,20 +71,20 @@ export default class MultiSelect extends React.Component {
 
   _renderSelectAllOption() {
     return this._renderOption(
-      'selectAll',
       'all',
       'select all',
       true,
-      this.props.selectAll
+      this.props.selectAll,
+      false
     )
   }
   _renderUnSelectAllOption() {
     return this._renderOption(
-      'unselectAll',
       'none',
       'unselect all',
       true,
-      this.props.selectAll
+      this.props.unselectAll,
+      false
     )
   }
 
@@ -134,7 +147,6 @@ export default class MultiSelect extends React.Component {
 
             {props.options.map(option => {
               return this._renderOption(
-                option.value,
                 option.value,
                 option.label,
                 option.active,
