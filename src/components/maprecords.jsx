@@ -41,7 +41,6 @@ class MapRecords extends React.Component {
               feature.geometry.coordinates[0]
             ]}
           >
-            <i>ahoj</i>
             {
               <Popup className="popup">
                 <div className="marker-tooltip">
