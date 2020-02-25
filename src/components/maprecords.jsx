@@ -9,8 +9,6 @@ import TooltipLine from "./tooltipline";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
 require("leaflet.markercluster.placementstrategies");
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 
 @observer
 class MapRecords extends React.Component {

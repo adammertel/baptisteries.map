@@ -2,12 +2,8 @@ import React from "react";
 import { observable, action } from "mobx";
 import { observer } from "mobx-react";
 
-import L from "leaflet";
 import Shapes from "./../helpers/shapes";
 import { Pane } from "react-leaflet";
-
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 
 @observer
 class MapGrid extends React.Component {
@@ -114,12 +110,6 @@ class MapGrid extends React.Component {
     const records = data.features
       .filter(store.isActiveRecord)
       .map((feature, fi) => {
-        const props = feature.properties;
-        const icon = L.AwesomeMarkers.icon({
-          icon: Shapes.getIcon(props.shape),
-          markerColor: "cadetblue",
-          shadowSize: [0, 0]
-        });
         return {
           marker: L.marker([
             feature.geometry.coordinates[1],

@@ -4,9 +4,6 @@ import { observer } from "mobx-react";
 import MapRecords from "./maprecords";
 import MapGrid from "./mapgrid";
 
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
-require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
-
 import {
   Map,
   TileLayer,

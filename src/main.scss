@@ -1,4 +1,4 @@
-@import '../node_modules/bulma/sass/utilities/initial-variables';
+@import "../node_modules/bulma/sass/utilities/initial-variables";
 
 $color1: #222222;
 $color2: #f9f9f9;
@@ -52,10 +52,12 @@ $panel-w: 400;
   }
 }
 
-@import '~react-leaflet-markercluster/dist/styles.min.css';
-@import '../node_modules/bulma/bulma';
-@import './styles/slider';
-@import './styles/checkradio';
+@import "~react-leaflet-markercluster/dist/styles.min.css";
+@import "../node_modules/bulma/bulma";
+@import "./styles/slider";
+@import "./styles/checkradio";
+@import "../node_modules/leaflet/dist/leaflet.css";
+@import "../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
 
 .map-wrapper {
   top: 0;

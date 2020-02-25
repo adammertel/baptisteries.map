@@ -2,6 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const extractSass = new ExtractTextPlugin({
   filename: "main.css"
@@ -83,6 +85,7 @@ module.exports = {
         from: "./src/data/baptisteries.geojson",
         to: "data/baptisteries.geojson"
       }
-    ])
+    ]),
+    new BundleAnalyzerPlugin()
   ]
 };
