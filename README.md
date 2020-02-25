@@ -67,6 +67,8 @@ three static maps were produced:
 - [building shape - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_shape.png)
 - [piscina - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_piscina.png)
 
+<img src="./public/static_piscina.png" alt="screenshot3" height="250" />
+
 ## Recommended citation
 
 `RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version 1.0.1). Available online at <http://hde.geogr.muni.cz/baptisteries/>.`
