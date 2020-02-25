@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
-import MapRecords from './maprecords';
-import MapGrid from './mapgrid';
+import React, { Component } from "react";
+import { observable, action, computed } from "mobx";
+import { observer } from "mobx-react";
+import MapRecords from "./maprecords";
+import MapGrid from "./mapgrid";
 
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 
 import {
   Map,
@@ -14,14 +14,9 @@ import {
   ScaleControl,
   AttributionControl,
   LayersControl,
-  CircleMarker,
-  Tooltip,
-  Marker,
-  LayerGroup,
-  GeoJSON,
-  Pane
-} from 'react-leaflet';
-import 'leaflet-regular-grid-cluster';
+  LayerGroup
+} from "react-leaflet";
+import "leaflet-regular-grid-cluster";
 
 @observer
 class AppMap extends React.Component {
@@ -40,11 +35,8 @@ class AppMap extends React.Component {
   }
 
   componentDidMount() {
-    window['map'] = this.refs.map.leafletElement;
+    window["map"] = this.refs.map.leafletElement;
     L.Util.setOptions(map, { maxBoundsViscosity: 1 });
-  }
-  shouldComponentUpdate(nextProps) {
-    return true;
   }
 
   renderBaseLayers() {
@@ -52,9 +44,9 @@ class AppMap extends React.Component {
   }
 
   renderBaseLayer(basemap) {
-    if (basemap.type === 'tile') {
+    if (basemap.type === "tile") {
       return <TileLayer {...basemap} />;
-    } else if (basemap.type === 'wms') {
+    } else if (basemap.type === "wms") {
       return <WMSTileLayer {...basemap} />;
     }
   }

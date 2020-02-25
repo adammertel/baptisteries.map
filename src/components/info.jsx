@@ -1,14 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 const { version } = require("./../../package.json");
 
 import GridLegend from "./gridlegend";
+
 @observer
 class Panel extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return true;
-  }
-
   handleCloseModal() {
     store.closeInfo();
   }

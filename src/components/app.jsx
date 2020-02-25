@@ -1,18 +1,14 @@
-import React from 'react';
-import { observer } from 'mobx-react';
+import React from "react";
+import { observer } from "mobx-react";
 
-import AppMap from './appmap';
-import Panel from './panel';
-import Info from './info';
+import AppMap from "./appmap";
+import Panel from "./panel";
+import Info from "./info";
 
 @observer
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    console.log(nextProps);
   }
 
   render() {

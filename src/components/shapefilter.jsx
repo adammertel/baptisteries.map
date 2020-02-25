@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
-import Shapes from './../helpers/shapes';
+import React from "react";
+import { observer } from "mobx-react";
+import Shapes from "./../helpers/shapes";
 
 @observer
 class ShapeFilter extends React.Component {
-  style() {
-    return {};
-  }
-
   handleChangeFilter(shapeKey) {
     store.toggleShapeFilter(shapeKey);
   }
@@ -17,13 +12,9 @@ class ShapeFilter extends React.Component {
     store.toggleAllShapeFilters();
   }
 
-  shouldComponentUpdate(nextProps) {
-    return true;
-  }
-
   render() {
     return (
-      <div className="shape-filter" style={this.style()}>
+      <div className="shape-filter">
         <div className="field checkbox only-label" key="all">
           <input
             className="is-checkradio is-white"
@@ -49,7 +40,7 @@ class ShapeFilter extends React.Component {
               />
               <label htmlFor={shape.label}>
                 <i
-                  className={'shape shape-' + shape.label}
+                  className={"shape shape-" + shape.label}
                   dangerouslySetInnerHTML={{
                     __html: shape.icon
                   }}

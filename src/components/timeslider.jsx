@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
-import IncrementIcon from './incrementicon';
+import React from "react";
+import { observable, action } from "mobx";
+import { observer } from "mobx-react";
+import IncrementIcon from "./incrementicon";
 
 @observer
 class TimeSlider extends React.Component {
@@ -12,11 +12,11 @@ class TimeSlider extends React.Component {
   @observable changing = false;
 
   getDateValue = mode => {
-    return parseInt(mode === 'from' ? this.from : this.to, 10);
+    return parseInt(mode === "from" ? this.from : this.to, 10);
   };
 
   changeDateValue = (mode, newValue) => {
-    if (mode === 'from') {
+    if (mode === "from") {
       if (newValue > this.to) {
         newValue = this.to;
       }
@@ -58,32 +58,28 @@ class TimeSlider extends React.Component {
     Base.clearSelection();
   };
 
-  style() {
-    return {};
-  }
-
   render() {
     return (
-      <div className="time-slider-wrapper" style={this.style()}>
+      <div className="time-slider-wrapper">
         <div className="time-slider">
           <span className="label slider-name">
             from
             <IncrementIcon
               icon="angle-double-left"
-              handleClick={this.handleIncrement.bind(this, 'from', false, 10)}
+              handleClick={this.handleIncrement.bind(this, "from", false, 10)}
             />
             <IncrementIcon
               icon="angle-left"
-              handleClick={this.handleIncrement.bind(this, 'from', false, 1)}
+              handleClick={this.handleIncrement.bind(this, "from", false, 1)}
             />
             <span className="value-label">{store.dateFrom}</span>
             <IncrementIcon
               icon="angle-right"
-              handleClick={this.handleIncrement.bind(this, 'from', true, 1)}
+              handleClick={this.handleIncrement.bind(this, "from", true, 1)}
             />
             <IncrementIcon
               icon="angle-double-right"
-              handleClick={this.handleIncrement.bind(this, 'from', true, 10)}
+              handleClick={this.handleIncrement.bind(this, "from", true, 10)}
             />
           </span>
           <p className="time-slider-row">
@@ -92,7 +88,7 @@ class TimeSlider extends React.Component {
               <input
                 className="slider is-medium"
                 step="1"
-                onChange={this.handleDrag.bind(this, 'from')}
+                onChange={this.handleDrag.bind(this, "from")}
                 min={this.min}
                 max={this.max}
                 value={this.from}
@@ -107,20 +103,20 @@ class TimeSlider extends React.Component {
             to
             <IncrementIcon
               icon="angle-double-left"
-              handleClick={this.handleIncrement.bind(this, 'to', false, 10)}
+              handleClick={this.handleIncrement.bind(this, "to", false, 10)}
             />
             <IncrementIcon
               icon="angle-left"
-              handleClick={this.handleIncrement.bind(this, 'to', false, 1)}
+              handleClick={this.handleIncrement.bind(this, "to", false, 1)}
             />
             <span className="value-label">{store.dateTo}</span>
             <IncrementIcon
               icon="angle-right"
-              handleClick={this.handleIncrement.bind(this, 'to', true, 1)}
+              handleClick={this.handleIncrement.bind(this, "to", true, 1)}
             />
             <IncrementIcon
               icon="angle-double-right"
-              handleClick={this.handleIncrement.bind(this, 'to', true, 10)}
+              handleClick={this.handleIncrement.bind(this, "to", true, 10)}
             />
           </span>
           <p className="time-slider-row">
@@ -129,7 +125,7 @@ class TimeSlider extends React.Component {
               <input
                 className="slider is-medium"
                 step="1"
-                onChange={this.handleDrag.bind(this, 'to')}
+                onChange={this.handleDrag.bind(this, "to")}
                 min={this.min}
                 max={this.max}
                 value={this.to}
@@ -144,7 +140,7 @@ class TimeSlider extends React.Component {
             className="is-checkradio is-white no-date"
             id="no-date"
             type="checkbox"
-            name={'no-date'}
+            name={"no-date"}
             onChange={store.toggleNoDate}
             checked={store.showNoDate}
           />

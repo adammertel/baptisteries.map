@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
+import React from "react";
+import { observable, action } from "mobx";
+import { observer } from "mobx-react";
 
-import L from 'leaflet';
-import Shapes from './../helpers/shapes';
-import { Pane } from 'react-leaflet';
+import L from "leaflet";
+import Shapes from "./../helpers/shapes";
+import { Pane } from "react-leaflet";
 
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 
 @observer
 class MapGrid extends React.Component {
@@ -34,10 +34,6 @@ class MapGrid extends React.Component {
   componentWillUnmount() {
     this.rendered = false;
     this.clearGrid();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return true;
   }
 
   afterRender() {
@@ -73,26 +69,26 @@ class MapGrid extends React.Component {
     const rules = {
       cells: {
         fillColor: {
-          method: 'mean',
-          attribute: 'date',
-          scale: 'size',
+          method: "mean",
+          attribute: "date",
+          scale: "size",
           range: window.gridCellColors,
           domain: window.gridCellDomain
         },
-        color: '#222222',
+        color: "#222222",
         fillOpacity: 0.6,
         opacity: 1,
         weight: 2
       },
       markers: {
-        color: '#222222',
+        color: "#222222",
         weight: 0,
         fillOpacity: 0.9,
-        fillColor: '#222222',
+        fillColor: "#222222",
         radius: {
-          method: 'count',
-          attribute: '',
-          scale: 'continuous',
+          method: "count",
+          attribute: "",
+          scale: "continuous",
           range: [1, 22],
           domain: [0, 50]
         }
@@ -103,14 +99,14 @@ class MapGrid extends React.Component {
     this.grid = L.regularGridCluster({
       rules: rules,
       gridOrigin: { lat: 0, lng: -12 },
-      gridMode: 'hexagon',
+      gridMode: "hexagon",
       showCells: true,
       showMarkers: true,
       showTexts: false,
       zoneSize: 6000,
       defaultStyle: {
         cells: {
-          fillColor: '#383838'
+          fillColor: "#383838"
         }
       }
     });
@@ -121,7 +117,7 @@ class MapGrid extends React.Component {
         const props = feature.properties;
         const icon = L.AwesomeMarkers.icon({
           icon: Shapes.getIcon(props.shape),
-          markerColor: 'cadetblue',
+          markerColor: "cadetblue",
           shadowSize: [0, 0]
         });
         return {

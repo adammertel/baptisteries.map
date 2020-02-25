@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import { observable, action, computed } from 'mobx';
-import { observer } from 'mobx-react';
-import { divIcon } from 'leaflet';
-import { CircleMarker, Marker, Popup, Pane } from 'react-leaflet';
+import React from "react";
+import { observer } from "mobx-react";
+import { divIcon } from "leaflet";
+import { Marker, Popup, Pane } from "react-leaflet";
 
-import Shapes from './../helpers/shapes';
-import Certainties from './../helpers/certainties';
-import TooltipLine from './tooltipline';
-import MarkerClusterGroup from 'react-leaflet-markercluster';
+import Shapes from "./../helpers/shapes";
+import Certainties from "./../helpers/certainties";
+import TooltipLine from "./tooltipline";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
-require('leaflet.markercluster.placementstrategies');
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
-require('./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+require("leaflet.markercluster.placementstrategies");
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js");
+require("./../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 
 @observer
 class MapRecords extends React.Component {
@@ -20,8 +19,8 @@ class MapRecords extends React.Component {
       html:
         '<span style="vertical-align: bottom" class="marker-icon awesome-marker-icon-cadetblue awesome-marker"><i class="icon-text">' +
         Shapes.getIcon(shape) +
-        '</i></span>',
-      className: '',
+        "</i></span>",
+      className: "",
       iconAnchor: [18, 45],
       iconSize: [36, 45]
     });
@@ -77,8 +76,8 @@ class MapRecords extends React.Component {
                     definition="Piscina depth"
                     value={
                       props.piscina_depth
-                        ? props.piscina_depth + ' cm'
-                        : 'unknown'
+                        ? props.piscina_depth + " cm"
+                        : "unknown"
                     }
                   />
                   <TooltipLine
@@ -99,13 +98,13 @@ class MapRecords extends React.Component {
             showCoverageOnHover: false,
             zoomToBoundsOnClick: true,
             removeOutsideVisibleBounds: true,
-            elementsPlacementStrategy: 'clock-concentric',
+            elementsPlacementStrategy: "clock-concentric",
             firstCircleElements: 6,
             spiderfyDistanceSurplus: 45,
             animate: false,
             spiderLegPolylineOptions: { weight: 0 },
             clockHelpingCircleOptions: {
-              color: 'black',
+              color: "black",
               dashArray: 5,
               fillOpacity: 0,
               opacity: 0,
