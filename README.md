@@ -1,6 +1,9 @@
 # Christian Baptisteries map
 
-[map application](http://hde.geogr.muni.cz/baptisteries/)
+[map](http://hde.geogr.muni.cz/baptisteries/)
+
+<img src="./public/screen1.png" alt="screenshot1" height="250" />
+<img src="./public/screen2.png" alt="screenshot2" height="250" />
 
 This interactive map visualizes a database of Christian baptisteries built
 between the 3rd and 12th centuries. The database is a digital adaptation and

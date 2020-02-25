@@ -93,22 +93,20 @@ class MapRecords extends React.Component {
     return (
       <Pane style={{ zIndex: 999 }}>
         <MarkerClusterGroup
-          options={{
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: true,
-            removeOutsideVisibleBounds: true,
-            elementsPlacementStrategy: "clock-concentric",
-            firstCircleElements: 6,
-            spiderfyDistanceSurplus: 45,
-            animate: false,
-            spiderLegPolylineOptions: { weight: 0 },
-            clockHelpingCircleOptions: {
-              color: "black",
-              dashArray: 5,
-              fillOpacity: 0,
-              opacity: 0,
-              weight: 3
-            }
+          showCoverageOnHover={false}
+          zoomToBoundsOnClick={true}
+          removeOutsideVisibleBounds={true}
+          elementsPlacementStrategy="clock-concentric"
+          firstCircleElements={6}
+          spiderfyDistanceSurplus={45}
+          animate={false}
+          spiderLegPolylineOptions={{ weight: 0 }}
+          clockHelpingCircleOptions={{
+            color: "black",
+            dashArray: 5,
+            fillOpacity: 0,
+            opacity: 0,
+            weight: 3
           }}
         >
           {records}
