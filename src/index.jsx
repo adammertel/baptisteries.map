@@ -1,5 +1,3 @@
-import "babel-polyfill";
-
 import React from "react";
 import { render } from "react-dom";
 import DevTools from "mobx-react-devtools";
@@ -8,7 +6,6 @@ import Base from "./base";
 import Store from "./store";
 
 import "./main.scss";
-
 
 window.defaultDates = {
   min: 230,

@@ -9,6 +9,8 @@ const extractSass = new ExtractTextPlugin({
   filename: "main.css"
 });
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
   optimization: {
     minimize: true
@@ -37,32 +39,33 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.css$/,
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader
           },
-          {
-            loader: "css-loader" // translates CSS into CommonJS
-          },
-          {
-            loader: "sass-loader" // compiles Sass to CSS
-          }
+          "css-loader"
         ]
-      },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
-      {
-        test: /\.png$/,
-        loader: "url-loader",
-        query: { mimetype: "image/png" }
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader?limit=10000&mimetype=application/font-woff"
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        test: /\.(png|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images/"
+            },
+            loader: "file-loader"
+          }
+        ]
       }
     ]
   },
@@ -71,7 +74,9 @@ module.exports = {
   },
   plugins: [
     extractSass,
-    new ExtractTextPlugin("main.css"),
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production")
