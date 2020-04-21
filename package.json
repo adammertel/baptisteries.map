@@ -4,6 +4,9 @@
   "description": "",
   "scripts": {
     "start": "parcel src/index.html",
+    "start:piscina": "parcel src/static_piscina/index.html",
+    "start:multiples": "parcel src/static_multiples/index.html",
+    "start:shape": "parcel src/static_shape/index.html",
     "clean-dist": "rm -f -r -d build",
     "build": "npm run clean-dist && webpack --config webpack.production.config.js --mode production",
     "deploy": "rsync -avz dist/ adamm@10.38.208.11:~/../../var/www/html/maps/baptisteries/",
@@ -25,7 +28,7 @@
   ],
   "author": "Adam Mertel",
   "license": "MIT",
-  "homepage": "http://dissibet.cz/map/baptisteries/",
+  "homepage": "http://dissinet.cz/maps/baptisteries/",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
