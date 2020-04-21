@@ -1,96 +1,112 @@
-import { observable, action, computed, extendObservable } from 'mobx'
-import Base from './base'
-import Shapes from './helpers/shapes'
+import { observable, action, computed, extendObservable } from "mobx";
+import Base from "./base";
+import Shapes from "./helpers/shapes";
 
 export default class AppStore {
   @observable
-  dateFrom = defaultDates.min
+  dateFrom = defaultDates.min;
+
   @observable
-  dateTo = defaultDates.max
+  dateTo = defaultDates.max;
+
   @observable
-  showNoDate = true
+  showNoDate = true;
+
   @observable
-  gridThreshold = 6
+  gridThreshold = 6;
+
   @observable
-  shapes = {}
+  shapes = {};
+
   @observable
-  infoOpen = !DEV && true
+  infoOpen = !DEV && true;
+
   @observable
-  basemap = 'CartoDB_Positron'
+  basemap = "CartoDB_Positron";
 
   constructor() {
-    Shapes.shapesDictionary.map(s => s.label).map(label => {
-      const newRule = {}
-      newRule[label] = true
-      extendObservable(this.shapes, newRule)
-    })
+    Shapes.shapesDictionary
+      .map((s) => s.label)
+      .map((label) => {
+        const newRule = {};
+        newRule[label] = true;
+        extendObservable(this.shapes, newRule);
+      });
   }
 
   isDateGood(f) {
     if (this.showNoDate && !f.properties.date) {
-      return true
+      return true;
     } else {
       return (
         f.properties.date &&
         f.properties.date <= store.dateTo &&
         f.properties.date >= store.dateFrom
-      )
+      );
     }
   }
 
   isActiveRecord(f) {
     return (
-      store.isDateGood(f) &&
-      store.shapes[Shapes.getLabel(f.properties.shape)]
-    )
+      store.isDateGood(f) && store.shapes[Shapes.getLabel(f.properties.shape)]
+    );
   }
+
   @computed
   get todosArray() {
-    return Base.sortAlphabetical(this.todos, 'label')
+    return Base.sortAlphabetical(this.todos, "label");
   }
 
   @computed
   get activeRecordsCount() {
-    return data.features.filter(f => store.isActiveRecord(f)).length
+    return (
+      data &&
+      data.features &&
+      data.features.length &&
+      data.features.filter((f) => store.isActiveRecord(f)).length
+    );
   }
 
   @computed
   get recordsCountAll() {
-    return data.features.length
+    return data.features ? data.features.length : 0;
   }
 
   displayMapGrid() {
     if (map.getZoom) {
-      return map.getZoom() <= store.gridThreshold
+      return map.getZoom() <= store.gridThreshold;
     } else {
-      return true
+      return true;
     }
   }
 
   @action
-  toggleNoDate = () => (this.showNoDate = !this.showNoDate)
+  toggleNoDate = () => (this.showNoDate = !this.showNoDate);
+
   @action
-  closeInfo = () => (this.infoOpen = false)
+  closeInfo = () => (this.infoOpen = false);
+
   @action
-  openInfo = () => (this.infoOpen = true)
+  openInfo = () => (this.infoOpen = true);
 
   @action
   changeDate = (newDate, mode) => {
-    if (mode === 'from') {
-      this.dateFrom = newDate
-    } else if (mode === 'to') {
-      this.dateTo = newDate
+    if (mode === "from") {
+      this.dateFrom = newDate;
+    } else if (mode === "to") {
+      this.dateTo = newDate;
     }
-  }
+  };
+
   @action
   toggleShapeFilter(shapeKey) {
-    this.shapes[shapeKey] = !this.shapes[shapeKey]
+    this.shapes[shapeKey] = !this.shapes[shapeKey];
   }
 
   @action
   selectAllShapes(select) {
-    Object.keys(this.shapes).forEach(key => {
-      this.shapes[key] = select
-    })
+    Object.keys(this.shapes).forEach((key) => {
+      this.shapes[key] = select;
+    });
   }
 }

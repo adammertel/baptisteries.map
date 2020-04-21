@@ -15,7 +15,7 @@ class MapGrid extends React.Component {
   grid = false;
 
   @action
-  toggleRender = e => {
+  toggleRender = (e) => {
     this.rendere = !this.rendered;
   };
 
@@ -34,11 +34,12 @@ class MapGrid extends React.Component {
 
   afterRender() {
     if (
-      !this.rendered ||
-      this.props.dateTo !== this.dateTo ||
-      this.props.showNoDate !== this.showNoDate ||
-      this.props.dateFrom !== this.dateFrom ||
-      !Base.compareShapes(this.props.shapes, this.shapes)
+      data.features &&
+      (!this.rendered ||
+        this.props.dateTo !== this.dateTo ||
+        this.props.showNoDate !== this.showNoDate ||
+        this.props.dateFrom !== this.dateFrom ||
+        !Base.compareShapes(this.props.shapes, this.shapes))
     ) {
       this.renderGrid();
     }
@@ -69,12 +70,12 @@ class MapGrid extends React.Component {
           attribute: "date",
           scale: "size",
           range: window.gridCellColors,
-          domain: window.gridCellDomain
+          domain: window.gridCellDomain,
         },
         color: "#222222",
         fillOpacity: 0.6,
         opacity: 1,
-        weight: 2
+        weight: 2,
       },
       markers: {
         color: "#222222",
@@ -86,10 +87,10 @@ class MapGrid extends React.Component {
           attribute: "",
           scale: "continuous",
           range: [1, 22],
-          domain: [0, 50]
-        }
+          domain: [0, 50],
+        },
       },
-      texts: {}
+      texts: {},
     };
 
     this.grid = L.regularGridCluster({
@@ -102,9 +103,9 @@ class MapGrid extends React.Component {
       zoneSize: 6000,
       defaultStyle: {
         cells: {
-          fillColor: "#383838"
-        }
-      }
+          fillColor: "#383838",
+        },
+      },
     });
 
     const records = data.features
@@ -113,9 +114,9 @@ class MapGrid extends React.Component {
         return {
           marker: L.marker([
             feature.geometry.coordinates[1],
-            feature.geometry.coordinates[0]
+            feature.geometry.coordinates[0],
           ]),
-          properties: feature.properties
+          properties: feature.properties,
         };
       });
     this.grid.addLayers(records);
@@ -133,7 +134,7 @@ class MapGrid extends React.Component {
       <Pane
         style={{ zIndex: 999 }}
         activeShapes={
-          Object.keys(store.shapes).filter(s => store.shapes[s]).length
+          Object.keys(store.shapes).filter((s) => store.shapes[s]).length
         }
       />
     );

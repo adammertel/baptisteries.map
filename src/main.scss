@@ -52,12 +52,9 @@ $panel-w: 400;
   }
 }
 
-@import "~react-leaflet-markercluster/dist/styles.min.css";
-@import "../node_modules/bulma/bulma";
+@import "./../node_modules/bulma/bulma";
 @import "./styles/slider";
 @import "./styles/checkradio";
-@import "../node_modules/leaflet/dist/leaflet.css";
-@import "../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
 
 .map-wrapper {
   top: 0;
