@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --hot --mode development --open",
     "clean-dist": "rm -f -r -d build",
     "build": "npm run clean-dist && webpack --config webpack.production.config.js --mode production",
-    "deploy": "rsync -avz build/ hde@hde.geogr.muni.cz:/var/www/virthtml/hde/baptisteries",
+    "deploy": "rsync -avz build/ adamm@10.38.208.11:~/../../var/www/html/maps/baptisteries/",
     "build-deploy": "npm run build && npm run deploy",
     "zip": "sudo zip -r baptisteries ./build/",
     "lint": "eslint src",
