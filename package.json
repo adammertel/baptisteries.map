@@ -1,12 +1,13 @@
 {
   "name": "baptisteries",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --hot --mode development --open",
+    "start": "parcel src/index.html",
+    "start_": "webpack-dev-server --hot --mode development --open",
     "clean-dist": "rm -f -r -d build",
     "build": "npm run clean-dist && webpack --config webpack.production.config.js --mode production",
-    "deploy": "rsync -avz build/ adamm@10.38.208.11:~/../../var/www/html/maps/baptisteries/",
+    "deploy": "rsync -avz dist/ adamm@10.38.208.11:~/../../var/www/html/maps/baptisteries/",
     "build-deploy": "npm run build && npm run deploy",
     "zip": "sudo zip -r baptisteries ./build/",
     "lint": "eslint src",
@@ -61,6 +62,7 @@
     "react-leaflet": "^2.6.1",
     "react-leaflet-markercluster": "^2.0.0-rc3",
     "resolve-url-loader": "^2.2.0",
+    "sass": "^1.26.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
@@ -71,6 +73,7 @@
   },
   "dependencies": {
     "d3-hexbin": "^0.2.2",
+    "data": "^0.6.1",
     "eslint": "^5.6.1",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
