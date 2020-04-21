@@ -9,6 +9,7 @@ var Shapes = {
     "#a65628",
     "#f781bf",
     "#999999",
+    "black",
   ],
   shapesDictionary: [
     {
@@ -77,13 +78,13 @@ var Shapes = {
         "rosette",
       ],
       icon: "9676",
-      color: 9,
+      color: 8,
     },
     {
       label: "unknown",
       values: ["", "unknown"],
       icon: "?",
-      color: 8,
+      color: 9,
     },
   ],
   defaultShape: () => {

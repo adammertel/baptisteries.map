@@ -288,7 +288,7 @@ const init = () => {
   );
 
   hexLegendDates.map((hexDate, hi) => {
-    const x = (hi + 1) * ((legendW / 1.4 - 2 * (legendPadding + 20)) / 5) + 20;
+    const x = (hi + 1) * ((legendW / 1.45 - 2 * (legendPadding + 20)) / 5) + 20;
     const hexLabel = hi !== 3 ? hexDate : hexDate + "+";
 
     legendG
