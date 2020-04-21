@@ -119,7 +119,7 @@ class Panel extends React.Component {
               <p>
                 RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian
                 baptisteries: interactive map (version {version}). Available
-                online at &lt;http://hde.geogr.muni.cz/baptisteries&gt;.
+                online at &lt;http://dissinet.cz/maps/baptisteries&gt;.
               </p>
               <hr />
               <p className="has-text-primary title is-5">Map Legend</p>
