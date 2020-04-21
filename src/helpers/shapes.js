@@ -9,7 +9,6 @@ var Shapes = {
     "#a65628",
     "#f781bf",
     "#999999",
-    "black",
   ],
   shapesDictionary: [
     {
@@ -37,8 +36,8 @@ var Shapes = {
       color: 3,
     },
     {
-      label: "inside the church",
-      values: ["inside the church"],
+      label: "inside a church",
+      values: ["inside a church"],
       icon: "10752",
       color: 4,
     },
