@@ -63,11 +63,13 @@ The base map can be selected under the icon in the upper right corner.
 
 three static maps were produced:
 
-- [building shape - small multiples](http://dissinet.cz/maps/baptisteries/static_multiple.png)
-- [building shape - hexgrid + pie charts](http://dissinet.cz/maps/baptisteries/static_shape.png)
-- [piscina - hexgrid + pie charts](http://http://dissinet.cz/maps/baptisteries/static_piscina.png)
+- [building shape - small multiples](http://dissinet.cz/maps/baptisteries/multiples)
+- [building shape - hexgrid + pie charts](https://dissinet.cz/maps/baptisteries/shape/)
+- [piscina - hexgrid + pie charts](http://http://dissinet.cz/maps/baptisteries/piscina)
 
 <img src="./public/static_piscina.png" alt="screenshot3" height="250" />
+<img src="./public/static_shape.png" alt="screenshot4" height="250" />
+<img src="./public/static_multiples.png" alt="screenshot5" height="250" />
 
 ## Recommended citation
 
