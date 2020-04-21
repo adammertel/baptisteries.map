@@ -1,6 +1,6 @@
 # Christian Baptisteries map
 
-[map](http://hde.geogr.muni.cz/baptisteries/)
+[map](http://dissinet.cz/maps/baptisteries/)
 
 <img src="./public/screen1.png" alt="screenshot1" height="250" />
 <img src="./public/screen2.png" alt="screenshot2" height="250" />
@@ -63,12 +63,12 @@ The base map can be selected under the icon in the upper right corner.
 
 three static maps were produced:
 
-- [building shape - small multiples](http://hde.geogr.muni.cz/baptisteries/static_multiple.png)
-- [building shape - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_shape.png)
-- [piscina - hexgrid + pie charts](http://hde.geogr.muni.cz/baptisteries/static_piscina.png)
+- [building shape - small multiples](http://dissinet.cz/maps/baptisteries/static_multiple.png)
+- [building shape - hexgrid + pie charts](http://dissinet.cz/maps/baptisteries/static_shape.png)
+- [piscina - hexgrid + pie charts](http://http://dissinet.cz/maps/baptisteries/static_piscina.png)
 
 <img src="./public/static_piscina.png" alt="screenshot3" height="250" />
 
 ## Recommended citation
 
-`RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version 1.0.1). Available online at <http://hde.geogr.muni.cz/baptisteries/>.`
+`RISTOW, S., A. MERTEL, H. HOŘÍNKOVÁ, D. ZBÍRAL (2017). Christian baptisteries: interactive map (version 1.0.1). Available online at <http://dissinet.cz/maps/baptisteries/>.`
