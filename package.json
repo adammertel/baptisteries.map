@@ -25,7 +25,7 @@
   ],
   "author": "Adam Mertel",
   "license": "MIT",
-  "homepage": "http://hde.geogr.muni.cz/baptisteries/",
+  "homepage": "http://dissibet.cz/map/baptisteries/",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -77,3 +77,4 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   }
+}
