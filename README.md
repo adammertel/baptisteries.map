@@ -1,6 +1,6 @@
-# Christian Baptisteries map
+# Christian baptisteries: interactive map
 
-[map](http://dissinet.cz/maps/baptisteries/)
+[http://dissinet.cz/maps/baptisteries/](http://dissinet.cz/maps/baptisteries/)
 
 <img src="./public/screen1.png" alt="screenshot1" height="250" />
 <img src="./public/screen2.png" alt="screenshot2" height="250" />

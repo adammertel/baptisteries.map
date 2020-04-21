@@ -19,7 +19,7 @@ window.defaultDates = {
   max: 1200,
 };
 
-window.DEV = true;
+window.DEV = false;
 
 window.store = new Store();
 window.map = false;
