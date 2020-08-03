@@ -1,6 +1,6 @@
 {
   "name": "baptisteries",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "scripts": {
     "start": "parcel src/index.html",
@@ -12,7 +12,8 @@
     "build:shape": "parcel build src/static_shape/index.html -d dist/shape --no-content-hash --public-url ./",
     "build": "parcel build src/index.html -d dist --no-content-hash --public-url ./",
     "build:all": "npm run build && npm run build:piscina && npm run build:multiples && npm run build:shape",
-    "deploy": "rsync -avz dist/ adamm@10.38.208.11:~/../../var/www/html/maps/baptisteries/",
+    "deploy": "rsync -avz dist/ adamm@10.16.30.211:~/../../var/www/html/maps/baptisteries/",
+    "deploy:hde": "rsync -avz dist/ hde@hde.geogr.muni.cz:~/../html/baptisteries/",
     "build-deploy": "npm run build && npm run deploy",
     "gitignore": "git rm -r --cached . && git add . && git commit"
   },
